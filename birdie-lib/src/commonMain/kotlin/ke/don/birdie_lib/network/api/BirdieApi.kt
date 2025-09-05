@@ -13,15 +13,18 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
+import ke.don.birdie_lib.helpers.logger
 import ke.don.birdie_lib.model.BirdieResult
 import ke.don.birdie_lib.model.NetworkError
 import ke.don.birdie_lib.model.TestData
+import ke.don.birdie_lib.network.KtorClientProvider
 import ke.don.birdie_lib.network.KtorClientProvider.client
 import ke.don.birdie_lib.network.klient
 
 object BirdieApi {
-    // TODO (make this internal after building sdk object)
-    suspend fun fetchTestData(): BirdieResult<TestData, NetworkError> = klient {
+    private val log = logger<BirdieApi>()
+
+    suspend fun fetchTestData(): BirdieResult<List<TestData>, NetworkError> = klient {
         client.get(Endpoint.TestTable.url) {
             contentType(ContentType.Application.Json)
             parameter("select", "*")

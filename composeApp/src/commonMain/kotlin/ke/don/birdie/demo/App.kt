@@ -24,6 +24,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import birdiesdk.composeapp.generated.resources.Res
 import birdiesdk.composeapp.generated.resources.compose_multiplatform
+import ke.don.birdie_lib.model.NetworkError
+import ke.don.birdie_lib.model.TestData
+import ke.don.birdie_lib.model.onError
+import ke.don.birdie_lib.model.onSuccess
 import ke.don.birdie_lib.network.api.BirdieApi
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
@@ -36,10 +40,11 @@ fun App() {
         val coroutineScope = rememberCoroutineScope()
         var showContent by remember { mutableStateOf(false) }
 
-        LaunchedEffect(showContent) {
-            coroutineScope.launch {
-                BirdieApi.fetchTestData()
-            }
+        var testData by remember {
+            mutableStateOf(emptyList<TestData>())
+        }
+        var errorMessage by remember {
+            mutableStateOf<NetworkError?>(null)
         }
         Column(
             modifier = Modifier
@@ -48,7 +53,18 @@ fun App() {
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Button(onClick = { showContent = !showContent }) {
+            Button(onClick = {
+                showContent = !showContent
+                coroutineScope.launch {
+                    BirdieApi.fetchTestData()
+                        .onSuccess {
+                            testData = it
+                        }
+                        .onError {
+                            errorMessage = it
+                        }
+                }
+            }) {
                 Text("Click me!")
             }
             AnimatedVisibility(showContent) {
@@ -59,6 +75,12 @@ fun App() {
                 ) {
                     Image(painterResource(Res.drawable.compose_multiplatform), null)
                     Text("Compose: $greeting")
+                    testData.forEach {
+                        it.text?.let { text -> Text(text) }
+                    }
+                    errorMessage?.let {
+                        Text(it.name)
+                    }
                 }
             }
         }

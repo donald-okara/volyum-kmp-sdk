@@ -18,8 +18,8 @@ buildkonfig {
     packageName = "ke.don.birdie_lib"
 
     defaultConfigs {
-        buildConfigField(STRING, "SUPABASE_URL", "\"${keys["SUPABASE_URL"]}\"")
-        buildConfigField(STRING, "SUPABASE_ANON_KEY", "\"${keys["SUPABASE_ANON_KEY"]}\"")
+        buildConfigField(STRING, "SUPABASE_URL", "${keys["SUPABASE_URL"]}")
+        buildConfigField(STRING, "SUPABASE_ANON_KEY", "${keys["SUPABASE_ANON_KEY"]}")
     }
 }
 
