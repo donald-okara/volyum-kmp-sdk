@@ -7,6 +7,9 @@
  *
  *       http://www.apache.org/licenses/LICENSE-2.0
  */
-package ke.don.birdie_lib
+package ke.don.birdie_lib.network
 
-actual fun platform() = "iOS"
+import io.ktor.client.engine.HttpClientEngineFactory
+import io.ktor.client.engine.okhttp.OkHttp
+
+actual fun provideEngine(): HttpClientEngineFactory<*> = OkHttp

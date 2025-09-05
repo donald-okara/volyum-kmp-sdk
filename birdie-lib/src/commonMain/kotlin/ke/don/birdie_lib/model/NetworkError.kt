@@ -7,6 +7,16 @@
  *
  *       http://www.apache.org/licenses/LICENSE-2.0
  */
-package ke.don.birdie_lib
+package ke.don.birdie_lib.model
 
-expect fun platform(): String
+enum class NetworkError : Error {
+    REQUEST_TIMEOUT,
+    UNAUTHORIZED,
+    CONFLICT,
+    TOO_MANY_REQUESTS,
+    NO_INTERNET,
+    PAYLOAD_TOO_LARGE,
+    SERVER_ERROR,
+    SERIALIZATION,
+    UNKNOWN,
+}

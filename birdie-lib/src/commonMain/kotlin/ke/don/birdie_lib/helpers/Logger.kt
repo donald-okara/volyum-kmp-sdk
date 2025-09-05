@@ -7,6 +7,10 @@
  *
  *       http://www.apache.org/licenses/LICENSE-2.0
  */
-package ke.don.birdie_lib
+package ke.don.birdie_lib.helpers
 
-actual fun platform() = "Android"
+import co.touchlab.kermit.Logger
+
+internal inline fun <reified T> logger(): Logger {
+    return Logger.withTag(T::class.simpleName ?: "Birdie")
+}
