@@ -10,7 +10,6 @@ local.properties
 captures
 .externalNativeBuild
 .cxx
-gradle.properties
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddata/
