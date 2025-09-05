@@ -1,3 +1,6 @@
+import com.diffplug.gradle.spotless.SpotlessExtension
+import org.gradle.kotlin.dsl.configure
+
 plugins {
     // this is necessary to avoid the plugins to be loaded multiple times
     // in each subproject's classloader
@@ -8,4 +11,28 @@ plugins {
     alias(libs.plugins.composeCompiler) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.androidKotlinMultiplatformLibrary) apply false
+    id("com.diffplug.spotless") version "7.2.1"
+}
+
+subprojects {
+    apply(plugin = "com.diffplug.spotless")
+    configure<SpotlessExtension> {
+        kotlin {
+            target("**/*.kt")
+            targetExclude("${layout.buildDirectory.get().asFile}/**/*.kt")
+            ktlint("0.50.0")
+                .editorConfigOverride(
+                    mapOf(
+                        "ktlint_standard_package-name" to "disabled",
+                        "ktlint_standard_no-wildcard-imports" to "disabled"
+                    )
+                )
+            licenseHeaderFile(rootProject.file("spotless/copyright.kt"))
+        }
+
+        kotlinGradle {
+            target("*.gradle.kts")
+            ktlint("0.50.0")
+        }
+    }
 }
