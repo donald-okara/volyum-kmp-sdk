@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -45,7 +46,9 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(libs.kermit)
                 implementation(libs.kotlin.stdlib)
+                implementation(libs.bundles.ktor)
             }
         }
 
@@ -55,8 +58,15 @@ kotlin {
             }
         }
 
+        jvmMain {
+            dependencies {
+                implementation(libs.ktor.client.okhttp)
+            }
+        }
+
         androidMain {
             dependencies {
+                implementation(libs.ktor.client.okhttp)
             }
         }
 
@@ -70,6 +80,7 @@ kotlin {
 
         iosMain {
             dependencies {
+                implementation(libs.ktor.client.darwin)
             }
         }
     }
