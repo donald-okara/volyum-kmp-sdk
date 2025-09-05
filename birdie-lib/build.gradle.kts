@@ -1,7 +1,20 @@
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
     alias(libs.plugins.kotlin.serialization)
+    id("com.codingfeline.buildkonfig") version "0.17.1"
+}
+
+
+buildkonfig {
+    packageName = "ke.don.birdie_lib"
+
+    defaultConfigs {
+        buildConfigField(STRING, "SUPABASE_URL", providers.gradleProperty("SUPABASE_URL").get())
+        buildConfigField(STRING, "SUPABASE_ANON_KEY", providers.gradleProperty("SUPABASE_ANON_KEY").get())
+    }
 }
 
 kotlin {
