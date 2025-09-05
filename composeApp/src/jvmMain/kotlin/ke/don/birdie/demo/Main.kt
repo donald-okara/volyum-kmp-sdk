@@ -9,8 +9,14 @@
  */
 package ke.don.birdie.demo
 
-interface Platform {
-    val name: String
-}
+import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.application
 
-expect fun getPlatform(): Platform
+fun main() = application {
+    Window(
+        onCloseRequest = ::exitApplication,
+        title = "BirdieSDK",
+    ) {
+        App()
+    }
+}
