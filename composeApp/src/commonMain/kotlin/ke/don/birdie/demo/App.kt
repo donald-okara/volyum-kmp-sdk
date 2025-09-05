@@ -24,6 +24,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import birdiesdk.composeapp.generated.resources.Res
 import birdiesdk.composeapp.generated.resources.compose_multiplatform
+import ke.don.birdie_lib.network.api.BirdieApi
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -31,7 +33,14 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Preview
 fun App() {
     MaterialTheme {
+        val coroutineScope = rememberCoroutineScope()
         var showContent by remember { mutableStateOf(false) }
+
+        LaunchedEffect(showContent){
+            coroutineScope.launch {
+                BirdieApi.fetchTestData()
+            }
+        }
         Column(
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.primaryContainer)

@@ -12,5 +12,5 @@ sealed class SupabaseEndpoint(val route: String) {
         }
 
     /** Test table */
-    object TestTable : SupabaseEndpoint(route = "test_data")
+    object TestTable : SupabaseEndpoint(route = "test_table")
 }
