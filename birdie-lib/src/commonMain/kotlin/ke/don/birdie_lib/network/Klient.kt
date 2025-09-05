@@ -1,4 +1,4 @@
-package ke.don.birdie_lib.helpers
+package ke.don.birdie_lib.network
 
 import io.ktor.client.call.body
 import io.ktor.client.network.sockets.ConnectTimeoutException
@@ -9,7 +9,7 @@ import ke.don.birdie_lib.model.BirdieResult
 import kotlinx.io.IOException
 import kotlinx.serialization.SerializationException
 
-suspend inline fun <reified T> klient(
+internal suspend inline fun <reified T> klient(
     crossinline call: suspend () -> HttpResponse
 ): BirdieResult<T, NetworkError> {
     return try {

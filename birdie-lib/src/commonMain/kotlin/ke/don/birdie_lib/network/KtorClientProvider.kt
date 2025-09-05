@@ -16,7 +16,7 @@ import kotlinx.serialization.json.Json
 
 expect fun provideEngine(): HttpClientEngineFactory<*>
 
-object KtorClientProvider {
+internal object KtorClientProvider {
     private val log = logger<KtorClientProvider>()
 
 
