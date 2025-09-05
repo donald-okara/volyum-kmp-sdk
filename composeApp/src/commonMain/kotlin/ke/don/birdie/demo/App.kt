@@ -36,7 +36,7 @@ fun App() {
         val coroutineScope = rememberCoroutineScope()
         var showContent by remember { mutableStateOf(false) }
 
-        LaunchedEffect(showContent){
+        LaunchedEffect(showContent) {
             coroutineScope.launch {
                 BirdieApi.fetchTestData()
             }

@@ -1,3 +1,12 @@
+/*
+ * Copyright © 2025 Donald O. Isoe (isoedonald@gmail.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ */
 package ke.don.birdie_lib.network
 
 import io.ktor.client.HttpClient
@@ -18,7 +27,6 @@ expect fun provideEngine(): HttpClientEngineFactory<*>
 
 internal object KtorClientProvider {
     private val log = logger<KtorClientProvider>()
-
 
     // This will store the session provider, which we'll set manually
     val client = HttpClient(provideEngine()) {
@@ -51,6 +59,5 @@ internal object KtorClientProvider {
         install(DefaultRequest) {
             header("apiKey", BuildKonfig.SUPABASE_ANON_KEY)
         }
-
     }
 }

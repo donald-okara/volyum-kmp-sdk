@@ -1,16 +1,25 @@
+/*
+ * Copyright © 2025 Donald O. Isoe (isoedonald@gmail.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ */
 package ke.don.birdie_lib.network
 
 import io.ktor.client.call.body
 import io.ktor.client.network.sockets.ConnectTimeoutException
 import io.ktor.client.network.sockets.SocketTimeoutException
 import io.ktor.client.statement.HttpResponse
-import ke.don.birdie_lib.model.NetworkError
 import ke.don.birdie_lib.model.BirdieResult
+import ke.don.birdie_lib.model.NetworkError
 import kotlinx.io.IOException
 import kotlinx.serialization.SerializationException
 
 internal suspend inline fun <reified T> klient(
-    crossinline call: suspend () -> HttpResponse
+    crossinline call: suspend () -> HttpResponse,
 ): BirdieResult<T, NetworkError> {
     return try {
         val response = call()
