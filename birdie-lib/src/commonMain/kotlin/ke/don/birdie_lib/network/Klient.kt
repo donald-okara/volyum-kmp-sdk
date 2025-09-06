@@ -13,11 +13,8 @@ import io.ktor.client.call.body
 import io.ktor.client.network.sockets.ConnectTimeoutException
 import io.ktor.client.network.sockets.SocketTimeoutException
 import io.ktor.client.statement.HttpResponse
-import io.ktor.client.statement.request
-import ke.don.birdie_lib.helpers.logger
 import ke.don.birdie_lib.model.BirdieResult
 import ke.don.birdie_lib.model.NetworkError
-import ke.don.birdie_lib.network.api.BirdieApi
 import kotlinx.io.IOException
 import kotlinx.serialization.SerializationException
 

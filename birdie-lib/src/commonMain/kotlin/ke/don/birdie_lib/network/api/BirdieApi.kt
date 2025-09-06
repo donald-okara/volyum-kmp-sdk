@@ -17,7 +17,6 @@ import ke.don.birdie_lib.helpers.logger
 import ke.don.birdie_lib.model.BirdieResult
 import ke.don.birdie_lib.model.NetworkError
 import ke.don.birdie_lib.model.TestData
-import ke.don.birdie_lib.network.KtorClientProvider
 import ke.don.birdie_lib.network.KtorClientProvider.client
 import ke.don.birdie_lib.network.klient
 

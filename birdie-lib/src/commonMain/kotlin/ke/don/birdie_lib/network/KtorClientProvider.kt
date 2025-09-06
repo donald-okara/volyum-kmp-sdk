@@ -19,8 +19,8 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.header
 import io.ktor.serialization.kotlinx.json.json
 import ke.don.birdie_lib.BuildKonfig
-import ke.don.birdie_lib.helpers.logger
 import ke.don.birdie_lib.helpers.compactKtorLogger
+import ke.don.birdie_lib.helpers.logger
 import kotlinx.serialization.json.Json
 
 expect fun provideEngine(): HttpClientEngineFactory<*>
