@@ -14,7 +14,7 @@ import ke.don.birdie.feedback.BuildKonfig
 private val URL = BuildKonfig.SUPABASE_URL
 
 sealed class Endpoint(val route: String) {
-    open val baseUrl = "${URL}/rest/v1/"
+    open val baseUrl = "$URL/rest/v1/"
 
     val url: String
         get() = buildString {
@@ -26,9 +26,8 @@ sealed class Endpoint(val route: String) {
     object TestTable : Endpoint(route = "test_table")
 
     sealed class PostgresFunctions(route: String) : Endpoint(route) {
-        override val baseUrl = "${URL}/rest/v1/rpc/"
+        override val baseUrl = "$URL/rest/v1/rpc/"
 
         object AddFeedback : PostgresFunctions(route = "add_feedback")
-
     }
 }

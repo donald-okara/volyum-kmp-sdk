@@ -1,3 +1,12 @@
+/*
+ * Copyright © 2025 Donald O. Isoe (isoedonald@gmail.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ */
 package ke.don.birdie.feedback.model.domain
 
 import ke.don.birdie.feedback.model.table.Feedback
@@ -8,5 +17,5 @@ import kotlinx.serialization.Serializable
 data class AddFeedbackRequest(
     @SerialName("p_project_id")val projectId: String,
     @SerialName("p_api_key")val key: String,
-    @SerialName("p_feedback") val feedback: Feedback
+    @SerialName("p_feedback") val feedback: Feedback,
 )

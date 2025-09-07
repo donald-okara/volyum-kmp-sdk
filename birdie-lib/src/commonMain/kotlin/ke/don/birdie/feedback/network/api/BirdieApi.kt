@@ -39,7 +39,7 @@ object BirdieApi {
 
     suspend fun addFeedback(
         projectIdentity: ProjectIdentity,
-        feedback: Feedback
+        feedback: Feedback,
     ): BirdieResult<EntityUUID, NetworkError> =
         klient<String> {
             client.post(Endpoint.PostgresFunctions.AddFeedback.url) {
@@ -48,12 +48,11 @@ object BirdieApi {
                     AddFeedbackRequest(
                         projectId = projectIdentity.id,
                         key = projectIdentity.key,
-                        feedback = feedback
-                    )
+                        feedback = feedback,
+                    ),
                 )
             }
         }.map { raw ->
             EntityUUID(raw.trim('"'))
         }
-
 }

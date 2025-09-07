@@ -43,8 +43,8 @@ internal suspend inline fun <reified T> klient(
             NetworkError(
                 category = statusCode.toCategory(),
                 message = errorMessage,
-                code = statusCode
-            )
+                code = statusCode,
+            ),
         )
     }
 } catch (e: Exception) {
@@ -52,8 +52,8 @@ internal suspend inline fun <reified T> klient(
         NetworkError(
             category = e.toCategory(),
             message = e.message,
-            code = null
-        )
+            code = null,
+        ),
     )
 }
 
@@ -68,7 +68,8 @@ private fun Int.toCategory(): NetworkErrorCategory = when (this) {
 
 private fun Exception.toCategory(): NetworkErrorCategory = when (this) {
     is ConnectTimeoutException,
-    is SocketTimeoutException -> NetworkErrorCategory.REQUEST_TIMEOUT
+    is SocketTimeoutException,
+    -> NetworkErrorCategory.REQUEST_TIMEOUT
     is IOException -> NetworkErrorCategory.NO_INTERNET
     is SerializationException -> NetworkErrorCategory.SERIALIZATION
     else -> NetworkErrorCategory.UNKNOWN

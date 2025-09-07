@@ -74,7 +74,6 @@ fun App() {
                             errorMessage = it
                         }
                 }
-
             }) {
                 Text("Click me!")
             }
@@ -84,15 +83,15 @@ fun App() {
                     BirdieApi.addFeedback(
                         projectIdentity = ProjectIdentity(
                             id = "df35f8db-bbe6-40f1-993f-8335e2a22eda",
-                            key = "00=="
+                            key = "00==",
                         ),
                         feedback = Feedback(
                             rating = 5,
                             userId = "user123",
                             targetId = "feature213",
                             targetType = "feature",
-                            text =  "This is a comment"
-                        )
+                            text = "This is a comment",
+                        ),
                     )
                         .onSuccess {
                             feedback = feedback + it.toString()
@@ -101,7 +100,6 @@ fun App() {
                             errorMessage = it
                         }
                 }
-
             }) {
                 Text("Click me!")
             }
