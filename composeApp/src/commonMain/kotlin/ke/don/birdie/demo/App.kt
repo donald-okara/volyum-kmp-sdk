@@ -30,9 +30,11 @@ import androidx.compose.ui.Modifier
 import birdiesdk.composeapp.generated.resources.Res
 import birdiesdk.composeapp.generated.resources.compose_multiplatform
 import ke.don.birdie.feedback.model.domain.NetworkError
+import ke.don.birdie.feedback.model.domain.ProjectIdentity
 import ke.don.birdie.feedback.model.domain.TestData
 import ke.don.birdie.feedback.model.domain.onError
 import ke.don.birdie.feedback.model.domain.onSuccess
+import ke.don.birdie.feedback.model.table.Feedback
 import ke.don.birdie.feedback.network.api.BirdieApi
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
@@ -47,6 +49,9 @@ fun App() {
 
         var testData by remember {
             mutableStateOf(emptyList<TestData>())
+        }
+        var feedback by remember {
+            mutableStateOf(emptyList<String>())
         }
         var errorMessage by remember {
             mutableStateOf<NetworkError?>(null)
@@ -73,6 +78,43 @@ fun App() {
             }) {
                 Text("Click me!")
             }
+
+            Button(onClick = {
+                coroutineScope.launch {
+                    BirdieApi.addFeedback(
+                        projectIdentity = ProjectIdentity(
+                            id = "df35f8db-bbe6-40f1-993f-8335e2a22eda",
+                            key = "00=="
+                        ),
+                        feedback = Feedback(
+                            rating = 5,
+                            userId = "user123",
+                            targetId = "feature213",
+                            targetType = "feature",
+                            text =  "This is a comment"
+                        )
+                    )
+                        .onSuccess {
+                            feedback = feedback + it.toString()
+                        }
+                        .onError {
+                            errorMessage = it
+                        }
+                }
+
+            }) {
+                Text("Click me!")
+            }
+
+            feedback.forEach {
+                Text(it)
+            }
+            testData.forEach {
+                it.text?.let { text -> Text(text) }
+            }
+            errorMessage?.let {
+                Text(it.category.name)
+            }
             AnimatedVisibility(showContent) {
                 val greeting = remember { Greeting().greet() }
                 Column(
@@ -81,12 +123,6 @@ fun App() {
                 ) {
                     Image(painterResource(Res.drawable.compose_multiplatform), null)
                     Text("Compose: $greeting")
-                    testData.forEach {
-                        it.text?.let { text -> Text(text) }
-                    }
-                    errorMessage?.let {
-                        Text(it.category.name)
-                    }
                 }
             }
         }

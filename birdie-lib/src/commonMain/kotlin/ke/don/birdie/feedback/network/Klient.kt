@@ -13,11 +13,15 @@ import io.ktor.client.call.body
 import io.ktor.client.network.sockets.ConnectTimeoutException
 import io.ktor.client.network.sockets.SocketTimeoutException
 import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.bodyAsText
 import ke.don.birdie.feedback.model.domain.BirdieResult
 import ke.don.birdie.feedback.model.domain.NetworkError
 import ke.don.birdie.feedback.model.domain.NetworkErrorCategory
 import kotlinx.io.IOException
 import kotlinx.serialization.SerializationException
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
 internal suspend inline fun <reified T> klient(
     crossinline call: suspend () -> HttpResponse,
@@ -28,10 +32,17 @@ internal suspend inline fun <reified T> klient(
     if (statusCode in 200..299) {
         BirdieResult.Success(response.body<T>())
     } else {
+        val errorBody = response.bodyAsText()
+        val errorMessage = try {
+            val json = Json.parseToJsonElement(errorBody).jsonObject
+            json["message"]?.jsonPrimitive?.content ?: response.status.description
+        } catch (e: Exception) {
+            response.status.description
+        }
         BirdieResult.Error(
             NetworkError(
                 category = statusCode.toCategory(),
-                message = response.status.description,
+                message = errorMessage,
                 code = statusCode
             )
         )

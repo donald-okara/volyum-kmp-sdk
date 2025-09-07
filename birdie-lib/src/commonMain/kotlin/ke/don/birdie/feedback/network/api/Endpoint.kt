@@ -9,7 +9,7 @@
  */
 package ke.don.birdie.feedback.network.api
 
-import ke.don.birdie.BuildKonfig
+import ke.don.birdie.feedback.BuildKonfig
 
 private val URL = BuildKonfig.SUPABASE_URL
 

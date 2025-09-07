@@ -18,7 +18,7 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.header
 import io.ktor.serialization.kotlinx.json.json
-import ke.don.birdie.BuildKonfig
+import ke.don.birdie.feedback.BuildKonfig
 import ke.don.birdie.feedback.helpers.compactKtorLogger
 import ke.don.birdie.feedback.helpers.logger
 import kotlinx.serialization.json.Json
@@ -26,8 +26,6 @@ import kotlinx.serialization.json.Json
 expect fun provideEngine(): HttpClientEngineFactory<*>
 
 internal object KtorClientProvider {
-    private val log = logger<KtorClientProvider>()
-
     // This will store the session provider, which we'll set manually
     val client = HttpClient(provideEngine()) {
         install(HttpTimeout) {

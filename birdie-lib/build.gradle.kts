@@ -15,7 +15,7 @@ if (keysFile.exists()) {
 }
 
 buildkonfig {
-    packageName = "ke.don.birdie_lib"
+    packageName = "ke.don.birdie.feedback"
 
     defaultConfigs {
         buildConfigField(STRING, "SUPABASE_URL", "${keys["SUPABASE_URL"]}")

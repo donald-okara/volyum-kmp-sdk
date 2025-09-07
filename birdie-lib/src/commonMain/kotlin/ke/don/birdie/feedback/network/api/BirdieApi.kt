@@ -15,11 +15,14 @@ import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
+import ke.don.birdie.feedback.helpers.EntityUUID
 import ke.don.birdie.feedback.helpers.logger
+import ke.don.birdie.feedback.model.domain.AddFeedbackRequest
 import ke.don.birdie.feedback.model.domain.BirdieResult
 import ke.don.birdie.feedback.model.domain.NetworkError
 import ke.don.birdie.feedback.model.domain.ProjectIdentity
 import ke.don.birdie.feedback.model.domain.TestData
+import ke.don.birdie.feedback.model.domain.map
 import ke.don.birdie.feedback.model.table.Feedback
 import ke.don.birdie.feedback.network.KtorClientProvider.client
 import ke.don.birdie.feedback.network.klient
@@ -37,16 +40,20 @@ object BirdieApi {
     suspend fun addFeedback(
         projectIdentity: ProjectIdentity,
         feedback: Feedback
-    ): BirdieResult<String, NetworkError> = klient {
-        client.post(Endpoint.PostgresFunctions.AddFeedback.url) {
-            contentType(ContentType.Application.Json)
-            setBody(
-                mapOf(
-                    "p_project_id" to projectIdentity.id,
-                    "p_api_key" to projectIdentity.key,
-                    "p_feedback" to feedback
+    ): BirdieResult<EntityUUID, NetworkError> =
+        klient<String> {
+            client.post(Endpoint.PostgresFunctions.AddFeedback.url) {
+                contentType(ContentType.Application.Json)
+                setBody(
+                    AddFeedbackRequest(
+                        projectId = projectIdentity.id,
+                        key = projectIdentity.key,
+                        feedback = feedback
+                    )
                 )
-            )
+            }
+        }.map { raw ->
+            EntityUUID(raw.trim('"'))
         }
-    }
+
 }

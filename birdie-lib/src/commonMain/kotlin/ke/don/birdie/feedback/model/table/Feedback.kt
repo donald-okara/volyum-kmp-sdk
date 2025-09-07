@@ -1,6 +1,5 @@
 package ke.don.birdie.feedback.model.table
 
-import ke.don.birdie.feedback.model.domain.Rating
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.jvm.JvmInline
@@ -12,5 +11,11 @@ data class Feedback(
     @SerialName("target_id")val targetId: String,
     @SerialName("target_type")val targetType: String,
     val text: String,
-    val rating: Rating?
-)
+    val rating: Int? = null
+) {
+    init {
+        require(rating == null || rating in 1..5) { "Rating must be between 1 and 5" }
+    }
+}
+
+
