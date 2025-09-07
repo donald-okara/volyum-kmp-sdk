@@ -9,6 +9,24 @@
  */
 package ke.don.birdie.demo
 
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.window.ComposeUIViewController
+import ke.don.birdie.feedback.config.BirdieConfig
+import ke.don.birdie.feedback.config.BirdieSdk
 
-fun MainViewController() = ComposeUIViewController { App() }
+
+fun MainViewController() = ComposeUIViewController {
+    val config = BirdieConfig(
+        projectId = "df35f8db-bbe6-40f1-993f-8335e2a22eda",
+        apiKey = "VCNU4Ul5TTgt2fbtAJVDiA==",
+    )
+
+    // Initialize SDK once
+    LaunchedEffect(Unit) {
+        BirdieSdk.init(config)
+    }
+
+    BirdieSdk.init(config)
+
+    App()
+}

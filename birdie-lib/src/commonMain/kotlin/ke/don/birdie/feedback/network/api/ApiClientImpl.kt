@@ -9,36 +9,24 @@
  */
 package ke.don.birdie.feedback.network.api
 
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import ke.don.birdie.feedback.helpers.EntityUUID
-import ke.don.birdie.feedback.helpers.logger
 import ke.don.birdie.feedback.model.domain.AddFeedbackRequest
 import ke.don.birdie.feedback.model.domain.BirdieResult
 import ke.don.birdie.feedback.model.domain.NetworkError
 import ke.don.birdie.feedback.model.domain.ProjectIdentity
-import ke.don.birdie.feedback.model.domain.TestData
 import ke.don.birdie.feedback.model.domain.map
 import ke.don.birdie.feedback.model.table.Feedback
 import ke.don.birdie.feedback.network.KtorClientProvider.client
 import ke.don.birdie.feedback.network.klient
 
-object BirdieApi {
-    private val log = logger<BirdieApi>()
-
-    suspend fun fetchTestData(): BirdieResult<List<TestData>, NetworkError> = klient {
-        client.get(Endpoint.TestTable.url) {
-            contentType(ContentType.Application.Json)
-            parameter("select", "*")
-        }
-    }
-
-    suspend fun addFeedback(
-        projectIdentity: ProjectIdentity,
+class ApiClientImpl(
+    private val projectIdentity: ProjectIdentity
+): ApiClient {
+    override suspend fun addFeedback(
         feedback: Feedback,
     ): BirdieResult<EntityUUID, NetworkError> =
         klient<String> {
