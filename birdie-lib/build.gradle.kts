@@ -26,7 +26,7 @@ buildkonfig {
 kotlin {
 
     androidLibrary {
-        namespace = "ke.don.birdie_lib"
+        namespace = "ke.don.birdie.feedback"
         compileSdk = 36
         minSdk = 26
 
@@ -40,7 +40,7 @@ kotlin {
         }
     }
 
-    val xcfName = "birdie-libKit"
+    val xcfName = "birdie-feedbackKit"
 
     iosX64 {
         binaries.framework {

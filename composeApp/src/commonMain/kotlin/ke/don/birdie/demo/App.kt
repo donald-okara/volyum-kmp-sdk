@@ -19,16 +19,21 @@ import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import birdiesdk.composeapp.generated.resources.Res
 import birdiesdk.composeapp.generated.resources.compose_multiplatform
-import ke.don.birdie_lib.model.NetworkError
-import ke.don.birdie_lib.model.TestData
-import ke.don.birdie_lib.model.onError
-import ke.don.birdie_lib.model.onSuccess
-import ke.don.birdie_lib.network.api.BirdieApi
+import ke.don.birdie.feedback.model.domain.NetworkError
+import ke.don.birdie.feedback.model.domain.TestData
+import ke.don.birdie.feedback.model.domain.onError
+import ke.don.birdie.feedback.model.domain.onSuccess
+import ke.don.birdie.feedback.network.api.BirdieApi
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -64,6 +69,7 @@ fun App() {
                             errorMessage = it
                         }
                 }
+
             }) {
                 Text("Click me!")
             }
@@ -79,7 +85,7 @@ fun App() {
                         it.text?.let { text -> Text(text) }
                     }
                     errorMessage?.let {
-                        Text(it.name)
+                        Text(it.category.name)
                     }
                 }
             }
