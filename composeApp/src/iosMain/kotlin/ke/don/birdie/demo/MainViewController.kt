@@ -9,13 +9,10 @@
  */
 package ke.don.birdie.demo
 
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.window.ComposeUIViewController
-import ke.don.birdie.feedback.config.BirdieConfig
 import ke.don.birdie.feedback.config.BirdieSdk
 
 fun MainViewController() = ComposeUIViewController {
-
     BirdieSdk.init(BirdieCredentials.CONFIG)
 
     App()

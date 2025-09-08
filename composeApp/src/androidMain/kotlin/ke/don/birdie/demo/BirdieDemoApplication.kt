@@ -10,7 +10,6 @@
 package ke.don.birdie.demo
 
 import android.app.Application
-import ke.don.birdie.feedback.config.BirdieConfig
 import ke.don.birdie.feedback.config.BirdieSdk
 
 class BirdieDemoApplication : Application() {
