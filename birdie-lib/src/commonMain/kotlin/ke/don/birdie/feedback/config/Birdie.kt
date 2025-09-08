@@ -18,7 +18,7 @@ class Birdie internal constructor(
     private val apiClient: ApiClient,
 ) {
     suspend fun sendFeedback(
-        feedback: Feedback
+        feedback: Feedback,
     ): BirdieResult<Feedback, NetworkError> =
         apiClient.addFeedback(feedback = feedback)
 
