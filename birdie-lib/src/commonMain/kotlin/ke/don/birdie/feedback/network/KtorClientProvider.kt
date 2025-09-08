@@ -34,6 +34,7 @@ internal object KtorClientProvider {
             json(
                 Json {
                     encodeDefaults = false
+                    explicitNulls = false
                     ignoreUnknownKeys = true
                     prettyPrint = true
                     isLenient = true

@@ -24,5 +24,7 @@ internal sealed class Endpoint(val route: String) {
         override val baseUrl = "$URL/functions/v1/"
 
         object AddFeedback : Functions(route = "submit_feedback")
+        object GetFeedback : Functions(route = "get_feedback")
+        object GetFeedbackById : Functions(route = "get_feedback_by_id")
     }
 }
