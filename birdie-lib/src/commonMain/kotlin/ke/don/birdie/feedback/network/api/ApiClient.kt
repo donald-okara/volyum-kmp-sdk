@@ -6,10 +6,11 @@ import ke.don.birdie.feedback.model.domain.NetworkError
 import ke.don.birdie.feedback.model.domain.ProjectIdentity
 import ke.don.birdie.feedback.model.table.Feedback
 
-interface ApiClient {
+internal interface ApiClient {
     suspend fun addFeedback(
         feedback: Feedback,
-    ): BirdieResult<EntityUUID, NetworkError>
+    ): BirdieResult<Feedback, NetworkError>
+
 
 
 }

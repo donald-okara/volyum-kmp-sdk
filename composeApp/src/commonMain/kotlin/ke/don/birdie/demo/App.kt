@@ -9,12 +9,9 @@
  */
 package ke.don.birdie.demo
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -27,19 +24,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import birdiesdk.composeapp.generated.resources.Res
-import birdiesdk.composeapp.generated.resources.compose_multiplatform
-import ke.don.birdie.feedback.config.BirdieConfig
 import ke.don.birdie.feedback.config.BirdieSdk
 import ke.don.birdie.feedback.model.domain.NetworkError
-import ke.don.birdie.feedback.model.domain.ProjectIdentity
 import ke.don.birdie.feedback.model.domain.TestData
 import ke.don.birdie.feedback.model.domain.onError
 import ke.don.birdie.feedback.model.domain.onSuccess
 import ke.don.birdie.feedback.model.table.Feedback
-import ke.don.birdie.feedback.network.api.ApiClientImpl
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -81,7 +72,7 @@ fun App() {
                             )
                         )
                         .onSuccess {
-                            feedback = feedback + it.toString()
+                            feedback = feedback + it.text
                         }.onError {
                             errorMessage = it
                         }

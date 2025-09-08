@@ -9,6 +9,6 @@ import ke.don.birdie.feedback.network.api.ApiClient
 class Birdie internal constructor(
     private val apiClient: ApiClient,
 ) {
-    suspend fun sendFeedback(feedback: Feedback): BirdieResult<EntityUUID, NetworkError> = apiClient.addFeedback( feedback = feedback )
+    suspend fun sendFeedback(feedback: Feedback): BirdieResult<Feedback, NetworkError> = apiClient.addFeedback( feedback = feedback )
 
 }

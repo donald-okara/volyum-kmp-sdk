@@ -23,24 +23,21 @@ import ke.don.birdie.feedback.model.table.Feedback
 import ke.don.birdie.feedback.network.KtorClientProvider.client
 import ke.don.birdie.feedback.network.klient
 
-class ApiClientImpl(
-    private val projectIdentity: ProjectIdentity
-): ApiClient {
+internal class ApiClientImpl(
+    private val projectIdentity: ProjectIdentity,
+) : ApiClient {
     override suspend fun addFeedback(
         feedback: Feedback,
-    ): BirdieResult<EntityUUID, NetworkError> =
-        klient<String> {
-            client.post(Endpoint.PostgresFunctions.AddFeedback.url) {
-                contentType(ContentType.Application.Json)
-                setBody(
-                    AddFeedbackRequest(
-                        projectId = projectIdentity.id,
-                        key = projectIdentity.key,
-                        feedback = feedback,
-                    ),
-                )
-            }
-        }.map { raw ->
-            EntityUUID(raw.trim('"'))
+    ): BirdieResult<Feedback, NetworkError> = klient<Feedback> {
+        client.post(Endpoint.Functions.AddFeedback.url) {
+            contentType(ContentType.Application.Json)
+            setBody(
+                AddFeedbackRequest(
+                    projectId = projectIdentity.id,
+                    key = projectIdentity.key,
+                    feedback = feedback,
+                ),
+            )
         }
+    }
 }

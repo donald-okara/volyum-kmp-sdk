@@ -9,11 +9,9 @@
  */
 package ke.don.birdie.feedback.network.api
 
-import ke.don.birdie.feedback.BuildKonfig
+import ke.don.birdie.feedback.model.domain.Constants.URL
 
-private val URL = BuildKonfig.SUPABASE_URL
-
-sealed class Endpoint(val route: String) {
+internal sealed class Endpoint(val route: String) {
     open val baseUrl = "$URL/rest/v1/"
 
     val url: String
@@ -22,12 +20,9 @@ sealed class Endpoint(val route: String) {
             append(route)
         }
 
-    /** Test table */
-    object TestTable : Endpoint(route = "test_table")
+    sealed class Functions(route: String) : Endpoint(route) {
+        override val baseUrl = "$URL/functions/v1/"
 
-    sealed class PostgresFunctions(route: String) : Endpoint(route) {
-        override val baseUrl = "$URL/rest/v1/rpc/"
-
-        object AddFeedback : PostgresFunctions(route = "add_feedback")
+        object AddFeedback : Functions(route = "submit_feedback")
     }
 }

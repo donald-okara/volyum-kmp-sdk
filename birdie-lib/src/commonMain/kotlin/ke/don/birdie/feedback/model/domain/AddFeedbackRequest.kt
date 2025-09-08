@@ -15,7 +15,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AddFeedbackRequest(
-    @SerialName("p_project_id")val projectId: String,
-    @SerialName("p_api_key")val key: String,
-    @SerialName("p_feedback") val feedback: Feedback,
+    @SerialName("project_id")val projectId: String,
+    @SerialName("api_key")val key: String,
+    @SerialName("feedback") val feedback: Feedback,
 )

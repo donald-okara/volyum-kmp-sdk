@@ -1,26 +1,7 @@
-import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
-import java.util.Properties
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
     alias(libs.plugins.kotlin.serialization)
-    id("com.codingfeline.buildkonfig") version "0.17.1"
-}
-
-val keysFile = rootProject.file("local.properties")
-val keys = Properties()
-if (keysFile.exists()) {
-    keys.load(keysFile.inputStream())
-}
-
-buildkonfig {
-    packageName = "ke.don.birdie.feedback"
-
-    defaultConfigs {
-        buildConfigField(STRING, "SUPABASE_URL", "${keys["SUPABASE_URL"]}")
-        buildConfigField(STRING, "SUPABASE_ANON_KEY", "${keys["SUPABASE_ANON_KEY"]}")
-    }
 }
 
 kotlin {
