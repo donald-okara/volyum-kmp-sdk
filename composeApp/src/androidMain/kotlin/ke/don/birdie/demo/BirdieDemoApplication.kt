@@ -9,17 +9,13 @@
  */
 package ke.don.birdie.demo
 
-import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.application
+import android.app.Application
 import ke.don.birdie.feedback.config.BirdieSdk
 
-fun main() = application {
-    BirdieSdk.init(BirdieCredentials.CONFIG)
+class BirdieDemoApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
 
-    Window(
-        onCloseRequest = ::exitApplication,
-        title = "BirdieSDK",
-    ) {
-        App()
+        BirdieSdk.init(BirdieCredentials.CONFIG)
     }
 }

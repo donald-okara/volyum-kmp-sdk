@@ -7,13 +7,17 @@
  *
  *       http://www.apache.org/licenses/LICENSE-2.0
  */
-package ke.don.birdie.demo
+package ke.don.birdie.feedback.helpers
 
-import androidx.compose.ui.window.ComposeUIViewController
-import ke.don.birdie.feedback.config.BirdieSdk
+import kotlin.jvm.JvmInline
 
-fun MainViewController() = ComposeUIViewController {
-    BirdieSdk.init(BirdieCredentials.CONFIG)
+@JvmInline
+value class EntityUUID(val value: String) {
+    init {
+        require(value.matches(Regex("^[0-9a-fA-F-]{36}\$"))) {
+            "Invalid UUID format: $value"
+        }
+    }
 
-    App()
+    override fun toString(): String = value
 }

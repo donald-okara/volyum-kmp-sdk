@@ -7,13 +7,10 @@
  *
  *       http://www.apache.org/licenses/LICENSE-2.0
  */
-package ke.don.birdie.demo
+package ke.don.birdie.feedback.model.domain
 
-import androidx.compose.ui.window.ComposeUIViewController
-import ke.don.birdie.feedback.config.BirdieSdk
-
-fun MainViewController() = ComposeUIViewController {
-    BirdieSdk.init(BirdieCredentials.CONFIG)
-
-    App()
-}
+data class NetworkError(
+    val category: NetworkErrorCategory = NetworkErrorCategory.UNKNOWN,
+    val message: String? = null,
+    val code: Int? = null,
+) : BirdieError

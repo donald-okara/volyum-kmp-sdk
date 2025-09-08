@@ -7,13 +7,16 @@
  *
  *       http://www.apache.org/licenses/LICENSE-2.0
  */
-package ke.don.birdie.demo
+package ke.don.birdie.feedback.model.domain
 
-import androidx.compose.ui.window.ComposeUIViewController
-import ke.don.birdie.feedback.config.BirdieSdk
-
-fun MainViewController() = ComposeUIViewController {
-    BirdieSdk.init(BirdieCredentials.CONFIG)
-
-    App()
+enum class NetworkErrorCategory {
+    REQUEST_TIMEOUT,
+    UNAUTHORIZED,
+    CONFLICT,
+    TOO_MANY_REQUESTS,
+    NO_INTERNET,
+    PAYLOAD_TOO_LARGE,
+    SERVER_ERROR,
+    SERIALIZATION,
+    UNKNOWN,
 }

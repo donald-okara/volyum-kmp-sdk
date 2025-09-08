@@ -7,13 +7,10 @@
  *
  *       http://www.apache.org/licenses/LICENSE-2.0
  */
-package ke.don.birdie.demo
+package ke.don.birdie.feedback.helpers
 
-import androidx.compose.ui.window.ComposeUIViewController
-import ke.don.birdie.feedback.config.BirdieSdk
+import co.touchlab.kermit.Logger
 
-fun MainViewController() = ComposeUIViewController {
-    BirdieSdk.init(BirdieCredentials.CONFIG)
-
-    App()
+internal inline fun <reified T> logger(): Logger {
+    return Logger.withTag(T::class.simpleName ?: "Birdie")
 }

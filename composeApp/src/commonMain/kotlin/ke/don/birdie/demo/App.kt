@@ -9,28 +9,28 @@
  */
 package ke.don.birdie.demo
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import birdiesdk.composeapp.generated.resources.Res
-import birdiesdk.composeapp.generated.resources.compose_multiplatform
-import ke.don.birdie_lib.model.NetworkError
-import ke.don.birdie_lib.model.TestData
-import ke.don.birdie_lib.model.onError
-import ke.don.birdie_lib.model.onSuccess
-import ke.don.birdie_lib.network.api.BirdieApi
+import ke.don.birdie.feedback.config.BirdieSdk
+import ke.don.birdie.feedback.model.domain.NetworkError
+import ke.don.birdie.feedback.model.domain.TestData
+import ke.don.birdie.feedback.model.domain.onError
+import ke.don.birdie.feedback.model.domain.onSuccess
+import ke.don.birdie.feedback.model.table.Feedback
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -43,9 +43,15 @@ fun App() {
         var testData by remember {
             mutableStateOf(emptyList<TestData>())
         }
+        var feedback by remember {
+            mutableStateOf(emptyList<String>())
+        }
         var errorMessage by remember {
             mutableStateOf<NetworkError?>(null)
         }
+
+        val birdie = BirdieSdk.get()
+
         Column(
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.primaryContainer)
@@ -54,34 +60,35 @@ fun App() {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Button(onClick = {
-                showContent = !showContent
                 coroutineScope.launch {
-                    BirdieApi.fetchTestData()
+                    birdie
+                        .sendFeedback(
+                            feedback = Feedback(
+                                rating = 5,
+                                userId = "user123",
+                                targetId = "feature213",
+                                targetType = "feature",
+                                text = "This is a comment",
+                            ),
+                        )
                         .onSuccess {
-                            testData = it
-                        }
-                        .onError {
+                            feedback = feedback + it.text
+                        }.onError {
                             errorMessage = it
                         }
                 }
             }) {
                 Text("Click me!")
             }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
-                    testData.forEach {
-                        it.text?.let { text -> Text(text) }
-                    }
-                    errorMessage?.let {
-                        Text(it.name)
-                    }
-                }
+
+            feedback.forEach {
+                Text(it)
+            }
+            testData.forEach {
+                it.text?.let { text -> Text(text) }
+            }
+            errorMessage?.let {
+                Text(it.category.name)
             }
         }
     }

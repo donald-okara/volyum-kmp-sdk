@@ -7,13 +7,13 @@
  *
  *       http://www.apache.org/licenses/LICENSE-2.0
  */
-package ke.don.birdie.demo
+package ke.don.birdie.feedback.config
 
-import androidx.compose.ui.window.ComposeUIViewController
-import ke.don.birdie.feedback.config.BirdieSdk
+import ke.don.birdie.feedback.network.api.ApiClientImpl
 
-fun MainViewController() = ComposeUIViewController {
-    BirdieSdk.init(BirdieCredentials.CONFIG)
-
-    App()
+object BirdieFactory {
+    fun create(config: BirdieConfig): Birdie {
+        val apiClient = ApiClientImpl(config.toProjectIdentifier())
+        return Birdie(apiClient)
+    }
 }

@@ -7,13 +7,12 @@
  *
  *       http://www.apache.org/licenses/LICENSE-2.0
  */
-package ke.don.birdie.demo
+package ke.don.birdie.feedback.model.domain
 
-import androidx.compose.ui.window.ComposeUIViewController
-import ke.don.birdie.feedback.config.BirdieSdk
+import kotlinx.serialization.Serializable
 
-fun MainViewController() = ComposeUIViewController {
-    BirdieSdk.init(BirdieCredentials.CONFIG)
-
-    App()
-}
+@Serializable
+data class TestData(
+    val id: Long,
+    val text: String? = null,
+)
