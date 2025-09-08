@@ -14,7 +14,6 @@ import androidx.compose.ui.window.ComposeUIViewController
 import ke.don.birdie.feedback.config.BirdieConfig
 import ke.don.birdie.feedback.config.BirdieSdk
 
-
 fun MainViewController() = ComposeUIViewController {
     val config = BirdieConfig(
         projectId = "df35f8db-bbe6-40f1-993f-8335e2a22eda",

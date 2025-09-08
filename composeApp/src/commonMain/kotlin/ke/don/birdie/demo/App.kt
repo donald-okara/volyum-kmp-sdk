@@ -69,7 +69,7 @@ fun App() {
                                 targetId = "feature213",
                                 targetType = "feature",
                                 text = "This is a comment",
-                            )
+                            ),
                         )
                         .onSuccess {
                             feedback = feedback + it.text

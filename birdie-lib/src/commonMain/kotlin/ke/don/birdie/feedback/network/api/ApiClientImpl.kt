@@ -13,14 +13,12 @@ import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
-import ke.don.birdie.feedback.helpers.EntityUUID
-import ke.don.birdie.feedback.model.domain.data_transfer.AddFeedbackRequest
 import ke.don.birdie.feedback.model.domain.BirdieResult
 import ke.don.birdie.feedback.model.domain.NetworkError
 import ke.don.birdie.feedback.model.domain.ProjectIdentity
+import ke.don.birdie.feedback.model.domain.data_transfer.AddFeedbackRequest
 import ke.don.birdie.feedback.model.domain.data_transfer.GetFeedbackByIdRequest
 import ke.don.birdie.feedback.model.domain.data_transfer.GetFeedbackRequest
-import ke.don.birdie.feedback.model.domain.map
 import ke.don.birdie.feedback.model.table.Feedback
 import ke.don.birdie.feedback.network.KtorClientProvider.client
 import ke.don.birdie.feedback.network.klient
@@ -49,8 +47,8 @@ internal class ApiClientImpl(
         userId: String?,
         targetId: String?,
         targetType: String?,
-    ): BirdieResult<List<Feedback>, NetworkError> = klient<List<Feedback>>{
-        client.post(Endpoint.Functions.GetFeedback.url){
+    ): BirdieResult<List<Feedback>, NetworkError> = klient<List<Feedback>> {
+        client.post(Endpoint.Functions.GetFeedback.url) {
             contentType(ContentType.Application.Json)
             setBody(
                 GetFeedbackRequest(
@@ -60,21 +58,23 @@ internal class ApiClientImpl(
                     targetId = targetId,
                     targetType = targetType,
                     limit = limit,
-                    offset = offset
-                )
+                    offset = offset,
+                ),
             )
         }
     }
 
-    override suspend fun getFeedbackById(id: String): BirdieResult<Feedback, NetworkError> = klient<Feedback>{
-        client.post(Endpoint.Functions.GetFeedbackById.url){
+    override suspend fun getFeedbackById(
+        id: String,
+    ): BirdieResult<Feedback, NetworkError> = klient<Feedback> {
+        client.post(Endpoint.Functions.GetFeedbackById.url) {
             contentType(ContentType.Application.Json)
             setBody(
                 GetFeedbackByIdRequest(
                     projectId = projectIdentity.id,
                     apiKey = projectIdentity.id,
-                    feedbackId = id
-                )
+                    feedbackId = id,
+                ),
             )
         }
     }

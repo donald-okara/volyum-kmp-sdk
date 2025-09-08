@@ -1,9 +1,16 @@
+/*
+ * Copyright © 2025 Donald O. Isoe (isoedonald@gmail.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ */
 package ke.don.birdie.feedback.network.api
 
-import ke.don.birdie.feedback.helpers.EntityUUID
 import ke.don.birdie.feedback.model.domain.BirdieResult
 import ke.don.birdie.feedback.model.domain.NetworkError
-import ke.don.birdie.feedback.model.domain.ProjectIdentity
 import ke.don.birdie.feedback.model.table.Feedback
 
 internal interface ApiClient {
@@ -16,11 +23,10 @@ internal interface ApiClient {
         offset: Int?,
         userId: String?,
         targetId: String?,
-        targetType: String?
+        targetType: String?,
     ): BirdieResult<List<Feedback>, NetworkError>
 
     suspend fun getFeedbackById(
-        id: String
+        id: String,
     ): BirdieResult<Feedback, NetworkError>
-
 }
