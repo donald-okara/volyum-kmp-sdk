@@ -9,23 +9,23 @@
  */
 package ke.don.birdie.feedback.model.domain
 
-sealed interface BirdieResult<out D, out E : Error> {
+sealed interface BirdieResult<out D, out E : BirdieError> {
     data class Success<out D>(val data: D) : BirdieResult<D, Nothing>
-    data class Error<out E : ke.don.birdie.feedback.model.domain.Error>(val error: E) : BirdieResult<Nothing, E>
+    data class Error<out E : ke.don.birdie.feedback.model.domain.BirdieError>(val error: E) : BirdieResult<Nothing, E>
 }
 
-inline fun <T, E : Error, R> BirdieResult<T, E>.map(map: (T) -> R): BirdieResult<R, E> {
+inline fun <T, E : BirdieError, R> BirdieResult<T, E>.map(map: (T) -> R): BirdieResult<R, E> {
     return when (this) {
         is BirdieResult.Error -> BirdieResult.Error(error)
         is BirdieResult.Success -> BirdieResult.Success(map(data))
     }
 }
 
-fun <T, E : Error> BirdieResult<T, E>.asEmptyDataResult(): EmptyResult<E> {
+fun <T, E : BirdieError> BirdieResult<T, E>.asEmptyDataResult(): EmptyResult<E> {
     return map { }
 }
 
-inline fun <T, E : Error> BirdieResult<T, E>.onSuccess(action: (T) -> Unit): BirdieResult<T, E> {
+inline fun <T, E : BirdieError> BirdieResult<T, E>.onSuccess(action: (T) -> Unit): BirdieResult<T, E> {
     return when (this) {
         is BirdieResult.Error -> this
         is BirdieResult.Success -> {
@@ -34,7 +34,7 @@ inline fun <T, E : Error> BirdieResult<T, E>.onSuccess(action: (T) -> Unit): Bir
         }
     }
 }
-inline fun <T, E : Error> BirdieResult<T, E>.onError(action: (E) -> Unit): BirdieResult<T, E> {
+inline fun <T, E : BirdieError> BirdieResult<T, E>.onError(action: (E) -> Unit): BirdieResult<T, E> {
     return when (this) {
         is BirdieResult.Error -> {
             action(error)

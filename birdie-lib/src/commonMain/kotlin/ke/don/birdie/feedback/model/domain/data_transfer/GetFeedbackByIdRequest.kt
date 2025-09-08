@@ -10,7 +10,9 @@
 package ke.don.birdie.feedback.model.domain.data_transfer
 
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class GetFeedbackByIdRequest(
     @SerialName("project_id")val projectId: String,
     @SerialName("api_key")val apiKey: String,

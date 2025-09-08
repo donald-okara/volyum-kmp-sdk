@@ -16,6 +16,8 @@ data class BirdieConfig(
     val apiKey: String,
 ) {
     fun toProjectIdentifier(): ProjectIdentity {
+        require(projectId.isNotBlank()) { "projectId must not be blank" }
+        require(apiKey.isNotBlank()) { "apiKey must not be blank" }
         return ProjectIdentity(
             id = projectId,
             key = apiKey,

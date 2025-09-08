@@ -72,7 +72,7 @@ internal class ApiClientImpl(
             setBody(
                 GetFeedbackByIdRequest(
                     projectId = projectIdentity.id,
-                    apiKey = projectIdentity.id,
+                    apiKey = projectIdentity.key,
                     feedbackId = id,
                 ),
             )

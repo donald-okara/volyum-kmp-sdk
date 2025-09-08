@@ -1,5 +1,7 @@
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -7,6 +9,22 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
+    id("com.codingfeline.buildkonfig") version "0.17.1"
+}
+
+val keysFile = rootProject.file("local.properties")
+val keys = Properties()
+if (keysFile.exists()) {
+    keys.load(keysFile.inputStream())
+}
+
+buildkonfig {
+    packageName = "ke.don.birdie.demo"
+
+    defaultConfigs {
+        buildConfigField(STRING, "BIRDIE_PROJECT_ID", "${keys["BIRDIE_PROJECT_ID"]}")
+        buildConfigField(STRING, "BIRDIE_API_KEY", "${keys["BIRDIE_API_KEY"]}")
+    }
 }
 
 kotlin {

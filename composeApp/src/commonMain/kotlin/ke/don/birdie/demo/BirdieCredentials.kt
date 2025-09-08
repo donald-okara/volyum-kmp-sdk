@@ -9,18 +9,11 @@
  */
 package ke.don.birdie.demo
 
-import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.application
 import ke.don.birdie.feedback.config.BirdieConfig
-import ke.don.birdie.feedback.config.BirdieSdk
 
-fun main() = application {
-    BirdieSdk.init(BirdieCredentials.CONFIG)
-
-    Window(
-        onCloseRequest = ::exitApplication,
-        title = "BirdieSDK",
-    ) {
-        App()
-    }
+object BirdieCredentials {
+    val CONFIG = BirdieConfig(
+        projectId = BuildKonfig.BIRDIE_PROJECT_ID,
+        apiKey = BuildKonfig.BIRDIE_API_KEY,
+    )
 }

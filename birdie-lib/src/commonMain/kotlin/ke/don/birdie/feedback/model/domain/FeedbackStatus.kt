@@ -9,4 +9,20 @@
  */
 package ke.don.birdie.feedback.model.domain
 
-interface Error
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+enum class FeedbackStatus {
+    @SerialName("pending")
+    Pending,
+
+    @SerialName("reviewed")
+    Reviewed,
+
+    @SerialName("resolved")
+    Resolved,
+
+    @SerialName("rejected")
+    Rejected,
+}

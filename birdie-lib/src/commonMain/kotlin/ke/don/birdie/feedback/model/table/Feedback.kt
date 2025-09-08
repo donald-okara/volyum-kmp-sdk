@@ -9,6 +9,7 @@
  */
 package ke.don.birdie.feedback.model.table
 
+import ke.don.birdie.feedback.model.domain.FeedbackStatus
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -20,6 +21,7 @@ data class Feedback(
     @SerialName("target_type")val targetType: String,
     val text: String,
     val rating: Int? = null,
+    val status: FeedbackStatus = FeedbackStatus.Pending,
 ) {
     init {
         require(rating == null || rating in 1..5) { "Rating must be between 1 and 5" }

@@ -9,17 +9,18 @@
  */
 package ke.don.birdie.feedback.config
 
-import kotlin.concurrent.Volatile
+import kotlinx.atomicfu.atomic
 
 object BirdieSdk {
-    @Volatile
-    private var instance: Birdie? = null
+    private val instanceRef = atomic<Birdie?>(null)
 
     fun init(config: BirdieConfig) {
-        check(instance == null) { "BirdieSdk is already initialized" }
-        instance = BirdieFactory.create(config)
+        val created = BirdieFactory.create(config)
+        if (!instanceRef.compareAndSet(null, created)) {
+            error("BirdieSdk is already initialized")
+        }
     }
 
     fun get(): Birdie =
-        instance ?: error("BirdieSdk not initialized. Call BirdieSdk.init(config) first.")
+        instanceRef.value ?: error("BirdieSdk not initialized. Call BirdieSdk.init(config) first.")
 }
