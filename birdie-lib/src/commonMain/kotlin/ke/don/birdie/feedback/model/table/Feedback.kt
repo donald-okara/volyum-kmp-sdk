@@ -19,7 +19,7 @@ data class Feedback(
     @SerialName("user_id")val userId: String,
     @SerialName("target_id")val targetId: String,
     @SerialName("target_type")val targetType: String,
-    @SerialName("closing_remarks")val closingRemarks: String,
+    @SerialName("closing_remarks")val closingRemarks: String? = null,
     val text: String,
     val rating: Int? = null,
     val status: FeedbackStatus = FeedbackStatus.Pending,
