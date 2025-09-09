@@ -1,3 +1,12 @@
+/*
+ * Copyright © 2025 Donald O. Isoe (isoedonald@gmail.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ */
 package ke.don.birdie.demo.previews
 
 import androidx.compose.material3.Surface
@@ -20,7 +29,7 @@ class BooleanPreviewParameterProvider : PreviewParameterProvider<Boolean> {
 @Composable
 fun FeedbackItemPreview(
     @PreviewParameter(BooleanPreviewParameterProvider::class)
-    darkTheme: Boolean
+    darkTheme: Boolean,
 ) {
     BirdieTheme(darkTheme = darkTheme) {
         Surface {
@@ -34,7 +43,7 @@ fun FeedbackItemPreview(
                     text = "This is a sample feedback item.",
                     createdAt = "2023-09-09T10:15:00.000000+00:00",
                     userMetadata = UserData().getRandom().toMetadata(),
-                )
+                ),
             )
         }
     }
@@ -44,12 +53,12 @@ fun FeedbackItemPreview(
 @Composable
 fun ProfileHeaderPreview(
     @PreviewParameter(BooleanPreviewParameterProvider::class)
-    darkTheme: Boolean
+    darkTheme: Boolean,
 ) {
     BirdieTheme(darkTheme = darkTheme) {
         Surface {
             ProfileHeader(
-                userData = UserData().getRandom()
+                userData = UserData().getRandom(),
             )
         }
     }
@@ -59,13 +68,13 @@ fun ProfileHeaderPreview(
 @Composable
 fun RatingRowPreview(
     @PreviewParameter(BooleanPreviewParameterProvider::class)
-    darkTheme: Boolean
+    darkTheme: Boolean,
 ) {
     BirdieTheme(darkTheme = darkTheme) {
         Surface {
             RatingRow(
                 rating = 3,
-                timestamp = "2023-09-09T10:15:00.000000+00:00"
+                timestamp = "2023-09-09T10:15:00.000000+00:00",
             )
         }
     }

@@ -14,6 +14,7 @@ import io.ktor.client.network.sockets.ConnectTimeoutException
 import io.ktor.client.network.sockets.SocketTimeoutException
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
+import io.ktor.util.reflect.*
 import ke.don.birdie.feedback.model.domain.BirdieResult
 import ke.don.birdie.feedback.model.domain.NetworkError
 import ke.don.birdie.feedback.model.domain.NetworkErrorCategory
@@ -22,7 +23,6 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import io.ktor.util.reflect.*
 
 internal suspend inline fun <reified T> klient(
     crossinline call: suspend () -> HttpResponse,
@@ -58,7 +58,6 @@ internal suspend inline fun <reified T> klient(
         ),
     )
 }
-
 
 private fun Int.toCategory(): NetworkErrorCategory = when (this) {
     401 -> NetworkErrorCategory.UNAUTHORIZED

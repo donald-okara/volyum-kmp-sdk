@@ -9,23 +9,14 @@
  */
 package ke.don.birdie.demo
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,18 +26,11 @@ import ke.don.birdie.demo.models.DemoIntentHandler
 import ke.don.birdie.demo.models.FeedbackViewModel
 import ke.don.birdie.demo.screens.FeedbackList
 import ke.don.birdie.demo.theme.BirdieTheme
-import ke.don.birdie.feedback.config.BirdieSdk
-import ke.don.birdie.feedback.model.domain.NetworkError
-import ke.don.birdie.feedback.model.domain.TestData
 import ke.don.birdie.feedback.model.domain.data_transfer.GetFeedbackFilter
-import ke.don.birdie.feedback.model.domain.onError
-import ke.don.birdie.feedback.model.domain.onSuccess
-import ke.don.birdie.feedback.model.table.Feedback
 import ke.don.koffee.annotations.ExperimentalKoffeeApi
 import ke.don.koffee.model.KoffeeDefaults
 import ke.don.koffee.ui.KoffeeBar
 import ke.don.koffee.ui.toasts_suite.GlowingToast
-import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalKoffeeApi::class)
@@ -60,28 +44,27 @@ fun App() {
 
         val koffeeConfig = KoffeeDefaults.config.copy(
             layout = { GlowingToast(it) },
-            maxVisibleToasts = 3
+            maxVisibleToasts = 3,
         )
-        LaunchedEffect(viewModel){
+        LaunchedEffect(viewModel) {
             handleIntent(DemoIntentHandler.GetFeedback(GetFeedbackFilter()))
         }
 
-        Surface{
+        Surface {
             KoffeeBar(
-                config = koffeeConfig
+                config = koffeeConfig,
             ) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(24.dp), // outer breathing space
-                    contentAlignment = Alignment.Center
+                    contentAlignment = Alignment.Center,
                 ) {
                     FeedbackList(
                         state = state,
-                        handleIntent = handleIntent
+                        handleIntent = handleIntent,
                     )
                 }
-
             }
         }
     }

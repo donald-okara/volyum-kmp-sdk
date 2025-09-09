@@ -25,7 +25,7 @@ class FakeApiClient : ApiClient {
     }
 
     override suspend fun getFeedback(
-        filter: GetFeedbackFilter
+        filter: GetFeedbackFilter,
     ): BirdieResult<List<Feedback>, NetworkError> {
         return if (filter.userId == "0") {
             return BirdieResult.Error(NetworkError())

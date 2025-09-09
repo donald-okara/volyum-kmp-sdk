@@ -1,3 +1,12 @@
+/*
+ * Copyright © 2025 Donald O. Isoe (isoedonald@gmail.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ */
 package ke.don.birdie.demo.models
 
 import androidx.lifecycle.ViewModel
@@ -18,13 +27,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class FeedbackViewModel: ViewModel() {
+class FeedbackViewModel : ViewModel() {
     val birdie = BirdieSdk.get()
 
     private val myUserData = UserData(
         id = "1",
         name = "Donald",
-        profileUrl = "https://picsum.photos/200?seed=1"
+        profileUrl = "https://picsum.photos/200?seed=1",
     )
 
     private val _uiState = MutableStateFlow(FeedbackState())
@@ -36,8 +45,8 @@ class FeedbackViewModel: ViewModel() {
         }
     }
 
-    fun handleIndent(intent: DemoIntentHandler){
-        when(intent){
+    fun handleIndent(intent: DemoIntentHandler) {
+        when (intent) {
             is DemoIntentHandler.GetFeedback -> getFeedback()
             is DemoIntentHandler.GetFeedbackById -> getFeedbackById(intent.id)
             is DemoIntentHandler.SendFeedback -> sendFeedback(intent.option)
@@ -54,7 +63,7 @@ class FeedbackViewModel: ViewModel() {
                     updateState { state ->
                         state.copy(
                             feedbackList = it,
-                            listIsLoading = false
+                            listIsLoading = false,
                         )
                     }
                 }
@@ -64,7 +73,7 @@ class FeedbackViewModel: ViewModel() {
                         state.copy(
                             listIsLoading = false,
                             listIsError = true,
-                            listErrorMessage = it.message
+                            listErrorMessage = it.message,
                         )
                     }
 
@@ -74,7 +83,7 @@ class FeedbackViewModel: ViewModel() {
                         type = ToastType.Error,
                         duration = ToastDuration.Indefinite,
                         primaryAction = ToastAction("Retry", { getFeedback() }, dismissAfter = true),
-                        secondaryAction = ToastAction(label = "Ok Got it", {} , true)
+                        secondaryAction = ToastAction(label = "Ok Got it", {}, true),
                     )
                 }
         }
@@ -87,7 +96,7 @@ class FeedbackViewModel: ViewModel() {
     }
 
     fun sendFeedback(option: UserSubmitOption) {
-        val userData = when(option){
+        val userData = when (option) {
             UserSubmitOption.MyProfile -> myUserData
             UserSubmitOption.Anonymous -> null
             UserSubmitOption.RandomUser -> UserData().getRandom()
@@ -98,12 +107,11 @@ class FeedbackViewModel: ViewModel() {
                     userId = userData?.id,
                     userMetadata = UserMetadata(
                         username = userData?.name,
-                        profileUrl = userData?.profileUrl
-                    )
-                )
+                        profileUrl = userData?.profileUrl,
+                    ),
+                ),
             )
         }
-
     }
 
     fun updateFeedback(feedback: Feedback) {
@@ -117,5 +125,4 @@ class FeedbackViewModel: ViewModel() {
             state.copy(filter = filter)
         }
     }
-
 }

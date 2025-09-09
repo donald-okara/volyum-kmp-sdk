@@ -1,3 +1,12 @@
+/*
+ * Copyright © 2025 Donald O. Isoe (isoedonald@gmail.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ */
 package ke.don.birdie.demo.components
 
 import androidx.compose.foundation.BorderStroke
@@ -11,11 +20,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.StarRate
 import androidx.compose.material.icons.outlined.StarRate
-import androidx.compose.material3.AssistChip
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -42,7 +49,7 @@ fun FeedbackItem(
     item: Feedback,
     modifier: Modifier = Modifier,
     isPreview: Boolean = true,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     OutlinedCard(
         modifier = modifier.fillMaxWidth(),
@@ -53,16 +60,15 @@ fun FeedbackItem(
         Column(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
-            horizontalAlignment = Alignment.Start
+            horizontalAlignment = Alignment.Start,
         ) {
-
             ProfileHeader(
                 status = item.status,
                 userData = UserData(
                     id = item.userId ?: "",
                     name = item.userMetadata?.username ?: "Anonymous",
                     profileUrl = item.userMetadata?.profileUrl
-                        ?: "https://picsum.photos/seed/${item.id ?: "default"}/200"
+                        ?: "https://picsum.photos/seed/${item.id ?: "default"}/200",
                 ),
             )
 
@@ -70,7 +76,7 @@ fun FeedbackItem(
             RatingRow(
                 rating = item.rating ?: 0,
                 timestamp = item.createdAt,
-                modifier = Modifier.padding(top = 4.dp)
+                modifier = Modifier.padding(top = 4.dp),
             )
 
             // Target type label
@@ -78,7 +84,7 @@ fun FeedbackItem(
                 Text(
                     text = "#${item.targetType}",
                     style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.primary
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
 
@@ -88,24 +94,22 @@ fun FeedbackItem(
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = if (isPreview) 4 else Int.MAX_VALUE,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
             )
         }
     }
-
 }
-
 
 @Composable
 fun ProfileHeader(
     userData: UserData,
     modifier: Modifier = Modifier,
-    status: FeedbackStatus = FeedbackStatus.Pending
+    status: FeedbackStatus = FeedbackStatus.Pending,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
-            .fillMaxWidth()
+            .fillMaxWidth(),
     ) {
         AsyncImage(
             model = userData.profileUrl,
@@ -121,7 +125,7 @@ fun ProfileHeader(
 
         Text(
             text = userData.name,
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleMedium,
         )
 
         Spacer(modifier = Modifier.weight(1f)) // pushes chip to end
@@ -131,18 +135,17 @@ fun ProfileHeader(
             tonalElevation = 0.dp,
             border = BorderStroke(
                 width = 1.dp,
-                color = status.color()
+                color = status.color(),
             ),
-            color = Color.Transparent // outlined look
+            color = Color.Transparent, // outlined look
         ) {
             Text(
                 text = status.name,
                 style = MaterialTheme.typography.labelSmall,
                 color = status.color(),
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
             )
         }
-
     }
 }
 
@@ -162,7 +165,7 @@ fun StarRating(
                 tint = MaterialTheme.colorScheme.tertiary,
                 modifier = Modifier
                     .size(starSize)
-                    .padding(end = spacing)
+                    .padding(end = spacing),
             )
         }
     }
@@ -177,14 +180,13 @@ fun RatingRow(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = modifier
+        modifier = modifier,
     ) {
         StarRating(rating = rating)
         Text(
             text = TimeFormatter.formatRelativeTime(timestamp),
             style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
     }
 }
-

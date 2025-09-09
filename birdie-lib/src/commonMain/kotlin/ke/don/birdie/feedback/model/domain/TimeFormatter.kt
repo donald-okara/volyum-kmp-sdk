@@ -1,15 +1,24 @@
+/*
+ * Copyright © 2025 Donald O. Isoe (isoedonald@gmail.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ */
 package ke.don.birdie.feedback.model.domain
 
 import kotlinx.datetime.*
-import kotlin.time.Duration.Companion.minutes
-import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.days
+import kotlin.time.Duration.Companion.hours
+import kotlin.time.Duration.Companion.minutes
 
 object TimeFormatter {
 
     fun formatRelativeTime(
         timestamp: String,
-        timeZone: TimeZone = TimeZone.currentSystemDefault()
+        timeZone: TimeZone = TimeZone.currentSystemDefault(),
     ): String {
         // Postgres timestamptz looks like: 2025-09-09 10:15:00.000000+00
         // Normalize into ISO-8601 (2025-09-09T10:15:00.000000+00:00)

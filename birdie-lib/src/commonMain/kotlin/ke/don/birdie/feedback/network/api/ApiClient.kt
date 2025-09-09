@@ -13,7 +13,6 @@ import ke.don.birdie.feedback.model.domain.BirdieResult
 import ke.don.birdie.feedback.model.domain.NetworkError
 import ke.don.birdie.feedback.model.domain.data_transfer.GetFeedbackFilter
 import ke.don.birdie.feedback.model.table.Feedback
-import ke.don.birdie.feedback.model.table.FeedbackStatus
 
 internal interface ApiClient {
     suspend fun addFeedback(
@@ -21,7 +20,7 @@ internal interface ApiClient {
     ): BirdieResult<Feedback, NetworkError>
 
     suspend fun getFeedback(
-        filter: GetFeedbackFilter
+        filter: GetFeedbackFilter,
     ): BirdieResult<List<Feedback>, NetworkError>
 
     suspend fun getFeedbackById(
