@@ -9,11 +9,16 @@
  */
 package ke.don.birdie.feedback.config
 
+import ke.don.birdie.feedback.network.api.ApiClient
 import ke.don.birdie.feedback.network.api.ApiClientImpl
 
 object BirdieFactory {
     fun create(config: BirdieConfig): Birdie {
-        val apiClient = ApiClientImpl(config.toProjectIdentifier())
+        return createInternal(config)
+    }
+
+    @PublishedApi
+    internal fun createInternal(config: BirdieConfig, apiClient: ApiClient = ApiClientImpl(config.toProjectIdentifier())): Birdie {
         return Birdie(apiClient)
     }
 }

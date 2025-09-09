@@ -9,7 +9,7 @@
  */
 package ke.don.birdie.feedback.model.table
 
-import ke.don.birdie.feedback.model.domain.FeedbackStatus
+import ke.don.birdie.feedback.model.table.FeedbackStatus
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -20,6 +20,7 @@ data class Feedback(
     @SerialName("target_id")val targetId: String,
     @SerialName("target_type")val targetType: String,
     @SerialName("closing_remarks")val closingRemarks: String? = null,
+    @SerialName("user_metadata")val userMetadata: UserMetadata? = UserMetadata(),
     val text: String,
     val rating: Int? = null,
     val status: FeedbackStatus = FeedbackStatus.Pending,

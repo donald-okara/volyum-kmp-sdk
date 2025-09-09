@@ -44,4 +44,12 @@ inline fun <T, E : BirdieError> BirdieResult<T, E>.onError(action: (E) -> Unit):
     }
 }
 
+fun BirdieResult<*, *>.isSuccess(): Boolean {
+    return when (this) {
+        is BirdieResult.Error<*> -> false
+        is BirdieResult.Success<*> -> true
+    }
+}
+
+
 typealias EmptyResult<E> = BirdieResult<Unit, E>
