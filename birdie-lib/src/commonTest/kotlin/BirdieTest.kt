@@ -13,6 +13,7 @@ import ke.don.birdie.feedback.config.Birdie
 import ke.don.birdie.feedback.config.BirdieConfig
 import ke.don.birdie.feedback.config.BirdieFactory
 import ke.don.birdie.feedback.model.domain.BirdieResult
+import ke.don.birdie.feedback.model.domain.data_transfer.GetFeedbackFilter
 import ke.don.birdie.feedback.model.domain.isSuccess
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
@@ -20,7 +21,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class BirdieTest {
-    private val config = BirdieConfig("https://your.supabase.co", "your_api_key")
+    private val config = BirdieConfig("123", "your_api_key")
 
     @Test
     fun sendFeedbackReturnsSuccess() = runTest {
@@ -56,7 +57,7 @@ class BirdieTest {
         val userId = "6"
 
         // Act
-        val result = birdie.getFeedback(userId = userId)
+        val result = birdie.getFeedback(GetFeedbackFilter(userId = userId))
 
         // Assert
         assertTrue(result.isSuccess())
@@ -69,7 +70,7 @@ class BirdieTest {
         val birdie: Birdie = BirdieFactory.createInternal(config, apiClient = FakeApiClient())
 
         // Act
-        val result = birdie.getFeedback(userId = "0")
+        val result = birdie.getFeedback(GetFeedbackFilter(userId = "0"))
 
         // Assert
         assertTrue(!result.isSuccess())

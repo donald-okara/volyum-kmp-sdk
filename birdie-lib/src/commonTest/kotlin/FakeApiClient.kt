@@ -11,6 +11,7 @@ import FakeFeedbackData.fakeFeedbackItem
 import FakeFeedbackData.fakeFeedbackList
 import ke.don.birdie.feedback.model.domain.BirdieResult
 import ke.don.birdie.feedback.model.domain.NetworkError
+import ke.don.birdie.feedback.model.domain.data_transfer.GetFeedbackFilter
 import ke.don.birdie.feedback.model.table.Feedback
 import ke.don.birdie.feedback.network.api.ApiClient
 
@@ -24,13 +25,9 @@ class FakeApiClient : ApiClient {
     }
 
     override suspend fun getFeedback(
-        limit: Int?,
-        offset: Int?,
-        userId: String?,
-        targetId: String?,
-        targetType: String?,
+        filter: GetFeedbackFilter
     ): BirdieResult<List<Feedback>, NetworkError> {
-        return if (userId == "0") {
+        return if (filter.userId == "0") {
             return BirdieResult.Error(NetworkError())
         } else {
             BirdieResult.Success(fakeFeedbackList)

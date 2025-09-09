@@ -9,6 +9,7 @@
  */
 package ke.don.birdie.feedback.model.domain.data_transfer
 
+import ke.don.birdie.feedback.model.table.FeedbackStatus
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -19,6 +20,7 @@ data class GetFeedbackRequest(
     @SerialName("user_id")val userId: String? = null,
     @SerialName("target_id")val targetId: String? = null,
     @SerialName("target_type")val targetType: String? = null,
+    val status: FeedbackStatus? = null,
     val limit: Int? = null,
     val offset: Int? = null,
 )

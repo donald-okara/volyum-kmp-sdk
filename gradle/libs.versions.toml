@@ -13,6 +13,7 @@ composeHotReload = "1.0.0-beta06"
 composeMultiplatform = "1.8.2"
 junit = "4.13.2"
 kermit = "2.0.8"
+koffee = "0.2.0"
 kotlin = "2.2.10"
 kotlinx-coroutines = "1.10.2"
 kotlinStdlib = "2.2.10"
@@ -24,6 +25,7 @@ kotlinxCoroutinesTest = "1.10.2"
 
 [libraries]
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
+koffee = { module = "io.github.donald-okara:koffee", version.ref = "koffee" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-testJunit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { module = "junit:junit", version.ref = "junit" }

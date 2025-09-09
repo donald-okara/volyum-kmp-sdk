@@ -18,8 +18,10 @@ import ke.don.birdie.feedback.model.domain.NetworkError
 import ke.don.birdie.feedback.model.domain.ProjectIdentity
 import ke.don.birdie.feedback.model.domain.data_transfer.AddFeedbackRequest
 import ke.don.birdie.feedback.model.domain.data_transfer.GetFeedbackByIdRequest
+import ke.don.birdie.feedback.model.domain.data_transfer.GetFeedbackFilter
 import ke.don.birdie.feedback.model.domain.data_transfer.GetFeedbackRequest
 import ke.don.birdie.feedback.model.table.Feedback
+import ke.don.birdie.feedback.model.table.FeedbackStatus
 import ke.don.birdie.feedback.network.KtorClientProvider.client
 import ke.don.birdie.feedback.network.klient
 
@@ -42,11 +44,7 @@ internal class ApiClientImpl(
     }
 
     override suspend fun getFeedback(
-        limit: Int?,
-        offset: Int?,
-        userId: String?,
-        targetId: String?,
-        targetType: String?,
+        filter: GetFeedbackFilter
     ): BirdieResult<List<Feedback>, NetworkError> = klient<List<Feedback>> {
         client.post(Endpoint.Functions.GetFeedback.url) {
             contentType(ContentType.Application.Json)
@@ -54,11 +52,12 @@ internal class ApiClientImpl(
                 GetFeedbackRequest(
                     projectId = projectIdentity.id,
                     apiKey = projectIdentity.key,
-                    userId = userId,
-                    targetId = targetId,
-                    targetType = targetType,
-                    limit = limit,
-                    offset = offset,
+                    userId = filter.userId,
+                    targetId = filter.targetId,
+                    targetType = filter.targetType,
+                    status = filter.status,
+                    limit = filter.limit,
+                    offset = filter.offset,
                 ),
             )
         }
