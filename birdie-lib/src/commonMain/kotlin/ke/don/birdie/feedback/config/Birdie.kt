@@ -23,11 +23,11 @@ class Birdie internal constructor(
         apiClient.addFeedback(feedback = feedback)
 
     suspend fun getFeedback(
-        limit: Int?,
-        offset: Int?,
-        userId: String?,
-        targetId: String?,
-        targetType: String?,
+        limit: Int? = null,
+        offset: Int? = null,
+        userId: String? = null,
+        targetId: String? = null,
+        targetType: String? = null,
     ): BirdieResult<List<Feedback>, NetworkError> =
         apiClient.getFeedback(
             limit = limit,

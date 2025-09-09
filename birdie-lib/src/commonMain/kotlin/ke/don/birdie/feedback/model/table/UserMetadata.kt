@@ -7,22 +7,13 @@
  *
  *       http://www.apache.org/licenses/LICENSE-2.0
  */
-package ke.don.birdie.feedback.model.domain
+package ke.don.birdie.feedback.model.table
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class FeedbackStatus {
-    @SerialName("pending")
-    Pending,
-
-    @SerialName("reviewed")
-    Reviewed,
-
-    @SerialName("resolved")
-    Resolved,
-
-    @SerialName("rejected")
-    Rejected,
-}
+data class UserMetadata(
+    val username: String? = null,
+    @SerialName("profile_url")val profileUrl: String? = null,
+)
