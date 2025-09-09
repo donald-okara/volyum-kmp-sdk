@@ -9,7 +9,6 @@
  */
 package ke.don.birdie.feedback.model.table
 
-import ke.don.birdie.feedback.model.table.FeedbackStatus
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

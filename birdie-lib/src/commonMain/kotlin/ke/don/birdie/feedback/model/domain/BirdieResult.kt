@@ -51,5 +51,4 @@ fun BirdieResult<*, *>.isSuccess(): Boolean {
     }
 }
 
-
 typealias EmptyResult<E> = BirdieResult<Unit, E>
