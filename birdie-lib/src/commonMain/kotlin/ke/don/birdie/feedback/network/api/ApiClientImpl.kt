@@ -45,7 +45,7 @@ internal class ApiClientImpl(
 
     override suspend fun getFeedback(
         filter: GetFeedbackFilter
-    ): BirdieResult<List<Feedback>, NetworkError> = klient<List<Feedback>> {
+    ): BirdieResult<List<Feedback>, NetworkError> = klient {
         client.post(Endpoint.Functions.GetFeedback.url) {
             contentType(ContentType.Application.Json)
             setBody(

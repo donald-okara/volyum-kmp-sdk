@@ -14,6 +14,6 @@ sealed class DemoIntentHandler {
     ): DemoIntentHandler()
 
     data class SendFeedback(
-        val feedback: Feedback,
+        val option: UserSubmitOption,
     ): DemoIntentHandler()
 }

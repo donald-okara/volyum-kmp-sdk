@@ -22,6 +22,7 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
+import io.ktor.util.reflect.*
 
 internal suspend inline fun <reified T> klient(
     crossinline call: suspend () -> HttpResponse,
@@ -30,7 +31,8 @@ internal suspend inline fun <reified T> klient(
     val statusCode = response.status.value
 
     if (statusCode in 200..299) {
-        BirdieResult.Success(response.body<T>())
+        // 👇 Pass typeInfo to help Ktor decode lists properly
+        BirdieResult.Success(response.body(typeInfo<T>()) as T)
     } else {
         val errorBody = response.bodyAsText()
         val errorMessage = try {
@@ -56,6 +58,7 @@ internal suspend inline fun <reified T> klient(
         ),
     )
 }
+
 
 private fun Int.toCategory(): NetworkErrorCategory = when (this) {
     401 -> NetworkErrorCategory.UNAUTHORIZED

@@ -43,7 +43,8 @@ kotlin {
                 implementation(libs.kermit)
                 implementation(libs.kotlin.stdlib)
                 implementation(libs.bundles.ktor)
-                implementation("org.jetbrains.kotlinx:atomicfu:0.29.0")
+                implementation(libs.kotlinx.datetime)
+                implementation(libs.kotlinx.atomicfu)
             }
         }
 

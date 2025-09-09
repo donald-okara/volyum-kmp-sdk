@@ -4,8 +4,8 @@ import ke.don.birdie.feedback.model.domain.data_transfer.GetFeedbackFilter
 import ke.don.birdie.feedback.model.table.Feedback
 
 data class FeedbackState(
-    val filter: GetFeedbackFilter = GetFeedbackFilter(),
-    val feedbackList: List<String> = emptyList(),
+    val filter: GetFeedbackFilter = GetFeedbackFilter(limit = 10),
+    val feedbackList: List<Feedback> = emptyList(),
     val listErrorMessage: String? = null,
     val listIsLoading: Boolean = false,
     val listIsError: Boolean = false,

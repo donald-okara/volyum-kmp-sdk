@@ -9,15 +9,17 @@
  */
 package ke.don.birdie.feedback.model.table
 
+import ke.don.birdie.feedback.model.domain.TimeFormatter
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Feedback(
     val id: String? = null,
-    @SerialName("user_id")val userId: String = "",
+    @SerialName("user_id")val userId: String? = null,
     @SerialName("target_id")val targetId: String = "",
     @SerialName("target_type")val targetType: String = "",
+    @SerialName("created_at")val createdAt: String = "",
     @SerialName("closing_remarks")val closingRemarks: String? = null,
     @SerialName("user_metadata")val userMetadata: UserMetadata? = UserMetadata(),
     val text: String = "",
@@ -26,5 +28,9 @@ data class Feedback(
 ) {
     init {
         require(rating == null || rating in 1..5) { "Rating must be between 1 and 5" }
+    }
+
+    fun formatTimestamp(): String {
+        return TimeFormatter.formatRelativeTime(createdAt)
     }
 }
