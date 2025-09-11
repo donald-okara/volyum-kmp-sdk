@@ -20,6 +20,8 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         title = "BirdieSDK",
     ) {
+        window.minimumSize = java.awt.Dimension(600, 400) // px, not dp
+
         App()
     }
 }

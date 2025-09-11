@@ -17,12 +17,12 @@ import kotlinx.serialization.Serializable
 data class Feedback(
     val id: String? = null,
     @SerialName("user_id")val userId: String? = null,
-    @SerialName("target_id")val targetId: String = "",
-    @SerialName("target_type")val targetType: String = "",
+    @SerialName("target_id")val targetId: String? = null,
+    @SerialName("target_type")val targetType: String? = null,
     @SerialName("created_at")val createdAt: String = "",
     @SerialName("closing_remarks")val closingRemarks: String? = null,
     @SerialName("user_metadata")val userMetadata: UserMetadata? = UserMetadata(),
-    val text: String = "",
+    val text: String? = "",
     val rating: Int? = null,
     val status: FeedbackStatus = FeedbackStatus.Pending,
 ) {

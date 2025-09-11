@@ -80,7 +80,7 @@ fun FeedbackItem(
             )
 
             // Target type label
-            if (item.targetType.isNotBlank()) {
+            if (item.targetType?.isNotBlank() == true) {
                 Text(
                     text = "#${item.targetType}",
                     style = MaterialTheme.typography.labelSmall,
@@ -89,13 +89,15 @@ fun FeedbackItem(
             }
 
             // Feedback text
-            Text(
-                text = item.text,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                maxLines = if (isPreview) 4 else Int.MAX_VALUE,
-                overflow = TextOverflow.Ellipsis,
-            )
+            item.text?.let {
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    maxLines = if (isPreview) 4 else Int.MAX_VALUE,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            }
         }
     }
 }

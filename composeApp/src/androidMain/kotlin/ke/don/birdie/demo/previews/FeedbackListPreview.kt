@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import ke.don.birdie.demo.FeedbackState
 import ke.don.birdie.demo.models.UserData
+import ke.don.birdie.demo.screens.FeedbackFilterRow
 import ke.don.birdie.demo.screens.FeedbackList
 import ke.don.birdie.demo.theme.BirdieTheme
 import ke.don.birdie.feedback.model.table.Feedback
@@ -59,6 +60,25 @@ val feedbackList = listOf(
 )
 val state = FeedbackState(
     feedbackList = feedbackList,
+    readFeedback = Feedback(
+        id = "4",
+        userId = "456",
+        status = FeedbackStatus.Resolved,
+        rating = 3,
+        text = "The new feature is interesting, but the user interface feels a bit cluttered. Maybe simplify the layout?",
+        createdAt = "2023-09-07T18:45:00.000000+00:00",
+        userMetadata = UserData().getRandom().toMetadata(),
+        closingRemarks = "The issue was resolved by updating the user's account information and verifying their identity through our secure portal. The user confirmed that they are now able to access their account without any issues."
+    ),
+    sendFeedback = Feedback(
+        id = "4",
+        userId = "456",
+        status = FeedbackStatus.Reviewed,
+        rating = 3,
+        text = "The new feature is interesting, but the user interface feels a bit cluttered. Maybe simplify the layout?",
+        createdAt = "2023-09-07T18:45:00.000000+00:00",
+        userMetadata = UserData().getRandom().toMetadata(),
+    )
 )
 
 @DevicePreviews
@@ -76,3 +96,22 @@ fun FeedbackListPreview(
         }
     }
 }
+
+
+
+@DevicePreviews
+@Composable
+fun FeedbackFilterRowPreview(
+    @PreviewParameter(BooleanPreviewParameterProvider::class)
+    darkTheme: Boolean,
+) {
+    BirdieTheme(darkTheme = darkTheme) {
+        Surface {
+            FeedbackFilterRow(
+                filter = state.filter,
+                onFilterChange = {},
+            )
+        }
+    }
+}
+

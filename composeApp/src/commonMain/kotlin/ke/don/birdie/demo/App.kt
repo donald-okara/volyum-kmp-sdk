@@ -9,24 +9,49 @@
  */
 package ke.don.birdie.demo
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.LookaheadScope
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ke.don.birdie.demo.models.DemoIntentHandler
 import ke.don.birdie.demo.models.FeedbackViewModel
+import ke.don.birdie.demo.models.WindowSizeClass
+import ke.don.birdie.demo.models.getScreenWidth
+import ke.don.birdie.demo.models.getWindowSizeClass
+import ke.don.birdie.demo.screens.FeedbackDetailsScreen
+import ke.don.birdie.demo.screens.FeedbackForm
 import ke.don.birdie.demo.screens.FeedbackList
 import ke.don.birdie.demo.theme.BirdieTheme
 import ke.don.birdie.feedback.model.domain.data_transfer.GetFeedbackFilter
+import ke.don.birdie.feedback.model.table.Feedback
 import ke.don.koffee.annotations.ExperimentalKoffeeApi
 import ke.don.koffee.model.KoffeeDefaults
 import ke.don.koffee.ui.KoffeeBar
@@ -54,18 +79,190 @@ fun App() {
             KoffeeBar(
                 config = koffeeConfig,
             ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(24.dp), // outer breathing space
-                    contentAlignment = Alignment.Center,
+                FeedbackScreenContent(
+                    state = state,
+                    handleIntent = handleIntent
+                )
+            }
+        }
+    }
+}
+
+// --- Top-level screen switcher ---
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun FeedbackScreenContent(
+    state: FeedbackState,
+    handleIntent: (DemoIntentHandler) -> Unit
+) {
+    val screenWidth = getScreenWidth().toInt().dp
+    val windowSize = getWindowSizeClass(screenWidth)
+
+    when (windowSize) {
+        WindowSizeClass.Compact -> {
+            MobileScreen(screenWidth, state, handleIntent)
+        }
+        WindowSizeClass.Medium -> {
+            ResponsiveScaffold(
+                state = state,
+                handleIntent = handleIntent,
+                padding = 24.dp,
+                detailsWeight = 2f,
+                formWeight = 1f,
+                listWeight = 1f,
+                detailsOffset = { it }, // slide from right
+            )
+        }
+        WindowSizeClass.Expanded -> {
+            ResponsiveScaffold(
+                state = state,
+                handleIntent = handleIntent,
+                padding = 32.dp,
+                listWeight = 2f,
+                formWeight = 1f,
+                detailsWeight = 1f,
+                detailsOffset = { -it }, // slide from left
+            )
+        }
+    }
+}
+
+// --- Shared responsive layout ---
+@Composable
+private fun ResponsiveScaffold(
+    state: FeedbackState,
+    handleIntent: (DemoIntentHandler) -> Unit,
+    padding: Dp,
+    listWeight: Float = 1f,
+    formWeight: Float = 1f,
+    detailsWeight: Float= 1f,
+    detailsOffset: (Int) -> Int,
+) {
+    val baseWidth = 420.dp
+    val expandedWidth = 600.dp
+
+    val listWidth by animateDpAsState(
+        targetValue = if (state.showForm || state.showDetails) baseWidth else expandedWidth,
+        animationSpec = tween(300),
+        label = "listWidthAnim"
+    )
+
+    val minPanelWidth = 420.dp
+
+    BoxWithConstraints(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(padding)
+    ) {
+        val totalWidth = maxWidth
+
+        LookaheadScope {
+            Row(
+                modifier = Modifier.fillMaxSize(),
+                horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
+            ) {
+                FeedbackList(
+                    state = state,
+                    handleIntent = handleIntent,
+                    width = listWidth,
+                    modifier = Modifier.weight(listWeight)
+                )
+
+                AnimatedVisibility(
+                    visible = state.showDetails && totalWidth > (listWidth + minPanelWidth),
+                    enter = slideInHorizontally { it } + fadeIn(),
+                    exit = slideOutHorizontally { it } + fadeOut()
                 ) {
-                    FeedbackList(
+                    FeedbackDetailsScreen(
                         state = state,
                         handleIntent = handleIntent,
+                        width = minPanelWidth,
+                        modifier = Modifier.weight(detailsWeight)
+                    )
+                }
+
+                AnimatedVisibility(
+                    visible = state.showForm && totalWidth > (listWidth + minPanelWidth * 2),
+                    enter = slideInHorizontally(initialOffsetX = { fullWidth -> detailsOffset(fullWidth) }) + fadeIn(),
+                    exit = slideOutHorizontally(targetOffsetX = { fullWidth -> detailsOffset(fullWidth) }) + fadeOut()
+                ) {
+                    FeedbackForm(
+                        state = state,
+                        onEvent = handleIntent,
+                        width = minPanelWidth,
+                        modifier = Modifier.weight(formWeight)
                     )
                 }
             }
         }
     }
 }
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MobileScreen(
+    screenWidth: Dp,
+    state: FeedbackState,
+    handleIntent: (DemoIntentHandler) -> Unit
+){
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        FeedbackList(
+            state = state,
+            handleIntent = handleIntent,
+            width = screenWidth
+        )
+
+        if (state.showDetails) {
+            ModalBottomSheet(
+                onDismissRequest = { handleIntent(DemoIntentHandler.ShowDetails) }
+            ) {
+                FeedbackDetailsScreen(
+                    state = state,
+                    handleIntent = handleIntent,
+                    width = screenWidth
+                )
+            }
+        }
+
+        if (state.showForm) {
+            ModalBottomSheet(
+                onDismissRequest = { handleIntent(DemoIntentHandler.ShowForm) }
+            ) {
+                FeedbackForm(
+                    state = state,
+                    onEvent = handleIntent,
+                    width = screenWidth
+                )
+            }
+        }
+    }
+}
+
+
+@Composable
+private fun ToggleControls(
+    showDetails: Boolean,
+    onToggleDetails: () -> Unit,
+    showForm: Boolean,
+    onToggleForm: () -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.End)
+    ) {
+        Button(onClick = onToggleDetails) {
+            Text(if (showDetails) "Hide Details" else "Show Details")
+        }
+        Button(onClick = onToggleForm) {
+            Text(if (showForm) "Hide Form" else "Show Form")
+        }
+    }
+}
+

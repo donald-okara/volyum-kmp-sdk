@@ -10,17 +10,28 @@
 package ke.don.birdie.demo.models
 
 import ke.don.birdie.feedback.model.domain.data_transfer.GetFeedbackFilter
+import ke.don.birdie.feedback.model.table.Feedback
 
 sealed class DemoIntentHandler {
     data class GetFeedback(
         val filter: GetFeedbackFilter,
     ) : DemoIntentHandler()
-
     data class GetFeedbackById(
         val id: String,
     ) : DemoIntentHandler()
-
-    data class SendFeedback(
-        val option: UserSubmitOption,
+    data class UpdateFeedback(
+        val feedback: Feedback
     ) : DemoIntentHandler()
+    data class UpdateTargetType(
+        val targetType: EventFeature
+    ) : DemoIntentHandler()
+    data class UpdateSender(
+        val sender: UserSubmitOption
+    ): DemoIntentHandler()
+    data class UpdateFilter(
+        val filter: GetFeedbackFilter
+    ): DemoIntentHandler()
+    data object SendFeedback: DemoIntentHandler()
+    data object ShowDetails: DemoIntentHandler()
+    data object ShowForm: DemoIntentHandler()
 }

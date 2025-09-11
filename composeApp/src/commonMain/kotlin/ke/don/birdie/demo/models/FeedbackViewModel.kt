@@ -26,16 +26,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 class FeedbackViewModel : ViewModel() {
     val birdie = BirdieSdk.get()
-
-    private val myUserData = UserData(
-        id = "1",
-        name = "Donald",
-        profileUrl = "https://picsum.photos/200?seed=1",
-    )
-
     private val _uiState = MutableStateFlow(FeedbackState())
     val uiState: StateFlow<FeedbackState> = _uiState
 
@@ -49,7 +44,27 @@ class FeedbackViewModel : ViewModel() {
         when (intent) {
             is DemoIntentHandler.GetFeedback -> getFeedback()
             is DemoIntentHandler.GetFeedbackById -> getFeedbackById(intent.id)
-            is DemoIntentHandler.SendFeedback -> sendFeedback(intent.option)
+            is DemoIntentHandler.SendFeedback -> sendFeedback()
+            is DemoIntentHandler.UpdateTargetType -> updateState { state ->
+                state.copy(targetType = intent.targetType)
+            }
+            is DemoIntentHandler.UpdateFeedback -> {
+                updateFeedback(intent.feedback)
+            }
+            is DemoIntentHandler.UpdateSender -> {
+                updateState { state ->
+                    state.copy(sender = intent.sender)
+                }
+            }
+            DemoIntentHandler.ShowDetails -> updateState { state ->
+                state.copy(showDetails = !state.showDetails)
+            }
+            DemoIntentHandler.ShowForm -> updateState { state ->
+                state.copy(showForm = !state.showForm)
+            }
+            is DemoIntentHandler.UpdateFilter -> {
+                updateFilter(intent.filter)
+            }
         }
     }
 
@@ -91,26 +106,88 @@ class FeedbackViewModel : ViewModel() {
 
     fun getFeedbackById(id: String) {
         viewModelScope.launch {
-            birdie.getFeedbackById(id)
+            updateState {
+                it.copy(
+                    readIsLoading = true,
+                    showDetails = true
+                )
+            }
+            birdie.getFeedbackById(id).onSuccess {
+                updateState { state ->
+                    state.copy(
+                        readFeedback = it,
+                        readIsLoading = false,
+                    )
+                }
+            }.onError {
+                println(it)
+
+                Koffee.show(
+                    title = "Error",
+                    description = it.message ?: "Unknown error",
+                    type = ToastType.Error,
+                    duration = ToastDuration.Indefinite,
+                    primaryAction = ToastAction("Retry", { getFeedbackById(id) }, dismissAfter = true),
+                    secondaryAction = ToastAction(label = "Ok Got it", {}, true),
+                )
+                updateState { state ->
+                    state.copy(
+                        readIsLoading = false,
+                        readIsError = true,
+                        readErrorMessage = it.message,
+                    )
+                }
+            }
         }
     }
 
-    fun sendFeedback(option: UserSubmitOption) {
-        val userData = when (option) {
-            UserSubmitOption.MyProfile -> myUserData
+    fun sendFeedback() {
+        val userData = when (uiState.value.sender) {
+            UserSubmitOption.MyProfile -> uiState.value.myUserData
             UserSubmitOption.Anonymous -> null
             UserSubmitOption.RandomUser -> UserData().getRandom()
         }
         viewModelScope.launch {
+            updateState {
+                it.copy(
+                    sendIsLoading = true
+                )
+            }
             birdie.sendFeedback(
                 uiState.value.sendFeedback.copy(
                     userId = userData?.id,
+                    targetType = uiState.value.targetType.label,
                     userMetadata = UserMetadata(
                         username = userData?.name,
                         profileUrl = userData?.profileUrl,
                     ),
                 ),
-            )
+            ).onSuccess {
+                getFeedback()
+                updateState { state ->
+                    state.copy(
+                        sendIsLoading = false,
+                    )
+                }
+            }.onError {
+                println(it)
+
+                updateState { state ->
+                    state.copy(
+                        sendIsLoading = false,
+                        sendIsError = true,
+                        sendErrorMessage = it.message,
+                    )
+                }
+                Koffee.show(
+                    title = "Error",
+                    description = it.message ?: "Unknown error",
+                    type = ToastType.Error,
+                    duration = ToastDuration.Indefinite,
+                    primaryAction = ToastAction("Retry", { sendFeedback() }, dismissAfter = true),
+                    secondaryAction = ToastAction(label = "Ok Got it", {}, true),
+                )
+            }
         }
     }
 
@@ -124,5 +201,30 @@ class FeedbackViewModel : ViewModel() {
         updateState { state ->
             state.copy(filter = filter)
         }
+        getFeedback()
     }
+}
+
+@Serializable
+enum class EventFeature(val label: String) {
+    @SerialName("Ticketing")
+    TICKETING("Ticketing"),
+    @SerialName("Events")
+    EVENTS("Events"),
+    @SerialName("Workshops")
+    WORKSHOPS("Workshops"),
+    @SerialName("Notifications")
+    NOTIFICATIONS("Notifications"),
+    @SerialName("Check-in")
+    CHECK_IN("Check-in"),
+    @SerialName("Schedule")
+    SCHEDULE("Schedule"),
+    @SerialName("Analytics")
+    ANALYTICS("Analytics"),
+    @SerialName("Sponsors")
+    SPONSORS("Sponsors"),
+    @SerialName("Venue Maps")
+    MAPS("Venue Maps"),
+    @SerialName("Networking")
+    NETWORKING("Networking")
 }
