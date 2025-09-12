@@ -15,9 +15,9 @@ import io.ktor.client.network.sockets.SocketTimeoutException
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
 import io.ktor.util.reflect.*
-import ke.don.volyum.feedback.model.domain.VolyumResult
 import ke.don.volyum.feedback.model.domain.NetworkError
 import ke.don.volyum.feedback.model.domain.NetworkErrorCategory
+import ke.don.volyum.feedback.model.domain.VolyumResult
 import kotlinx.io.IOException
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json

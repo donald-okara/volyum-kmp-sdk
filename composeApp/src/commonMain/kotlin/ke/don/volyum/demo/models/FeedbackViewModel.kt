@@ -11,6 +11,10 @@ package ke.don.volyum.demo.models
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ke.don.koffee.domain.Koffee
+import ke.don.koffee.model.ToastAction
+import ke.don.koffee.model.ToastDuration
+import ke.don.koffee.model.ToastType
 import ke.don.volyum.demo.FeedbackState
 import ke.don.volyum.feedback.config.VolyumSdk
 import ke.don.volyum.feedback.model.domain.NetworkError
@@ -19,10 +23,6 @@ import ke.don.volyum.feedback.model.domain.onError
 import ke.don.volyum.feedback.model.domain.onSuccess
 import ke.don.volyum.feedback.model.table.Feedback
 import ke.don.volyum.feedback.model.table.UserMetadata
-import ke.don.koffee.domain.Koffee
-import ke.don.koffee.model.ToastAction
-import ke.don.koffee.model.ToastDuration
-import ke.don.koffee.model.ToastType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
