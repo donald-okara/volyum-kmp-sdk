@@ -10,17 +10,12 @@
 package ke.don.birdie.feedback.model.domain.data_transfer
 
 import ke.don.birdie.feedback.model.table.FeedbackStatus
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 
-@Serializable
-data class GetFeedbackRequest(
-    @SerialName("project_id")val projectId: String,
-    @SerialName("api_key")val apiKey: String,
-    @SerialName("user_id")val userId: String? = null,
-    @SerialName("target_id")val targetId: String? = null,
-    @SerialName("target_type")val targetType: String? = null,
-    val status: FeedbackStatus? = null,
+data class GetFeedbackFilter(
     val limit: Int? = null,
     val offset: Int? = null,
+    val userId: String? = null,
+    val targetId: String? = null,
+    val targetType: String? = null,
+    val status: FeedbackStatus? = null,
 )

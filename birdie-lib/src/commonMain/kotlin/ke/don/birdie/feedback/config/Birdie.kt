@@ -11,6 +11,7 @@ package ke.don.birdie.feedback.config
 
 import ke.don.birdie.feedback.model.domain.BirdieResult
 import ke.don.birdie.feedback.model.domain.NetworkError
+import ke.don.birdie.feedback.model.domain.data_transfer.GetFeedbackFilter
 import ke.don.birdie.feedback.model.table.Feedback
 import ke.don.birdie.feedback.network.api.ApiClient
 
@@ -23,19 +24,9 @@ class Birdie internal constructor(
         apiClient.addFeedback(feedback = feedback)
 
     suspend fun getFeedback(
-        limit: Int? = null,
-        offset: Int? = null,
-        userId: String? = null,
-        targetId: String? = null,
-        targetType: String? = null,
+        filter: GetFeedbackFilter,
     ): BirdieResult<List<Feedback>, NetworkError> =
-        apiClient.getFeedback(
-            limit = limit,
-            offset = offset,
-            userId = userId,
-            targetId = targetId,
-            targetType = targetType,
-        )
+        apiClient.getFeedback(filter)
 
     suspend fun getFeedbackById(
         id: String,
