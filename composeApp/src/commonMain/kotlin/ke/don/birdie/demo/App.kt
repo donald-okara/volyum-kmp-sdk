@@ -130,7 +130,6 @@ fun FeedbackScreenContent(
     }
 }
 
-// --- Shared responsive layout ---
 @Composable
 private fun ResponsiveScaffold(
     state: FeedbackState,
@@ -143,6 +142,7 @@ private fun ResponsiveScaffold(
 ) {
     val baseWidth = 420.dp
     val expandedWidth = 600.dp
+    val minPanelWidth = 420.dp
 
     val listWidth by animateDpAsState(
         targetValue = if (state.showForm || state.showDetails) baseWidth else expandedWidth,
@@ -150,14 +150,19 @@ private fun ResponsiveScaffold(
         label = "listWidthAnim"
     )
 
-    val minPanelWidth = 420.dp
-
     BoxWithConstraints(
         modifier = Modifier
             .fillMaxSize()
             .padding(padding)
     ) {
         val totalWidth = maxWidth
+
+        // --- Decide modes upfront ---
+        val showDialogDetails = state.showDetails && totalWidth < (listWidth + minPanelWidth)
+        val showInlineDetails = state.showDetails && !showDialogDetails
+
+        val showDialogForm = state.showForm && totalWidth < (listWidth + minPanelWidth * 2)
+        val showInlineForm = state.showForm && !showDialogForm
 
         LookaheadScope {
             Row(
@@ -173,40 +178,44 @@ private fun ResponsiveScaffold(
                         .weight(listWeight)
                 )
 
-                // --- Inline details (only if enough space) ---
-                AnimatedVisibility(
-                    visible = state.showDetails && totalWidth > (listWidth + minPanelWidth),
-                    enter = slideInHorizontally { it } + fadeIn(),
-                    exit = slideOutHorizontally { it } + fadeOut()
-                ) {
-                    FeedbackDetailsScreen(
-                        state = state,
-                        handleIntent = handleIntent,
-                        modifier = Modifier
-                            .widthIn(max = minPanelWidth, min = 420.dp)
-                            .weight(detailsWeight)
-                    )
+                // --- Inline details ---
+                if (showInlineDetails) {
+                    AnimatedVisibility(
+                        visible = true,
+                        enter = slideInHorizontally { it } + fadeIn(),
+                        exit = slideOutHorizontally { it } + fadeOut()
+                    ) {
+                        FeedbackDetailsScreen(
+                            state = state,
+                            handleIntent = handleIntent,
+                            modifier = Modifier
+                                .widthIn(max = minPanelWidth, min = 420.dp)
+                                .weight(detailsWeight)
+                        )
+                    }
                 }
 
-                // --- Inline form (only if enough space) ---
-                AnimatedVisibility(
-                    visible = state.showForm && totalWidth > (listWidth + minPanelWidth * 2),
-                    enter = slideInHorizontally(initialOffsetX = { fullWidth -> detailsOffset(fullWidth) }) + fadeIn(),
-                    exit = slideOutHorizontally(targetOffsetX = { fullWidth -> detailsOffset(fullWidth) }) + fadeOut()
-                ) {
-                    FeedbackForm(
-                        state = state,
-                        onEvent = handleIntent,
-                        modifier = Modifier
-                            .widthIn(max = minPanelWidth, min = 420.dp)
-                            .weight(formWeight)
-                    )
+                // --- Inline form ---
+                if (showInlineForm) {
+                    AnimatedVisibility(
+                        visible = true,
+                        enter = slideInHorizontally { fullWidth -> detailsOffset(fullWidth) } + fadeIn(),
+                        exit = slideOutHorizontally { fullWidth -> detailsOffset(fullWidth) } + fadeOut()
+                    ) {
+                        FeedbackForm(
+                            state = state,
+                            onEvent = handleIntent,
+                            modifier = Modifier
+                                .widthIn(max = minPanelWidth, min = 420.dp)
+                                .weight(formWeight)
+                        )
+                    }
                 }
             }
         }
 
         // --- Dialog fallback for Details ---
-        if (state.showDetails && totalWidth <= (listWidth + minPanelWidth)) {
+        if (showDialogDetails) {
             Dialog(
                 onDismissRequest = { handleIntent(DemoIntentHandler.ShowDetails) }
             ) {
@@ -226,9 +235,9 @@ private fun ResponsiveScaffold(
         }
 
         // --- Dialog fallback for Form ---
-        if (state.showForm && totalWidth <= (listWidth + minPanelWidth * 2)) {
+        if (showDialogForm) {
             Dialog(
-                onDismissRequest = { handleIntent(DemoIntentHandler.ShowDetails) }
+                onDismissRequest = { handleIntent(DemoIntentHandler.ShowForm) }
             ) {
                 Surface(
                     modifier = Modifier
@@ -246,6 +255,7 @@ private fun ResponsiveScaffold(
         }
     }
 }
+
 
 
 

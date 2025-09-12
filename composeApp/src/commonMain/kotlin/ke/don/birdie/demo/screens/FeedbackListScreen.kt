@@ -88,19 +88,15 @@ fun FeedbackList(
             ) {
                 // Pinned filter row
                 stickyHeader {
-                    Surface(
-                        color = MaterialTheme.colorScheme.surface,
-                        shadowElevation = 2.dp
-                    ) {
-                        FeedbackFilterRow(
-                            filter = state.filter,
-                            myUserData = state.myUserData,
-                            onFilterChange = { handleIntent(DemoIntentHandler.UpdateFilter(it)) },
-                            showForm = state.showForm,
-                            onShowFormChange = { handleIntent(DemoIntentHandler.ShowForm) },
-                            modifier = Modifier.padding(bottom = 8.dp)
-                        )
-                    }
+                    FeedbackFilterRow(
+                        filter = state.filter,
+                        myUserData = state.myUserData,
+                        onFilterChange = { handleIntent(DemoIntentHandler.UpdateFilter(it)) },
+                        showForm = state.showForm,
+                        onShowFormChange = { handleIntent(DemoIntentHandler.ShowForm) },
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
+
                 }
 
                 when {
