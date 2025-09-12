@@ -13,12 +13,12 @@ import ke.don.volyum.feedback.network.api.ApiClient
 import ke.don.volyum.feedback.network.api.ApiClientImpl
 
 object VolyumFactory {
-    fun create(config: VoyumConfig): Volyum {
+    fun create(config: VolyumConfig): Volyum {
         return createInternal(config)
     }
 
     @PublishedApi
-    internal fun createInternal(config: VoyumConfig, apiClient: ApiClient = ApiClientImpl(config.toProjectIdentifier())): Volyum {
+    internal fun createInternal(config: VolyumConfig, apiClient: ApiClient = ApiClientImpl(config.toProjectIdentifier())): Volyum {
         return Volyum(apiClient)
     }
 }

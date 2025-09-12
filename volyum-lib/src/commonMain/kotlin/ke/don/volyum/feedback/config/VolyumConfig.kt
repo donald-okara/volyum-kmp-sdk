@@ -11,7 +11,7 @@ package ke.don.volyum.feedback.config
 
 import ke.don.volyum.feedback.model.domain.ProjectIdentity
 
-data class VoyumConfig(
+data class VolyumConfig(
     val projectId: String,
     val apiKey: String,
 ) {

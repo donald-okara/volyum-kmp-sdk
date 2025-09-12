@@ -9,10 +9,10 @@
  */
 package ke.don.volyum.demo
 
-import ke.don.volyum.feedback.config.VoyumConfig
+import ke.don.volyum.feedback.config.VolyumConfig
 
 object VolyumCredentials {
-    val CONFIG = VoyumConfig(
+    val CONFIG = VolyumConfig(
         projectId = BuildKonfig.VOLYUM_PROJECT_ID,
         apiKey = BuildKonfig.VOLYUM_API_KEY,
     )

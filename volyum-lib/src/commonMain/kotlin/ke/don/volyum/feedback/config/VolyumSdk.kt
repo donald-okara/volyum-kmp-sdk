@@ -14,7 +14,7 @@ import kotlinx.atomicfu.atomic
 object VolyumSdk {
     private val instanceRef = atomic<Volyum?>(null)
 
-    fun init(config: VoyumConfig) {
+    fun init(config: VolyumConfig) {
         val created = VolyumFactory.create(config)
         if (!instanceRef.compareAndSet(null, created)) {
             error("VolyumSdk is already initialized")

@@ -11,7 +11,7 @@ import FakeFeedbackData.fakeFeedbackItem
 import FakeFeedbackData.fakeFeedbackList
 import ke.don.volyum.feedback.config.Volyum
 import ke.don.volyum.feedback.config.VolyumFactory
-import ke.don.volyum.feedback.config.VoyumConfig
+import ke.don.volyum.feedback.config.VolyumConfig
 import ke.don.volyum.feedback.model.domain.VolyumResult
 import ke.don.volyum.feedback.model.domain.data_transfer.GetFeedbackFilter
 import ke.don.volyum.feedback.model.domain.isSuccess
@@ -21,7 +21,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class VolyumTest {
-    private val config = VoyumConfig("123", "your_api_key")
+    private val config = VolyumConfig("123", "your_api_key")
 
     @Test
     fun sendFeedbackReturnsSuccess() = runTest {
