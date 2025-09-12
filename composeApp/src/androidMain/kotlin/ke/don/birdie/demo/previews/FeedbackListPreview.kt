@@ -59,6 +59,7 @@ val feedbackList = listOf(
     ),
 )
 val state = FeedbackState(
+    listIsLoading = false,
     feedbackList = feedbackList,
     readFeedback = Feedback(
         id = "4",

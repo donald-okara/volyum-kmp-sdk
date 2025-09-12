@@ -52,13 +52,11 @@ fun FeedbackDetailsScreen(
     modifier: Modifier = Modifier,
     state: FeedbackState = FeedbackState(),
     handleIntent: (DemoIntentHandler) -> Unit,
-    width: Dp = 420.dp,
 ) {
     Surface(
         shape = MaterialTheme.shapes.medium,
         modifier = modifier
             .fillMaxHeight()
-            .widthIn(max = width, min = 420.dp) // phone-like width
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             AnimatedContent(
@@ -72,7 +70,7 @@ fun FeedbackDetailsScreen(
                     isLoading -> {
                         LazyColumn(
                             modifier = Modifier.fillMaxSize(),
-                            contentPadding = PaddingValues(16.dp),
+                            contentPadding = PaddingValues(4.dp),
                         ) {
                             item { FeedbackItemShimmer() }
                         }

@@ -68,14 +68,12 @@ import ke.don.birdie.demo.models.UserSubmitOption
 fun FeedbackForm(
     modifier: Modifier = Modifier,
     state: FeedbackState,
-    width: Dp = 420.dp,
     onEvent: (DemoIntentHandler) -> Unit,
 ) {
     Surface(
         shape = MaterialTheme.shapes.large,
         modifier = modifier
             .fillMaxHeight()
-            .widthIn(max = width, min = 420.dp), // phone-like width
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             Column(

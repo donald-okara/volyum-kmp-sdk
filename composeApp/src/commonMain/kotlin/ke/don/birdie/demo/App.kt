@@ -23,8 +23,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -40,6 +42,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.LookaheadScope
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ke.don.birdie.demo.models.DemoIntentHandler
 import ke.don.birdie.demo.models.FeedbackViewModel
@@ -100,7 +103,7 @@ fun FeedbackScreenContent(
 
     when (windowSize) {
         WindowSizeClass.Compact -> {
-            MobileScreen(screenWidth, state, handleIntent)
+            MobileScreen(state, handleIntent)
         }
         WindowSizeClass.Medium -> {
             ResponsiveScaffold(
@@ -135,7 +138,7 @@ private fun ResponsiveScaffold(
     padding: Dp,
     listWeight: Float = 1f,
     formWeight: Float = 1f,
-    detailsWeight: Float= 1f,
+    detailsWeight: Float = 1f,
     detailsOffset: (Int) -> Int,
 ) {
     val baseWidth = 420.dp
@@ -161,13 +164,16 @@ private fun ResponsiveScaffold(
                 modifier = Modifier.fillMaxSize(),
                 horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
             ) {
+                // --- List panel ---
                 FeedbackList(
                     state = state,
                     handleIntent = handleIntent,
-                    width = listWidth,
-                    modifier = Modifier.weight(listWeight)
+                    modifier = Modifier
+                        .widthIn(max = listWidth, min = 420.dp)
+                        .weight(listWeight)
                 )
 
+                // --- Inline details (only if enough space) ---
                 AnimatedVisibility(
                     visible = state.showDetails && totalWidth > (listWidth + minPanelWidth),
                     enter = slideInHorizontally { it } + fadeIn(),
@@ -176,11 +182,13 @@ private fun ResponsiveScaffold(
                     FeedbackDetailsScreen(
                         state = state,
                         handleIntent = handleIntent,
-                        width = minPanelWidth,
-                        modifier = Modifier.weight(detailsWeight)
+                        modifier = Modifier
+                            .widthIn(max = minPanelWidth, min = 420.dp)
+                            .weight(detailsWeight)
                     )
                 }
 
+                // --- Inline form (only if enough space) ---
                 AnimatedVisibility(
                     visible = state.showForm && totalWidth > (listWidth + minPanelWidth * 2),
                     enter = slideInHorizontally(initialOffsetX = { fullWidth -> detailsOffset(fullWidth) }) + fadeIn(),
@@ -189,8 +197,49 @@ private fun ResponsiveScaffold(
                     FeedbackForm(
                         state = state,
                         onEvent = handleIntent,
-                        width = minPanelWidth,
-                        modifier = Modifier.weight(formWeight)
+                        modifier = Modifier
+                            .widthIn(max = minPanelWidth, min = 420.dp)
+                            .weight(formWeight)
+                    )
+                }
+            }
+        }
+
+        // --- Dialog fallback for Details ---
+        if (state.showDetails && totalWidth <= (listWidth + minPanelWidth)) {
+            Dialog(
+                onDismissRequest = { handleIntent(DemoIntentHandler.ShowDetails) }
+            ) {
+                Surface(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    shape = MaterialTheme.shapes.medium
+                ) {
+                    FeedbackDetailsScreen(
+                        state = state,
+                        handleIntent = handleIntent,
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
+            }
+        }
+
+        // --- Dialog fallback for Form ---
+        if (state.showForm && totalWidth <= (listWidth + minPanelWidth * 2)) {
+            Dialog(
+                onDismissRequest = { handleIntent(DemoIntentHandler.ShowDetails) }
+            ) {
+                Surface(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    shape = MaterialTheme.shapes.medium
+                ) {
+                    FeedbackForm(
+                        state = state,
+                        onEvent = handleIntent,
+                        modifier = Modifier.fillMaxSize()
                     )
                 }
             }
@@ -199,10 +248,10 @@ private fun ResponsiveScaffold(
 }
 
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MobileScreen(
-    screenWidth: Dp,
     state: FeedbackState,
     handleIntent: (DemoIntentHandler) -> Unit
 ){
@@ -214,29 +263,37 @@ fun MobileScreen(
         FeedbackList(
             state = state,
             handleIntent = handleIntent,
-            width = screenWidth
+            modifier = Modifier
+                .fillMaxWidth()
+                .widthIn(min = 420.dp) // phone-like width
         )
 
         if (state.showDetails) {
             ModalBottomSheet(
+                containerColor = MaterialTheme.colorScheme.surface,
                 onDismissRequest = { handleIntent(DemoIntentHandler.ShowDetails) }
             ) {
                 FeedbackDetailsScreen(
                     state = state,
                     handleIntent = handleIntent,
-                    width = screenWidth
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .widthIn(min = 420.dp) // phone-like width
                 )
             }
         }
 
         if (state.showForm) {
             ModalBottomSheet(
+                containerColor = MaterialTheme.colorScheme.surface,
                 onDismissRequest = { handleIntent(DemoIntentHandler.ShowForm) }
             ) {
                 FeedbackForm(
                     state = state,
                     onEvent = handleIntent,
-                    width = screenWidth
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .widthIn(min = 420.dp) // phone-like width
                 )
             }
         }

@@ -68,7 +68,6 @@ import ke.don.birdie.feedback.model.table.FeedbackStatus
 @Composable
 fun FeedbackList(
     modifier: Modifier = Modifier,
-    width: Dp = 420.dp,
     state: FeedbackState,
     handleIntent: (DemoIntentHandler) -> Unit,
 ) {
@@ -76,7 +75,6 @@ fun FeedbackList(
         shape = MaterialTheme.shapes.medium,
         modifier = modifier
             .fillMaxHeight()
-            .widthIn(max = width, min = 420.dp) // phone-like width
     ) {
         AnimatedContent(
             targetState = state.listIsLoading,
@@ -85,7 +83,7 @@ fun FeedbackList(
         ) { isLoading ->
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(16.dp),
+                contentPadding = PaddingValues(4.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 // Pinned filter row
