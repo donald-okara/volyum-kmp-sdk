@@ -34,8 +34,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -54,7 +52,6 @@ import ke.don.birdie.demo.screens.FeedbackForm
 import ke.don.birdie.demo.screens.FeedbackList
 import ke.don.birdie.demo.theme.BirdieTheme
 import ke.don.birdie.feedback.model.domain.data_transfer.GetFeedbackFilter
-import ke.don.birdie.feedback.model.table.Feedback
 import ke.don.koffee.annotations.ExperimentalKoffeeApi
 import ke.don.koffee.model.KoffeeDefaults
 import ke.don.koffee.ui.KoffeeBar
@@ -84,7 +81,7 @@ fun App() {
             ) {
                 FeedbackScreenContent(
                     state = state,
-                    handleIntent = handleIntent
+                    handleIntent = handleIntent,
                 )
             }
         }
@@ -96,7 +93,7 @@ fun App() {
 @Composable
 fun FeedbackScreenContent(
     state: FeedbackState,
-    handleIntent: (DemoIntentHandler) -> Unit
+    handleIntent: (DemoIntentHandler) -> Unit,
 ) {
     val screenWidth = getScreenWidth().toInt().dp
     val windowSize = getWindowSizeClass(screenWidth)
@@ -147,13 +144,13 @@ private fun ResponsiveScaffold(
     val listWidth by animateDpAsState(
         targetValue = if (state.showForm || state.showDetails) baseWidth else expandedWidth,
         animationSpec = tween(300),
-        label = "listWidthAnim"
+        label = "listWidthAnim",
     )
 
     BoxWithConstraints(
         modifier = Modifier
             .fillMaxSize()
-            .padding(padding)
+            .padding(padding),
     ) {
         val totalWidth = maxWidth
 
@@ -167,7 +164,7 @@ private fun ResponsiveScaffold(
         LookaheadScope {
             Row(
                 modifier = Modifier.fillMaxSize(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
+                horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally),
             ) {
                 // --- List panel ---
                 FeedbackList(
@@ -175,7 +172,7 @@ private fun ResponsiveScaffold(
                     handleIntent = handleIntent,
                     modifier = Modifier
                         .widthIn(max = listWidth, min = 420.dp)
-                        .weight(listWeight)
+                        .weight(listWeight),
                 )
 
                 // --- Inline details ---
@@ -183,14 +180,14 @@ private fun ResponsiveScaffold(
                     AnimatedVisibility(
                         visible = true,
                         enter = slideInHorizontally { it } + fadeIn(),
-                        exit = slideOutHorizontally { it } + fadeOut()
+                        exit = slideOutHorizontally { it } + fadeOut(),
                     ) {
                         FeedbackDetailsScreen(
                             state = state,
                             handleIntent = handleIntent,
                             modifier = Modifier
                                 .widthIn(max = minPanelWidth, min = 420.dp)
-                                .weight(detailsWeight)
+                                .weight(detailsWeight),
                         )
                     }
                 }
@@ -200,14 +197,14 @@ private fun ResponsiveScaffold(
                     AnimatedVisibility(
                         visible = true,
                         enter = slideInHorizontally { fullWidth -> detailsOffset(fullWidth) } + fadeIn(),
-                        exit = slideOutHorizontally { fullWidth -> detailsOffset(fullWidth) } + fadeOut()
+                        exit = slideOutHorizontally { fullWidth -> detailsOffset(fullWidth) } + fadeOut(),
                     ) {
                         FeedbackForm(
                             state = state,
                             onEvent = handleIntent,
                             modifier = Modifier
                                 .widthIn(max = minPanelWidth, min = 420.dp)
-                                .weight(formWeight)
+                                .weight(formWeight),
                         )
                     }
                 }
@@ -217,18 +214,18 @@ private fun ResponsiveScaffold(
         // --- Dialog fallback for Details ---
         if (showDialogDetails) {
             Dialog(
-                onDismissRequest = { handleIntent(DemoIntentHandler.ShowDetails) }
+                onDismissRequest = { handleIntent(DemoIntentHandler.ShowDetails) },
             ) {
                 Surface(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(16.dp),
-                    shape = MaterialTheme.shapes.medium
+                    shape = MaterialTheme.shapes.medium,
                 ) {
                     FeedbackDetailsScreen(
                         state = state,
                         handleIntent = handleIntent,
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier.fillMaxSize(),
                     )
                 }
             }
@@ -237,18 +234,18 @@ private fun ResponsiveScaffold(
         // --- Dialog fallback for Form ---
         if (showDialogForm) {
             Dialog(
-                onDismissRequest = { handleIntent(DemoIntentHandler.ShowForm) }
+                onDismissRequest = { handleIntent(DemoIntentHandler.ShowForm) },
             ) {
                 Surface(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(16.dp),
-                    shape = MaterialTheme.shapes.medium
+                    shape = MaterialTheme.shapes.medium,
                 ) {
                     FeedbackForm(
                         state = state,
                         onEvent = handleIntent,
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier.fillMaxSize(),
                     )
                 }
             }
@@ -256,39 +253,36 @@ private fun ResponsiveScaffold(
     }
 }
 
-
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MobileScreen(
     state: FeedbackState,
-    handleIntent: (DemoIntentHandler) -> Unit
-){
+    handleIntent: (DemoIntentHandler) -> Unit,
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(16.dp),
     ) {
         FeedbackList(
             state = state,
             handleIntent = handleIntent,
             modifier = Modifier
                 .fillMaxWidth()
-                .widthIn(min = 420.dp) // phone-like width
+                .widthIn(min = 420.dp), // phone-like width
         )
 
         if (state.showDetails) {
             ModalBottomSheet(
                 containerColor = MaterialTheme.colorScheme.surface,
-                onDismissRequest = { handleIntent(DemoIntentHandler.ShowDetails) }
+                onDismissRequest = { handleIntent(DemoIntentHandler.ShowDetails) },
             ) {
                 FeedbackDetailsScreen(
                     state = state,
                     handleIntent = handleIntent,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .widthIn(min = 420.dp) // phone-like width
+                        .widthIn(min = 420.dp), // phone-like width
                 )
             }
         }
@@ -296,33 +290,32 @@ fun MobileScreen(
         if (state.showForm) {
             ModalBottomSheet(
                 containerColor = MaterialTheme.colorScheme.surface,
-                onDismissRequest = { handleIntent(DemoIntentHandler.ShowForm) }
+                onDismissRequest = { handleIntent(DemoIntentHandler.ShowForm) },
             ) {
                 FeedbackForm(
                     state = state,
                     onEvent = handleIntent,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .widthIn(min = 420.dp) // phone-like width
+                        .widthIn(min = 420.dp), // phone-like width
                 )
             }
         }
     }
 }
 
-
 @Composable
 private fun ToggleControls(
     showDetails: Boolean,
     onToggleDetails: () -> Unit,
     showForm: Boolean,
-    onToggleForm: () -> Unit
+    onToggleForm: () -> Unit,
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.End)
+        horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.End),
     ) {
         Button(onClick = onToggleDetails) {
             Text(if (showDetails) "Hide Details" else "Show Details")
@@ -332,4 +325,3 @@ private fun ToggleControls(
         }
     }
 }
-

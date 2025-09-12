@@ -20,18 +20,18 @@ sealed class DemoIntentHandler {
         val id: String,
     ) : DemoIntentHandler()
     data class UpdateFeedback(
-        val feedback: Feedback
+        val feedback: Feedback,
     ) : DemoIntentHandler()
     data class UpdateTargetType(
-        val targetType: EventFeature
+        val targetType: EventFeature,
     ) : DemoIntentHandler()
     data class UpdateSender(
-        val sender: UserSubmitOption
-    ): DemoIntentHandler()
+        val sender: UserSubmitOption,
+    ) : DemoIntentHandler()
     data class UpdateFilter(
-        val filter: GetFeedbackFilter
-    ): DemoIntentHandler()
-    data object SendFeedback: DemoIntentHandler()
-    data object ShowDetails: DemoIntentHandler()
-    data object ShowForm: DemoIntentHandler()
+        val filter: GetFeedbackFilter,
+    ) : DemoIntentHandler()
+    data object SendFeedback : DemoIntentHandler()
+    data object ShowDetails : DemoIntentHandler()
+    data object ShowForm : DemoIntentHandler()
 }

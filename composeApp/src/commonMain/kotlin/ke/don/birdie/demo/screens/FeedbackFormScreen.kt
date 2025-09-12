@@ -9,7 +9,6 @@
  */
 package ke.don.birdie.demo.screens
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,15 +21,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.StarRate
-import androidx.compose.material.icons.outlined.StarRate
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenuItem
@@ -54,8 +49,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import ke.don.birdie.demo.FeedbackState
 import ke.don.birdie.demo.components.RatingInput
@@ -73,7 +66,7 @@ fun FeedbackForm(
     Surface(
         shape = MaterialTheme.shapes.large,
         modifier = modifier
-            .fillMaxHeight()
+            .fillMaxHeight(),
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             Column(
@@ -81,7 +74,7 @@ fun FeedbackForm(
                     .fillMaxSize()
                     .verticalScroll(rememberScrollState())
                     .padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(20.dp)
+                verticalArrangement = Arrangement.spacedBy(20.dp),
             ) {
                 // Header
                 FormHeader()
@@ -89,7 +82,7 @@ fun FeedbackForm(
                 // Rating section
                 Column(
                     modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     LabelText(text = "Your Rating")
                     RatingInput(
@@ -97,10 +90,10 @@ fun FeedbackForm(
                         onRatingChange = {
                             onEvent(
                                 DemoIntentHandler.UpdateFeedback(
-                                    state.sendFeedback.copy(rating = it)
-                                )
+                                    state.sendFeedback.copy(rating = it),
+                                ),
                             )
-                        }
+                        },
                     )
                 }
 
@@ -111,7 +104,7 @@ fun FeedbackForm(
                         selected = state.targetType,
                         onFeatureSelected = {
                             onEvent(DemoIntentHandler.UpdateTargetType(it))
-                        }
+                        },
                     )
                 }
 
@@ -123,10 +116,10 @@ fun FeedbackForm(
                         onTextChange = {
                             onEvent(
                                 DemoIntentHandler.UpdateFeedback(
-                                    state.sendFeedback.copy(text = it)
-                                )
+                                    state.sendFeedback.copy(text = it),
+                                ),
                             )
-                        }
+                        },
                     )
                 }
 
@@ -137,7 +130,7 @@ fun FeedbackForm(
                         selected = state.sender,
                         onOptionSelected = {
                             onEvent(DemoIntentHandler.UpdateSender(it))
-                        }
+                        },
                     )
                 }
 
@@ -149,12 +142,12 @@ fun FeedbackForm(
                     enabled = !state.sendIsLoading,
                     onClick = { onEvent(DemoIntentHandler.SendFeedback) },
                     modifier = Modifier.fillMaxWidth(),
-                    shape = MaterialTheme.shapes.medium
+                    shape = MaterialTheme.shapes.medium,
                 ) {
                     if (state.sendIsLoading) {
                         CircularProgressIndicator(
                             modifier = Modifier.size(20.dp),
-                            strokeWidth = 2.dp
+                            strokeWidth = 2.dp,
                         )
                     } else {
                         Text("Submit Feedback")
@@ -167,28 +160,27 @@ fun FeedbackForm(
                 onClick = { onEvent(DemoIntentHandler.ShowForm) },
                 modifier = Modifier
                     .align(Alignment.TopEnd)
-                    .padding(8.dp)
+                    .padding(8.dp),
             ) {
                 Icon(
                     imageVector = Icons.Default.Close,
-                    contentDescription = "Dismiss"
+                    contentDescription = "Dismiss",
                 )
             }
         }
     }
 }
 
-
 @Composable
 fun LabelText(
     modifier: Modifier = Modifier,
-    text: String
-){
+    text: String,
+) {
     Text(
         text = text,
         style = MaterialTheme.typography.bodyMedium,
         fontWeight = FontWeight.Bold,
-        modifier = modifier
+        modifier = modifier,
     )
 }
 
@@ -196,11 +188,11 @@ fun LabelText(
 fun UserSubmitOptionSelector(
     modifier: Modifier = Modifier,
     selected: UserSubmitOption,
-    onOptionSelected: (UserSubmitOption) -> Unit
+    onOptionSelected: (UserSubmitOption) -> Unit,
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         UserSubmitOption.entries.forEach { option ->
             Row(
@@ -209,29 +201,29 @@ fun UserSubmitOptionSelector(
                     .selectable(
                         selected = option == selected,
                         onClick = { onOptionSelected(option) },
-                        role = Role.RadioButton
+                        role = Role.RadioButton,
                     )
                     .padding(8.dp),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 RadioButton(
                     selected = option == selected,
-                    onClick = { onOptionSelected(option) }
+                    onClick = { onOptionSelected(option) },
                 )
 
                 Column(
-                    modifier = Modifier.padding(start = 8.dp)
+                    modifier = Modifier.padding(start = 8.dp),
                 ) {
                     Text(
                         text = option.name,
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = if (option == selected) FontWeight.SemiBold else FontWeight.Normal,
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = MaterialTheme.colorScheme.onSurface,
                     )
                     Text(
                         text = option.description,
                         style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
             }
@@ -239,43 +231,42 @@ fun UserSubmitOptionSelector(
     }
 }
 
-
 @Composable
 fun FormHeader(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         Row(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(16.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.Start),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             StarSurface(
                 onClick = {},
                 filled = true,
-                size = 48.dp
+                size = 48.dp,
             )
 
             Column(
-                verticalArrangement = Arrangement.spacedBy(2.dp)
+                verticalArrangement = Arrangement.spacedBy(2.dp),
             ) {
                 Text(
                     text = "Rate this product",
                     style = MaterialTheme.typography.titleMedium.copy(
-                        fontWeight = FontWeight.SemiBold
+                        fontWeight = FontWeight.SemiBold,
                     ),
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onSurface,
                 )
 
                 Text(
                     text = "Provide feedback for the product",
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
         }
@@ -285,7 +276,6 @@ fun FormHeader(
         HorizontalDivider()
 
         Spacer(modifier = Modifier.height(8.dp))
-
     }
 }
 
@@ -296,10 +286,10 @@ fun FeedbackTextField(
     text: String,
     onTextChange: (String) -> Unit,
     minLines: Int = 5,
-    maxChars: Int = 500
+    maxChars: Int = 500,
 ) {
     Column(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth(),
     ) {
         OutlinedTextField(
             value = text,
@@ -314,7 +304,7 @@ fun FeedbackTextField(
                 .heightIn(min = 150.dp), // makes it taller by default
             textStyle = MaterialTheme.typography.bodyMedium,
             singleLine = false,
-            minLines = minLines
+            minLines = minLines,
         )
 
         Spacer(modifier = Modifier.height(4.dp))
@@ -323,29 +313,29 @@ fun FeedbackTextField(
         Text(
             text = "${text.length} / $maxChars",
             style = MaterialTheme.typography.bodySmall,
-            color = if (text.length >= maxChars)
+            color = if (text.length >= maxChars) {
                 MaterialTheme.colorScheme.error
-            else
-                MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.align(Alignment.End)
+            } else {
+                MaterialTheme.colorScheme.onSurfaceVariant
+            },
+            modifier = Modifier.align(Alignment.End),
         )
     }
 }
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FeatureDropdown(
     modifier: Modifier = Modifier,
     selected: EventFeature,
-    onFeatureSelected: (EventFeature) -> Unit
+    onFeatureSelected: (EventFeature) -> Unit,
 ) {
     var expanded by remember { mutableStateOf(false) }
 
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },
-        modifier = modifier
+        modifier = modifier,
     ) {
         // Anchor
         OutlinedTextField(
@@ -359,13 +349,13 @@ fun FeatureDropdown(
             shape = MaterialTheme.shapes.medium,
             modifier = Modifier
                 .menuAnchor()
-                .fillMaxWidth()
+                .fillMaxWidth(),
         )
 
         // Dropdown menu
         ExposedDropdownMenu(
             expanded = expanded,
-            onDismissRequest = { expanded = false }
+            onDismissRequest = { expanded = false },
         ) {
             EventFeature.entries.forEach { feature ->
                 DropdownMenuItem(
@@ -373,10 +363,9 @@ fun FeatureDropdown(
                     onClick = {
                         onFeatureSelected(feature)
                         expanded = false
-                    }
+                    },
                 )
             }
         }
     }
 }
-

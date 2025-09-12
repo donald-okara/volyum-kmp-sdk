@@ -69,7 +69,7 @@ val state = FeedbackState(
         text = "The new feature is interesting, but the user interface feels a bit cluttered. Maybe simplify the layout?",
         createdAt = "2023-09-07T18:45:00.000000+00:00",
         userMetadata = UserData().getRandom().toMetadata(),
-        closingRemarks = "The issue was resolved by updating the user's account information and verifying their identity through our secure portal. The user confirmed that they are now able to access their account without any issues."
+        closingRemarks = "The issue was resolved by updating the user's account information and verifying their identity through our secure portal. The user confirmed that they are now able to access their account without any issues.",
     ),
     sendFeedback = Feedback(
         id = "4",
@@ -79,7 +79,7 @@ val state = FeedbackState(
         text = "The new feature is interesting, but the user interface feels a bit cluttered. Maybe simplify the layout?",
         createdAt = "2023-09-07T18:45:00.000000+00:00",
         userMetadata = UserData().getRandom().toMetadata(),
-    )
+    ),
 )
 
 @DevicePreviews
@@ -98,8 +98,6 @@ fun FeedbackListPreview(
     }
 }
 
-
-
 @DevicePreviews
 @Composable
 fun FeedbackFilterRowPreview(
@@ -115,4 +113,3 @@ fun FeedbackFilterRowPreview(
         }
     }
 }
-

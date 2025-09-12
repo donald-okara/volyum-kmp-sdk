@@ -1,3 +1,12 @@
+/*
+ * Copyright © 2025 Donald O. Isoe (isoedonald@gmail.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ */
 package ke.don.birdie.demo.components
 
 import androidx.compose.foundation.clickable
@@ -22,18 +31,18 @@ import androidx.compose.ui.unit.dp
 fun RatingInput(
     modifier: Modifier = Modifier,
     rating: Int,
-    onRatingChange: (rating: Int) -> Unit
+    onRatingChange: (rating: Int) -> Unit,
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
             .padding(8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         (1..5).forEach { index ->
             StarSurface(
                 onClick = { onRatingChange(index) },
-                filled = index <= rating
+                filled = index <= rating,
             )
         }
     }
@@ -43,16 +52,16 @@ fun RatingInput(
 fun StarSurface(
     modifier: Modifier = Modifier,
     size: Dp = 40.dp,
-    onClick: ()-> Unit,
-    filled: Boolean
-){
+    onClick: () -> Unit,
+    filled: Boolean,
+) {
     Surface(
         modifier = Modifier
             .size(size)
             .clickable { onClick() },
         shape = MaterialTheme.shapes.medium,
         tonalElevation = 2.dp,
-        color = MaterialTheme.colorScheme.surface
+        color = MaterialTheme.colorScheme.surface,
     ) {
         Icon(
             imageVector = if (filled) {
@@ -61,11 +70,14 @@ fun StarSurface(
                 Icons.Outlined.StarRate
             },
             contentDescription = "Rate star",
-            tint = if (filled) MaterialTheme.colorScheme.tertiary
-            else MaterialTheme.colorScheme.onSurfaceVariant,
+            tint = if (filled) {
+                MaterialTheme.colorScheme.tertiary
+            } else {
+                MaterialTheme.colorScheme.onSurfaceVariant
+            },
             modifier = Modifier
                 .padding(8.dp)
-                .fillMaxSize()
+                .fillMaxSize(),
         )
     }
 }

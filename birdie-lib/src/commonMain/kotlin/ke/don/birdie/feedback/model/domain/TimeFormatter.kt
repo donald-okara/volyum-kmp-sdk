@@ -20,7 +20,7 @@ object TimeFormatter {
         timestamp: String,
         timeZone: TimeZone = TimeZone.currentSystemDefault(),
     ): String {
-        try {// Postgres timestamptz looks like: 2025-09-09 10:15:00.000000+00
+        try { // Postgres timestamptz looks like: 2025-09-09 10:15:00.000000+00
             // Normalize into ISO-8601 (2025-09-09T10:15:00.000000+00:00)
             val normalized = timestamp
                 .replace(" ", "T")

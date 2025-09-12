@@ -9,56 +9,44 @@
  */
 package ke.don.birdie.demo.screens
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import ke.don.birdie.demo.FeedbackState
-import ke.don.birdie.demo.components.FeedbackItem
-import ke.don.birdie.demo.components.FeedbackItemShimmer
-import ke.don.birdie.demo.models.DemoIntentHandler
-
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.FilterChip
-import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import ke.don.birdie.demo.FeedbackState
 import ke.don.birdie.demo.components.EmptyScreenMessage
+import ke.don.birdie.demo.components.FeedbackItem
+import ke.don.birdie.demo.components.FeedbackItemShimmer
+import ke.don.birdie.demo.models.DemoIntentHandler
 import ke.don.birdie.demo.models.EventFeature
 import ke.don.birdie.demo.models.UserData
 import ke.don.birdie.feedback.model.domain.data_transfer.GetFeedbackFilter
@@ -74,12 +62,12 @@ fun FeedbackList(
     Surface(
         shape = MaterialTheme.shapes.medium,
         modifier = modifier
-            .fillMaxHeight()
+            .fillMaxHeight(),
     ) {
         AnimatedContent(
             targetState = state.listIsLoading,
             transitionSpec = { fadeIn() togetherWith fadeOut() },
-            label = "ListLoadingAnim"
+            label = "ListLoadingAnim",
         ) { isLoading ->
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
@@ -94,9 +82,8 @@ fun FeedbackList(
                         onFilterChange = { handleIntent(DemoIntentHandler.UpdateFilter(it)) },
                         showForm = state.showForm,
                         onShowFormChange = { handleIntent(DemoIntentHandler.ShowForm) },
-                        modifier = Modifier.padding(bottom = 8.dp)
+                        modifier = Modifier.padding(bottom = 8.dp),
                     )
-
                 }
 
                 when {
@@ -109,12 +96,12 @@ fun FeedbackList(
                             Box(
                                 modifier = Modifier
                                     .fillParentMaxSize(),
-                                contentAlignment = Alignment.Center
+                                contentAlignment = Alignment.Center,
                             ) {
                                 EmptyScreenMessage(
                                     title = "No feedback found",
                                     message = "Try adjusting your filters or check back later.",
-                                    icon = Icons.Default.Info
+                                    icon = Icons.Default.Info,
                                 )
                             }
                         }
@@ -125,14 +112,14 @@ fun FeedbackList(
                             Box(
                                 modifier = Modifier
                                     .fillParentMaxSize(),
-                                contentAlignment = Alignment.Center
+                                contentAlignment = Alignment.Center,
                             ) {
                                 EmptyScreenMessage(
                                     title = "Something went wrong",
                                     message = state.listErrorMessage,
                                     icon = Icons.Default.Info,
                                     actionLabel = "Try again",
-                                    onActionClick = { handleIntent(DemoIntentHandler.GetFeedback(state.filter)) }
+                                    onActionClick = { handleIntent(DemoIntentHandler.GetFeedback(state.filter)) },
                                 )
                             }
                         }
@@ -155,7 +142,6 @@ fun FeedbackList(
     }
 }
 
-
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun FeedbackFilterRow(
@@ -164,7 +150,7 @@ fun FeedbackFilterRow(
     showForm: Boolean = false,
     onShowFormChange: () -> Unit = {},
     onFilterChange: (GetFeedbackFilter) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val selectedFeature = filter.targetType?.let { label ->
         EventFeature.entries.firstOrNull { it.label == label }
@@ -173,17 +159,17 @@ fun FeedbackFilterRow(
     FlowRow(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         // --- Just mine chip ---
         FilterChip(
             selected = filter.userId != null,
             onClick = {
                 onFilterChange(
-                    filter.copy(userId = if (filter.userId == null) myUserData?.id else null)
+                    filter.copy(userId = if (filter.userId == null) myUserData?.id else null),
                 )
             },
-            label = { Text("Just mine") }
+            label = { Text("Just mine") },
         )
 
         FilterDropdownChip(
@@ -193,9 +179,8 @@ fun FeedbackFilterRow(
             onSelect = { label ->
                 onFilterChange(filter.copy(targetType = label)) // store label
             },
-            onClear = { onFilterChange(filter.copy(targetType = null)) }
+            onClear = { onFilterChange(filter.copy(targetType = null)) },
         )
-
 
         // --- Status chip ---
         FilterDropdownChip(
@@ -205,15 +190,15 @@ fun FeedbackFilterRow(
             onSelect = { name ->
                 onFilterChange(filter.copy(status = FeedbackStatus.valueOf(name)))
             },
-            onClear = { onFilterChange(filter.copy(status = null)) }
+            onClear = { onFilterChange(filter.copy(status = null)) },
         )
 
         FilterChip(
             selected = showForm,
-            onClick =  onShowFormChange,
+            onClick = onShowFormChange,
             label = {
                 Text("New Feedback")
-            }
+            },
         )
     }
 }
@@ -231,19 +216,19 @@ private fun FilterDropdownChip(
     FilterChip(
         selected = selected,
         onClick = { expanded = true },
-        label = { Text(label) }
+        label = { Text(label) },
     )
 
     DropdownMenu(
         expanded = expanded,
-        onDismissRequest = { expanded = false }
+        onDismissRequest = { expanded = false },
     ) {
         DropdownMenuItem(
             text = { Text("All") },
             onClick = {
                 onClear()
                 expanded = false
-            }
+            },
         )
         options.forEach { (value, display) ->
             DropdownMenuItem(
@@ -251,11 +236,8 @@ private fun FilterDropdownChip(
                 onClick = {
                     onSelect(value)
                     expanded = false
-                }
+                },
             )
         }
     }
 }
-
-
-

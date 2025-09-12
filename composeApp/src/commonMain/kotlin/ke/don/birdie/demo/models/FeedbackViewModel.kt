@@ -109,7 +109,7 @@ class FeedbackViewModel : ViewModel() {
             updateState {
                 it.copy(
                     readIsLoading = true,
-                    showDetails = true
+                    showDetails = true,
                 )
             }
             birdie.getFeedbackById(id).onSuccess {
@@ -150,7 +150,7 @@ class FeedbackViewModel : ViewModel() {
         viewModelScope.launch {
             updateState {
                 it.copy(
-                    sendIsLoading = true
+                    sendIsLoading = true,
                 )
             }
             birdie.sendFeedback(
@@ -209,22 +209,31 @@ class FeedbackViewModel : ViewModel() {
 enum class EventFeature(val label: String) {
     @SerialName("Ticketing")
     TICKETING("Ticketing"),
+
     @SerialName("Events")
     EVENTS("Events"),
+
     @SerialName("Workshops")
     WORKSHOPS("Workshops"),
+
     @SerialName("Notifications")
     NOTIFICATIONS("Notifications"),
+
     @SerialName("Check-in")
     CHECK_IN("Check-in"),
+
     @SerialName("Schedule")
     SCHEDULE("Schedule"),
+
     @SerialName("Analytics")
     ANALYTICS("Analytics"),
+
     @SerialName("Sponsors")
     SPONSORS("Sponsors"),
+
     @SerialName("Venue Maps")
     MAPS("Venue Maps"),
+
     @SerialName("Networking")
-    NETWORKING("Networking")
+    NETWORKING("Networking"),
 }
