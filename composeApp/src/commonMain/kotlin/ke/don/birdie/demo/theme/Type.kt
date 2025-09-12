@@ -22,9 +22,9 @@ val bodyFontFamily: FontFamily
     @Composable
     get() =
         FontFamily(
-        Font(Res.font.roboto_mono_regular, FontWeight.Normal),
+            Font(Res.font.roboto_mono_regular, FontWeight.Normal),
 
-    )
+        )
 
 val displayFontFamily: FontFamily
     @Composable

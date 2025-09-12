@@ -95,10 +95,9 @@ class FeedbackViewModel : ViewModel() {
                                     listErrorMessage = message,
                                 )
                             }
-                        }
+                        },
 
                     )
-
                 }
         }
     }
@@ -130,7 +129,7 @@ class FeedbackViewModel : ViewModel() {
                                 readErrorMessage = message,
                             )
                         }
-                    }
+                    },
                 )
             }
         }
@@ -176,7 +175,7 @@ class FeedbackViewModel : ViewModel() {
                                 sendErrorMessage = message,
                             )
                         }
-                    }
+                    },
                 )
             }
         }
@@ -198,7 +197,7 @@ class FeedbackViewModel : ViewModel() {
     private fun handleError(
         error: NetworkError,
         onRetry: () -> Unit,
-        updateState: (String?) -> Unit
+        updateState: (String?) -> Unit,
     ) {
         println(error)
         updateState(error.message)

@@ -12,7 +12,6 @@ package ke.don.birdie.demo.previews
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import ke.don.birdie.demo.components.FeedbackItem
 import ke.don.birdie.demo.components.ProfileHeader
 import ke.don.birdie.demo.components.RatingRow

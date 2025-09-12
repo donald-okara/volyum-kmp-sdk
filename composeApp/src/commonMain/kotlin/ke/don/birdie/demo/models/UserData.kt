@@ -21,7 +21,7 @@ data class UserData(
         return UserData(
             id = newId,
             name = FauxData.randomNames.random(),
-            profileUrl = "https://picsum.photos/200?seed=$newId"
+            profileUrl = "https://picsum.photos/200?seed=$newId",
         )
     }
 

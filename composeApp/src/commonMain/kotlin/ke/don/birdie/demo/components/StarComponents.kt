@@ -71,7 +71,7 @@ fun StarSurface(
             } else {
                 Icons.Outlined.StarRate
             },
-            contentDescription = if (index == null) "Star Icon" else if(filled) "Rated $index stars" else "Rate $index stars",
+            contentDescription = if (index == null) "Star Icon" else if (filled) "Rated $index stars" else "Rate $index stars",
             tint = if (filled) {
                 MaterialTheme.colorScheme.tertiary
             } else {

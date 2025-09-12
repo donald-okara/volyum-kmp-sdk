@@ -16,13 +16,19 @@ actual fun getScreenWidth(): Float {
     val configuration = Resources.getSystem().configuration
     val sw = configuration.screenWidthDp
     // dp; fallback if undefined
-    return if (sw != Configuration.SCREEN_WIDTH_DP_UNDEFINED) sw.toFloat()
-    else Resources.getSystem().displayMetrics.run { widthPixels / density }
+    return if (sw != Configuration.SCREEN_WIDTH_DP_UNDEFINED) {
+        sw.toFloat()
+    } else {
+        Resources.getSystem().displayMetrics.run { widthPixels / density }
+    }
 }
 
 actual fun getScreenHeight(): Float {
     val configuration = Resources.getSystem().configuration
     val sh = configuration.screenHeightDp
-    return if (sh != Configuration.SCREEN_HEIGHT_DP_UNDEFINED) sh.toFloat()
-    else Resources.getSystem().displayMetrics.run { heightPixels / density }
+    return if (sh != Configuration.SCREEN_HEIGHT_DP_UNDEFINED) {
+        sh.toFloat()
+    } else {
+        Resources.getSystem().displayMetrics.run { heightPixels / density }
+    }
 }

@@ -16,4 +16,4 @@ import platform.UIKit.currentTraitCollection
 
 @Composable
 actual fun systemInDarkTheme(): Boolean =
-UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyle.UIUserInterfaceStyleDark
+    UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyle.UIUserInterfaceStyleDark

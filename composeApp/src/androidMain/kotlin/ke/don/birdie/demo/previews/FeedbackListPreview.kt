@@ -12,13 +12,9 @@ package ke.don.birdie.demo.previews
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import ke.don.birdie.demo.FeedbackState
-import ke.don.birdie.demo.models.UserData
 import ke.don.birdie.demo.screens.FeedbackFilterRow
 import ke.don.birdie.demo.screens.FeedbackList
 import ke.don.birdie.demo.theme.BirdieTheme
-import ke.don.birdie.feedback.model.table.Feedback
-import ke.don.birdie.feedback.model.table.FeedbackStatus
 
 @DevicePreviews
 @Composable
