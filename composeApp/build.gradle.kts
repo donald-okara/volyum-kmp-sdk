@@ -20,11 +20,11 @@ if (keysFile.exists()) {
 }
 
 buildkonfig {
-    packageName = "ke.don.birdie.demo"
+    packageName = "ke.don.volyum.demo"
 
     defaultConfigs {
-        buildConfigField(STRING, "BIRDIE_PROJECT_ID", "${keys["BIRDIE_PROJECT_ID"]}")
-        buildConfigField(STRING, "BIRDIE_API_KEY", "${keys["BIRDIE_API_KEY"]}")
+        buildConfigField(STRING, "VOLYUM_PROJECT_ID", "${keys["VOLYUM_PROJECT_ID"]}")
+        buildConfigField(STRING, "VOLYUM_API_KEY", "${keys["VOLYUM_API_KEY"]}")
     }
 }
 
@@ -65,7 +65,7 @@ kotlin {
             implementation(libs.bundles.coil)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation(project(":birdie-lib"))
+            implementation(project(":volyum-lib"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -84,11 +84,11 @@ kotlin {
 }
 
 android {
-    namespace = "ke.don.birdie.demo"
+    namespace = "ke.don.volyum.demo"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "ke.don.birdie.demo"
+        applicationId = "ke.don.volyum.demo"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
@@ -116,11 +116,11 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "ke.don.birdie.demo.MainKt"
+        mainClass = "ke.don.volyum.demo.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "ke.don.birdie.demo"
+            packageName = "ke.don.volyum.demo"
             packageVersion = "1.0.0"
         }
     }
