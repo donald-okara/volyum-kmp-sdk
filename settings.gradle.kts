@@ -1,4 +1,4 @@
-rootProject.name = "BirdieSDK"
+rootProject.name = "volyum"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -33,4 +33,4 @@ plugins {
 }
 
 include(":composeApp")
-include(":birdie-lib")
+include(":volyum-lib")
