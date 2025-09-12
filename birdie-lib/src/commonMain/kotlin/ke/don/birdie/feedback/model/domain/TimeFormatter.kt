@@ -9,6 +9,8 @@
  */
 package ke.don.birdie.feedback.model.domain
 
+import ke.don.birdie.feedback.helpers.logger
+import ke.don.birdie.feedback.model.domain.TimeFormatter.log
 import kotlinx.datetime.*
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.hours
@@ -16,6 +18,10 @@ import kotlin.time.Duration.Companion.minutes
 
 object TimeFormatter {
 
+    fun plural(count: Long, singular: String): String {
+        return "$count $singular${if (count != 1L) "s" else ""} ago"
+    }
+    val log = logger<TimeFormatter>()
     fun formatRelativeTime(
         timestamp: String,
         timeZone: TimeZone = TimeZone.currentSystemDefault(),
@@ -36,15 +42,16 @@ object TimeFormatter {
 
             return when {
                 diff < 1.minutes -> "Just now"
-                diff < 60.minutes -> "${diff.inWholeMinutes} minute${if (diff.inWholeMinutes != 1L) "s" else ""} ago"
-                diff < 24.hours -> "${diff.inWholeHours} hour${if (diff.inWholeHours != 1L) "s" else ""} ago"
+                diff < 60.minutes -> plural(diff.inWholeMinutes, "minute")
+                diff < 24.hours -> plural(diff.inWholeHours, "hour")
+
                 // Compare calendar days in local timezone
                 zonedDateTime.date == nowZoned.date.minus(1, DateTimeUnit.DAY) -> "Yesterday"
-                diff < 7.days -> "${diff.inWholeDays} days ago"
+                diff < 7.days -> plural(diff.inWholeDays, "day")
                 else -> "${zonedDateTime.date.month.name.lowercase().replaceFirstChar { it.uppercase() }} ${zonedDateTime.date.dayOfMonth}, ${zonedDateTime.date.year}"
             }
         } catch (e: Exception) {
-            println("Error formatting relative time: $e")
+            log.d("Error formatting relative time: $e")
             return timestamp
         }
     }

@@ -70,7 +70,10 @@ fun EmptyScreenMessage(
             }
 
             if (actionLabel != null && onActionClick != null) {
-                Button(onClick = onActionClick) {
+                Button(
+                    onClick = onActionClick,
+                    modifier = Modifier.padding(top = 8.dp)
+                ) {
                     Text(actionLabel)
                 }
             }

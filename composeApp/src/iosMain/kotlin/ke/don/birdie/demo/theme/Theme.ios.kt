@@ -10,6 +10,10 @@
 package ke.don.birdie.demo.theme
 
 import androidx.compose.runtime.Composable
+import platform.UIKit.UITraitCollection
+import platform.UIKit.UIUserInterfaceStyle
+import platform.UIKit.currentTraitCollection
 
 @Composable
-actual fun systemInDarkTheme(): Boolean = true
+actual fun systemInDarkTheme(): Boolean =
+UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyle.UIUserInterfaceStyleDark

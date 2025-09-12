@@ -20,7 +20,8 @@ import org.jetbrains.compose.resources.Font
 
 val bodyFontFamily: FontFamily
     @Composable
-    get() = FontFamily(
+    get() =
+        FontFamily(
         Font(Res.font.roboto_mono_regular, FontWeight.Normal),
 
     )

@@ -21,10 +21,6 @@ import ke.don.birdie.demo.theme.BirdieTheme
 import ke.don.birdie.feedback.model.table.Feedback
 import ke.don.birdie.feedback.model.table.FeedbackStatus
 
-class BooleanPreviewParameterProvider : PreviewParameterProvider<Boolean> {
-    override val values = sequenceOf(true, false)
-}
-
 @DevicePreviews
 @Composable
 fun FeedbackItemPreview(

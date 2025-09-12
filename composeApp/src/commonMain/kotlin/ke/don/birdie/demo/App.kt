@@ -34,7 +34,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.LookaheadScope
@@ -65,7 +64,7 @@ fun App() {
     BirdieTheme {
         val viewModel: FeedbackViewModel = viewModel()
         val state by viewModel.uiState.collectAsState()
-        val handleIntent = viewModel::handleIndent
+        val handleIntent = viewModel::handleIntent
 
         val koffeeConfig = KoffeeDefaults.config.copy(
             layout = { GlowingToast(it) },

@@ -31,6 +31,9 @@ data class Feedback(
     }
 
     fun formatTimestamp(): String {
+        if (createdAt.isEmpty()) {
+            return ""
+        }
         return TimeFormatter.formatRelativeTime(createdAt)
     }
 }

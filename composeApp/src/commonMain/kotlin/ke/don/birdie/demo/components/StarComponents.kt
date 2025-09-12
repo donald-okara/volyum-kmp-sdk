@@ -41,6 +41,7 @@ fun RatingInput(
     ) {
         (1..5).forEach { index ->
             StarSurface(
+                index = index,
                 onClick = { onRatingChange(index) },
                 filled = index <= rating,
             )
@@ -52,11 +53,12 @@ fun RatingInput(
 fun StarSurface(
     modifier: Modifier = Modifier,
     size: Dp = 40.dp,
+    index: Int? = null,
     onClick: () -> Unit,
     filled: Boolean,
 ) {
     Surface(
-        modifier = Modifier
+        modifier = modifier
             .size(size)
             .clickable { onClick() },
         shape = MaterialTheme.shapes.medium,
@@ -69,7 +71,7 @@ fun StarSurface(
             } else {
                 Icons.Outlined.StarRate
             },
-            contentDescription = "Rate star",
+            contentDescription = if (index == null) "Star Icon" else if(filled) "Rated $index stars" else "Rate $index stars",
             tint = if (filled) {
                 MaterialTheme.colorScheme.tertiary
             } else {

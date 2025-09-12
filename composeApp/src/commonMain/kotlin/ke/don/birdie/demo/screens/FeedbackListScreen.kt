@@ -131,7 +131,9 @@ fun FeedbackList(
                                 item = item,
                                 isPreview = true,
                                 onClick = {
-                                    handleIntent(DemoIntentHandler.GetFeedbackById(item.id!!))
+                                    item.id?.let { id ->
+                                        handleIntent(DemoIntentHandler.GetFeedbackById(id))
+                                    }
                                 },
                             )
                         }

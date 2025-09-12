@@ -17,6 +17,6 @@ enum class UserSubmitOption(val description: String) {
         "Submit feedback anonymously",
     ),
     RandomUser(
-        "Submit feedback to with a random user. 🚩 Do not use in production",
+        "Submit feedback with a random user. 🚩 Do not use in production",
     ),
 }

@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ke.don.birdie.demo.FeedbackState
 import ke.don.birdie.feedback.config.BirdieSdk
+import ke.don.birdie.feedback.model.domain.NetworkError
 import ke.don.birdie.feedback.model.domain.data_transfer.GetFeedbackFilter
 import ke.don.birdie.feedback.model.domain.onError
 import ke.don.birdie.feedback.model.domain.onSuccess
@@ -40,7 +41,7 @@ class FeedbackViewModel : ViewModel() {
         }
     }
 
-    fun handleIndent(intent: DemoIntentHandler) {
+    fun handleIntent(intent: DemoIntentHandler) {
         when (intent) {
             is DemoIntentHandler.GetFeedback -> getFeedback()
             is DemoIntentHandler.GetFeedbackById -> getFeedbackById(intent.id)
@@ -83,23 +84,21 @@ class FeedbackViewModel : ViewModel() {
                     }
                 }
                 .onError {
-                    println(it)
-                    updateState { state ->
-                        state.copy(
-                            listIsLoading = false,
-                            listIsError = true,
-                            listErrorMessage = it.message,
-                        )
-                    }
+                    handleError(
+                        error = it,
+                        onRetry = { getFeedback() },
+                        updateState = { message ->
+                            updateState { state ->
+                                state.copy(
+                                    listIsLoading = false,
+                                    listIsError = true,
+                                    listErrorMessage = message,
+                                )
+                            }
+                        }
 
-                    Koffee.show(
-                        title = "Error",
-                        description = it.message ?: "Unknown error",
-                        type = ToastType.Error,
-                        duration = ToastDuration.Indefinite,
-                        primaryAction = ToastAction("Retry", { getFeedback() }, dismissAfter = true),
-                        secondaryAction = ToastAction(label = "Ok Got it", {}, true),
                     )
+
                 }
         }
     }
@@ -120,23 +119,19 @@ class FeedbackViewModel : ViewModel() {
                     )
                 }
             }.onError {
-                println(it)
-
-                Koffee.show(
-                    title = "Error",
-                    description = it.message ?: "Unknown error",
-                    type = ToastType.Error,
-                    duration = ToastDuration.Indefinite,
-                    primaryAction = ToastAction("Retry", { getFeedbackById(id) }, dismissAfter = true),
-                    secondaryAction = ToastAction(label = "Ok Got it", {}, true),
+                handleError(
+                    error = it,
+                    onRetry = { getFeedbackById(id) },
+                    updateState = { message ->
+                        updateState { state ->
+                            state.copy(
+                                readIsLoading = false,
+                                readIsError = true,
+                                readErrorMessage = message,
+                            )
+                        }
+                    }
                 )
-                updateState { state ->
-                    state.copy(
-                        readIsLoading = false,
-                        readIsError = true,
-                        readErrorMessage = it.message,
-                    )
-                }
             }
         }
     }
@@ -170,22 +165,18 @@ class FeedbackViewModel : ViewModel() {
                     )
                 }
             }.onError {
-                println(it)
-
-                updateState { state ->
-                    state.copy(
-                        sendIsLoading = false,
-                        sendIsError = true,
-                        sendErrorMessage = it.message,
-                    )
-                }
-                Koffee.show(
-                    title = "Error",
-                    description = it.message ?: "Unknown error",
-                    type = ToastType.Error,
-                    duration = ToastDuration.Indefinite,
-                    primaryAction = ToastAction("Retry", { sendFeedback() }, dismissAfter = true),
-                    secondaryAction = ToastAction(label = "Ok Got it", {}, true),
+                handleError(
+                    error = it,
+                    onRetry = { sendFeedback() },
+                    updateState = { message ->
+                        updateState { state ->
+                            state.copy(
+                                sendIsLoading = false,
+                                sendIsError = true,
+                                sendErrorMessage = message,
+                            )
+                        }
+                    }
                 )
             }
         }
@@ -202,6 +193,24 @@ class FeedbackViewModel : ViewModel() {
             state.copy(filter = filter)
         }
         getFeedback()
+    }
+
+    private fun handleError(
+        error: NetworkError,
+        onRetry: () -> Unit,
+        updateState: (String?) -> Unit
+    ) {
+        println(error)
+        updateState(error.message)
+
+        Koffee.show(
+            title = "Error",
+            description = error.message ?: "Unknown error",
+            type = ToastType.Error,
+            duration = ToastDuration.Indefinite,
+            primaryAction = ToastAction("Retry", onRetry, dismissAfter = true),
+            secondaryAction = ToastAction(label = "Ok Got it", {}, true),
+        )
     }
 }
 

@@ -17,10 +17,11 @@ data class UserData(
     val profileUrl: String = "",
 ) {
     fun getRandom(): UserData {
+        val newId = (2..1000).random().toString()
         return UserData(
-            id = (2..1000).random().toString(),
+            id = newId,
             name = FauxData.randomNames.random(),
-            profileUrl = "https://picsum.photos/200?seed=$id",
+            profileUrl = "https://picsum.photos/200?seed=$newId"
         )
     }
 
