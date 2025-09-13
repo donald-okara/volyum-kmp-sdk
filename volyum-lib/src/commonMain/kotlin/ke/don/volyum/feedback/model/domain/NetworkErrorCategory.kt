@@ -9,6 +9,12 @@
  */
 package ke.don.volyum.feedback.model.domain
 
+/**
+ * Represents different categories of network errors that can occur.
+ *
+ * This enum is used to classify network-related issues, making it easier to handle
+ * and display appropriate messages or take specific actions based on the error type.
+ */
 enum class NetworkErrorCategory {
     REQUEST_TIMEOUT,
     UNAUTHORIZED,

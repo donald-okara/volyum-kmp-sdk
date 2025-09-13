@@ -14,6 +14,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import ke.don.volyum.feedback.model.table.FeedbackStatus
 
+/**
+ * Returns the color associated with the [FeedbackStatus].
+ *
+ * This Composable function maps each [FeedbackStatus] to a specific color
+ * from the current [MaterialTheme.colorScheme].
+ *
+ * @return The [Color] corresponding to the feedback status:
+ *  - [FeedbackStatus.Pending] -> `MaterialTheme.colorScheme.primary`
+ *  - [FeedbackStatus.Reviewed] -> `MaterialTheme.colorScheme.tertiary`
+ *  - [FeedbackStatus.Resolved] -> `MaterialTheme.colorScheme.secondary`
+ *  - [FeedbackStatus.Rejected] -> `MaterialTheme.colorScheme.error`
+ */
 @Composable
 fun FeedbackStatus.color(): Color {
     return when (this) {

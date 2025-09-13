@@ -31,6 +31,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 
+/**
+ * A composable function that displays a shimmer loading placeholder for a feedback item.
+ * This is typically used while the actual feedback data is being fetched.
+ *
+ * The shimmer effect is achieved by using the `shimmerBackground` modifier on various Box elements
+ * that represent the different parts of a feedback item (avatar, name, rating, text, etc.).
+ *
+ * @param modifier Optional [Modifier] to be applied to the root OutlinedCard of the shimmer item.
+ */
 @Composable
 fun FeedbackItemShimmer(
     modifier: Modifier = Modifier,

@@ -42,7 +42,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ke.don.volyum.demo.FeedbackState
+import ke.don.volyum.demo.models.FeedbackState
 import ke.don.volyum.demo.components.EmptyScreenMessage
 import ke.don.volyum.demo.components.FeedbackItem
 import ke.don.volyum.demo.components.FeedbackItemShimmer
@@ -52,6 +52,13 @@ import ke.don.volyum.demo.models.UserData
 import ke.don.volyum.feedback.model.domain.data_transfer.GetFeedbackFilter
 import ke.don.volyum.feedback.model.table.FeedbackStatus
 
+/**
+ * Displays a list of feedback items with filtering and loading states.
+ *
+ * @param modifier Modifier for customizing the layout.
+ * @param state The current state of the feedback list, including loading status, error messages, and the list of feedback items.
+ * @param handleIntent A function to handle user intents, such as updating filters or fetching feedback.
+ */
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun FeedbackList(
@@ -76,14 +83,16 @@ fun FeedbackList(
             ) {
                 // Pinned filter row
                 stickyHeader {
-                    FeedbackFilterRow(
-                        filter = state.filter,
-                        myUserData = state.myUserData,
-                        onFilterChange = { handleIntent(DemoIntentHandler.UpdateFilter(it)) },
-                        showForm = state.showForm,
-                        onShowFormChange = { handleIntent(DemoIntentHandler.ShowForm) },
-                        modifier = Modifier.padding(bottom = 8.dp),
-                    )
+                    Surface{
+                        FeedbackFilterRow(
+                            filter = state.filter,
+                            myUserData = state.myUserData,
+                            onFilterChange = { handleIntent(DemoIntentHandler.UpdateFilter(it)) },
+                            showForm = state.showForm,
+                            onShowFormChange = { handleIntent(DemoIntentHandler.ShowForm) },
+                            modifier = Modifier.padding(bottom = 8.dp),
+                        )
+                    }
                 }
 
                 when {
@@ -144,6 +153,16 @@ fun FeedbackList(
     }
 }
 
+/**
+ * Composable function that displays a row of filter chips for feedback.
+ *
+ * @param myUserData The current user's data, used to filter by "Just mine".
+ * @param filter The current feedback filter.
+ * @param showForm Whether the new feedback form is shown.
+ * @param onShowFormChange Callback triggered when the "New Feedback" chip is clicked.
+ * @param onFilterChange Callback triggered when a filter chip is clicked or a dropdown option is selected.
+ * @param modifier Modifier for this composable.
+ */
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun FeedbackFilterRow(
@@ -205,6 +224,15 @@ fun FeedbackFilterRow(
     }
 }
 
+/**
+ * A composable that displays a filter chip with a dropdown menu for selecting options.
+ *
+ * @param label The text to display on the chip.
+ * @param selected Whether the chip is currently selected (an option is chosen).
+ * @param options A list of pairs, where each pair represents an option. The first element is the value to be returned when the option is selected, and the second element is the text to display for the option in the dropdown.
+ * @param onSelect Callback triggered when an option is selected from the dropdown. It receives the value of the selected option.
+ * @param onClear Callback triggered when the "All" option is selected, indicating that the filter should be cleared.
+ */
 @Composable
 private fun FilterDropdownChip(
     label: String,

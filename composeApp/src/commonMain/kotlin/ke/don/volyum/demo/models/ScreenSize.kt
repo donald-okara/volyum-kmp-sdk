@@ -9,6 +9,16 @@
  */
 package ke.don.volyum.demo.models
 
+/**
+ * Gets the width of the screen in pixels.
+ *
+ * @return The width of the screen in pixels.
+ */
 expect fun getScreenWidth(): Float
 
+/**
+ * Returns the height of the screen in pixels.
+ *
+ * @return The screen height as a [Float].
+ */
 expect fun getScreenHeight(): Float

@@ -50,13 +50,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import ke.don.volyum.demo.FeedbackState
+import ke.don.volyum.demo.models.FeedbackState
 import ke.don.volyum.demo.components.RatingInput
 import ke.don.volyum.demo.components.StarSurface
 import ke.don.volyum.demo.models.DemoIntentHandler
 import ke.don.volyum.demo.models.EventFeature
 import ke.don.volyum.demo.models.UserSubmitOption
 
+/**
+ * Composable function for the feedback form.
+ *
+ * This function displays a form with various input fields for users to provide feedback.
+ *
+ * @param modifier Modifier for customizing the layout and appearance of the form.
+ * @param state The current state of the feedback form, containing data like rating, text, and loading status.
+ * @param onEvent A callback function to handle user interactions and events within the form.
+ */
 @Composable
 fun FeedbackForm(
     modifier: Modifier = Modifier,
@@ -171,6 +180,15 @@ fun FeedbackForm(
     }
 }
 
+/**
+ * Composable function to display a label text with specific styling.
+ *
+ * This function renders a [Text] composable with a bold font weight and
+ * the bodyMedium typography style from the current [MaterialTheme].
+ *
+ * @param modifier Optional [Modifier] to be applied to the Text.
+ * @param text The string content to be displayed as the label.
+ */
 @Composable
 fun LabelText(
     modifier: Modifier = Modifier,
@@ -184,6 +202,13 @@ fun LabelText(
     )
 }
 
+/**
+ * A composable function that displays a list of user submit options as radio buttons.
+ *
+ * @param modifier The modifier to be applied to the layout.
+ * @param selected The currently selected [UserSubmitOption].
+ * @param onOptionSelected A callback function that is invoked when a user selects an option.
+ */
 @Composable
 fun UserSubmitOptionSelector(
     modifier: Modifier = Modifier,
@@ -231,6 +256,12 @@ fun UserSubmitOptionSelector(
     }
 }
 
+/**
+ * Composable function that displays the header for the feedback form.
+ * It includes a title, a subtitle, and a star icon.
+ *
+ * @param modifier Modifier for this composable.
+ */
 @Composable
 fun FormHeader(
     modifier: Modifier = Modifier,
@@ -279,6 +310,21 @@ fun FormHeader(
     }
 }
 
+/**
+ * A Composable function that creates a text field for user feedback.
+ *
+ * This text field is designed for multi-line input, includes a character counter,
+ * and allows customization of minimum lines and maximum characters.
+ *
+ * @param modifier Optional [Modifier] for styling and layout.
+ * @param text The current text content of the feedback field.
+ * @param onTextChange A lambda function called when the text in the field changes.
+ *                     It receives the new text as a String.
+ * @param minLines The minimum number of lines the text field should display by default.
+ *                 Defaults to 5.
+ * @param maxChars The maximum number of characters allowed in the feedback field.
+ *                 Defaults to 500.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FeedbackTextField(
@@ -323,6 +369,13 @@ fun FeedbackTextField(
     }
 }
 
+/**
+ * A dropdown menu for selecting a product feature.
+ *
+ * @param modifier The modifier to apply to this layout.
+ * @param selected The currently selected feature.
+ * @param onFeatureSelected A callback that is invoked when a feature is selected.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FeatureDropdown(

@@ -11,6 +11,16 @@ package ke.don.volyum.feedback.model.domain.data_transfer
 
 import ke.don.volyum.feedback.model.table.FeedbackStatus
 
+/**
+ * Data class representing the filter options for retrieving feedback.
+ *
+ * @property limit The maximum number of feedback items to retrieve.
+ * @property offset The number of feedback items to skip before starting to retrieve.
+ * @property userId The ID of the user who submitted the feedback.
+ * @property targetId The ID of the target entity for which the feedback was submitted.
+ * @property targetType The type of the target entity (e.g., "product", "service").
+ * @property status The status of the feedback (e.g., "pending", "resolved").
+ */
 data class GetFeedbackFilter(
     val limit: Int? = null,
     val offset: Int? = null,

@@ -44,6 +44,15 @@ import ke.don.volyum.feedback.model.domain.TimeFormatter
 import ke.don.volyum.feedback.model.table.Feedback
 import ke.don.volyum.feedback.model.table.FeedbackStatus
 
+/**
+ * Displays a single feedback item in a card format.
+ *
+ * @param item The [Feedback] object containing the data to display.
+ * @param modifier Optional [Modifier] for this composable.
+ * @param isPreview If true, the feedback text will be truncated to a maximum of 4 lines.
+ *                  If false, the full feedback text will be shown.
+ * @param onClick A lambda function to be invoked when the card is clicked.
+ */
 @Composable
 fun FeedbackItem(
     item: Feedback,
@@ -75,7 +84,7 @@ fun FeedbackItem(
             // Rating + timestamp
             RatingRow(
                 rating = item.rating ?: 0,
-                timestamp = item.createdAt,
+                timestamp = item.formatTimestamp(),
                 modifier = Modifier.padding(top = 4.dp),
             )
 
@@ -102,6 +111,13 @@ fun FeedbackItem(
     }
 }
 
+/**
+ * Displays the user's profile information, including their avatar, name, and feedback status.
+ *
+ * @param userData The user's data, including their name and profile URL.
+ * @param modifier Optional [Modifier] for this composable.
+ * @param status The status of the feedback (e.g., Pending, Approved, Rejected).
+ */
 @Composable
 fun ProfileHeader(
     userData: UserData,
@@ -151,6 +167,14 @@ fun ProfileHeader(
     }
 }
 
+/**
+ * A composable function that displays a star rating.
+ *
+ * @param rating The current rating, an integer between 0 and 5.
+ * @param modifier Optional [Modifier] for this composable.
+ * @param starSize The size of each star icon. Defaults to 20.dp.
+ * @param spacing The spacing between each star icon. Defaults to 2.dp.
+ */
 @Composable
 fun StarRating(
     rating: Int,
@@ -173,6 +197,13 @@ fun StarRating(
     }
 }
 
+/**
+ * Composable function that displays a row with a star rating and a timestamp.
+ *
+ * @param rating The rating to display, as an integer.
+ * @param timestamp The timestamp to display, as a string.
+ * @param modifier The modifier to apply to this layout node.
+ */
 @Composable
 fun RatingRow(
     rating: Int,
@@ -186,7 +217,7 @@ fun RatingRow(
     ) {
         StarRating(rating = rating)
         Text(
-            text = TimeFormatter.formatRelativeTime(timestamp),
+            text = timestamp,
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )

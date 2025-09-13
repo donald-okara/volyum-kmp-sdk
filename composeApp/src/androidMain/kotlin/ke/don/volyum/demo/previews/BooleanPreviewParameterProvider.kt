@@ -10,7 +10,7 @@
 package ke.don.volyum.demo.previews
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import ke.don.volyum.demo.FeedbackState
+import ke.don.volyum.demo.models.FeedbackState
 import ke.don.volyum.demo.models.UserData
 import ke.don.volyum.feedback.model.table.Feedback
 import ke.don.volyum.feedback.model.table.FeedbackStatus

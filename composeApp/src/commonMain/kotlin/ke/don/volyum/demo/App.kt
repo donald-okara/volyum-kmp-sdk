@@ -46,6 +46,7 @@ import ke.don.koffee.model.KoffeeDefaults
 import ke.don.koffee.ui.KoffeeBar
 import ke.don.koffee.ui.toasts_suite.GlowingToast
 import ke.don.volyum.demo.models.DemoIntentHandler
+import ke.don.volyum.demo.models.FeedbackState
 import ke.don.volyum.demo.models.FeedbackViewModel
 import ke.don.volyum.demo.models.WindowSizeClass
 import ke.don.volyum.demo.models.getScreenWidth
@@ -57,6 +58,13 @@ import ke.don.volyum.demo.theme.VolyumTheme
 import ke.don.volyum.feedback.model.domain.data_transfer.GetFeedbackFilter
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
+/**
+ * Main application composable function.
+ * Sets up the theme, view model, state, and KoffeeBar for displaying toasts.
+ * It also launches an effect to fetch initial feedback data.
+ * The UI is rendered within a [Surface] and [KoffeeBar],
+ * with the main content provided by [FeedbackScreenContent].
+ */
 @OptIn(ExperimentalKoffeeApi::class)
 @Composable
 @Preview
@@ -87,7 +95,13 @@ fun App() {
     }
 }
 
-// --- Top-level screen switcher ---
+/**
+ * Composable function that displays the feedback screen content.
+ * It adapts the layout based on the window size class.
+ *
+ * @param state The current state of the feedback screen.
+ * @param handleIntent A function to handle user intents.
+ */// --- Top-level screen switcher ---
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FeedbackScreenContent(
@@ -126,6 +140,21 @@ fun FeedbackScreenContent(
     }
 }
 
+/**
+ * A responsive scaffold that adapts its layout based on the available screen width and the current state.
+ * It can display a list, details, and a form, transitioning between inline and dialog presentations
+ * for details and form based on width constraints.
+ *
+ * @param state The current [FeedbackState] which determines what to show.
+ * @param handleIntent A function to handle user intents, like toggling visibility of details or form.
+ * @param padding The padding to apply around the scaffold content.
+ * @param listWeight The layout weight for the list panel when multiple panels are shown.
+ * @param formWeight The layout weight for the form panel when multiple panels are shown.
+ * @param detailsWeight The layout weight for the details panel when multiple panels are shown.
+ * @param detailsOffset A function that calculates the horizontal offset for the details panel's slide animation.
+ *                      It takes the full width of the animation container as input and returns the offset.
+ *                      Positive values slide from the right, negative values from the left.
+ */
 @Composable
 private fun ResponsiveScaffold(
     state: FeedbackState,
@@ -252,6 +281,13 @@ private fun ResponsiveScaffold(
     }
 }
 
+/**
+ * Composable function for the mobile screen layout.
+ * It displays the feedback list and uses modal bottom sheets for details and form.
+ *
+ * @param state The current state of the feedback screen.
+ * @param handleIntent A function to handle user intents.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MobileScreen(
@@ -299,28 +335,6 @@ fun MobileScreen(
                         .widthIn(min = 420.dp), // phone-like width
                 )
             }
-        }
-    }
-}
-
-@Composable
-private fun ToggleControls(
-    showDetails: Boolean,
-    onToggleDetails: () -> Unit,
-    showForm: Boolean,
-    onToggleForm: () -> Unit,
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.End),
-    ) {
-        Button(onClick = onToggleDetails) {
-            Text(if (showDetails) "Hide Details" else "Show Details")
-        }
-        Button(onClick = onToggleForm) {
-            Text(if (showForm) "Hide Form" else "Show Form")
         }
     }
 }

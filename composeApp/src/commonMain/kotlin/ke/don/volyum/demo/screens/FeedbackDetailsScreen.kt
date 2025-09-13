@@ -36,12 +36,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import ke.don.volyum.demo.FeedbackState
+import ke.don.volyum.demo.models.FeedbackState
 import ke.don.volyum.demo.components.EmptyScreenMessage
 import ke.don.volyum.demo.components.FeedbackItem
 import ke.don.volyum.demo.components.FeedbackItemShimmer
 import ke.don.volyum.demo.models.DemoIntentHandler
 
+/**
+ * Composable function that displays the details of a feedback item.
+ *
+ * This screen shows the feedback item itself and any closing remarks. It also handles loading and error states.
+ * A dismiss button is provided to close the details view.
+ *
+ * @param modifier Modifier for this composable.
+ * @param state The current state of the feedback details, containing information like loading status, error messages, and the feedback item itself.
+ * @param handleIntent A lambda function to handle user intents, specifically to dismiss the details view.
+ */
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun FeedbackDetailsScreen(
@@ -127,6 +137,15 @@ fun FeedbackDetailsScreen(
     }
 }
 
+/**
+ * Composable function to display closing remarks for a feedback item.
+ *
+ * This component displays a title "Closing Remarks" followed by the provided text content
+ * within a styled Surface.
+ *
+ * @param modifier Optional [Modifier] to be applied to the root Column of this component.
+ * @param text The string content of the closing remarks to be displayed.
+ */
 @Composable
 fun ClosingRemarksComponent(
     modifier: Modifier = Modifier,

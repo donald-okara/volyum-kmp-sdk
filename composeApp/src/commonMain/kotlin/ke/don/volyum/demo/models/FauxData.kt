@@ -9,7 +9,15 @@
  */
 package ke.don.volyum.demo.models
 
+/**
+ * A singleton object providing sample data for demonstration purposes.
+ * This object contains a list of random names.
+ */
 object FauxData {
+    /**
+     * A list of random names to be used for generating faux data.
+     * This list can be expanded or modified to include a wider variety of names.
+     */
     val randomNames = listOf(
         "Heidi",
         "Marcelo",
