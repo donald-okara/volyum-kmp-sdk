@@ -46,3 +46,18 @@ in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and r
 ---
 
 Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+
+<!-- DOCS-INDEX-START -->
+
+## Documentation
+
+#### Demo
+- [composeApp](docs-md/composeApp/index.md)
+
+#### Library
+- [volyum-lib](docs-md/volyum-lib/index.md)
+
+<!-- DOCS-INDEX-END -->
+
+
+

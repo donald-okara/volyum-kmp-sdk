@@ -1,5 +1,7 @@
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import org.gradle.kotlin.dsl.named
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
 
@@ -11,8 +13,25 @@ plugins {
     alias(libs.plugins.composeHotReload)
     alias(libs.plugins.kotlin.serialization)
     id("com.codingfeline.buildkonfig") version "0.17.1"
+    id("org.jetbrains.dokka") version "2.0.0"
 }
 
+// Configure Dokka GFM
+tasks.named<DokkaTask>("dokkaGfm").configure {
+    moduleName.set("Volyum sdk")
+
+    dokkaSourceSets.configureEach {
+        suppress.set(false)
+        skipEmptyPackages.set(true)
+    }
+}
+
+// Copy to /docs-md for README embedding
+tasks.register<Copy>("publishMarkdownDocs") {
+    dependsOn("dokkaGfm")
+    from(layout.buildDirectory.dir("dokka/gfm"))
+    into(rootProject.layout.projectDirectory.dir("docs-md").dir(project.name))
+}
 val keysFile = rootProject.file("local.properties")
 val keys = Properties()
 if (keysFile.exists()) {

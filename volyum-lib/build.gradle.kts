@@ -1,10 +1,29 @@
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlin.serialization)
+    id("org.jetbrains.dokka") version "2.0.0"
     id("org.jetbrains.kotlinx.atomicfu") version "0.29.0"
+}
+
+// Configure Dokka GFM
+tasks.named<DokkaTask>("dokkaGfm").configure {
+    moduleName.set("Volyum sdk")
+
+    dokkaSourceSets.configureEach {
+        suppress.set(false)
+        skipEmptyPackages.set(true)
+    }
+}
+
+// Copy to /docs-md for README embedding
+tasks.register<Copy>("publishMarkdownDocs") {
+    dependsOn("dokkaGfm")
+    from(layout.buildDirectory.dir("dokka/gfm"))
+    into(rootProject.layout.projectDirectory.dir("docs-md").dir(project.name))
 }
 
 kotlin {

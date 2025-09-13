@@ -36,3 +36,15 @@ subprojects {
         }
     }
 }
+
+tasks.register("publishMarkdownDocsAll") {
+    group = "documentation"
+    description = "Run publishMarkdownDocs across subprojects (if present) and regenerate README links."
+
+    // collect actual publishMarkdownDocs tasks from subprojects (safe: ignores subprojects without the task)
+    val publishTasks = subprojects.flatMap { sub ->
+        sub.tasks.matching { it.name == "publishMarkdownDocs" }.toList()
+    }
+
+    if (publishTasks.isNotEmpty()) dependsOn(publishTasks)
+}

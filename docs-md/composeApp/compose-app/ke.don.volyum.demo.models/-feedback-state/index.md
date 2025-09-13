@@ -1,0 +1,41 @@
+//[composeApp](../../../index.md)/[ke.don.volyum.demo.models](../index.md)/[FeedbackState](index.md)
+
+# FeedbackState
+
+[common]\
+data class [FeedbackState](index.md)(val filter: GetFeedbackFilter = GetFeedbackFilter(limit = 10), val feedbackList: [List](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html)&lt;Feedback&gt; = emptyList(), val listErrorMessage: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, val listIsLoading: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = true, val listIsError: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false, val myUserData: [UserData](../-user-data/index.md) = UserData(
+        id = &quot;1&quot;,
+        name = &quot;Donald&quot;,
+        profileUrl = &quot;https://picsum.photos/200?seed=1&quot;,
+    ), val targetType: [EventFeature](../-event-feature/index.md) = EventFeature.TICKETING, val sender: [UserSubmitOption](../-user-submit-option/index.md) = UserSubmitOption.MyProfile, val showDetails: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false, val showForm: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false, val readFeedback: Feedback = Feedback(), val readErrorMessage: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, val readIsLoading: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = true, val readIsError: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false, val sendFeedback: Feedback = Feedback(rating = 3), val sendErrorMessage: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, val sendIsLoading: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false, val sendIsError: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false)
+
+Represents the state of the feedback feature, including filters, feedback lists, user data, and states for reading and sending feedback.
+
+## Constructors
+
+| | |
+|---|---|
+| [FeedbackState](-feedback-state.md) | [common]<br>constructor(filter: GetFeedbackFilter = GetFeedbackFilter(limit = 10), feedbackList: [List](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html)&lt;Feedback&gt; = emptyList(), listErrorMessage: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, listIsLoading: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = true, listIsError: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false, myUserData: [UserData](../-user-data/index.md) = UserData(         id = &quot;1&quot;,         name = &quot;Donald&quot;,         profileUrl = &quot;https://picsum.photos/200?seed=1&quot;,     ), targetType: [EventFeature](../-event-feature/index.md) = EventFeature.TICKETING, sender: [UserSubmitOption](../-user-submit-option/index.md) = UserSubmitOption.MyProfile, showDetails: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false, showForm: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false, readFeedback: Feedback = Feedback(), readErrorMessage: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, readIsLoading: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = true, readIsError: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false, sendFeedback: Feedback = Feedback(rating = 3), sendErrorMessage: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, sendIsLoading: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false, sendIsError: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false) |
+
+## Properties
+
+| Name | Summary |
+|---|---|
+| [feedbackList](feedback-list.md) | [common]<br>val [feedbackList](feedback-list.md): [List](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html)&lt;Feedback&gt;<br>The list of feedback items. |
+| [filter](filter.md) | [common]<br>val [filter](filter.md): GetFeedbackFilter<br>The current filter applied to the feedback list. |
+| [listErrorMessage](list-error-message.md) | [common]<br>val [listErrorMessage](list-error-message.md): [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null<br>An error message related to fetching the feedback list, if any. |
+| [listIsError](list-is-error.md) | [common]<br>val [listIsError](list-is-error.md): [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false<br>True if there was an error fetching the feedback list, false otherwise. |
+| [listIsLoading](list-is-loading.md) | [common]<br>val [listIsLoading](list-is-loading.md): [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = true<br>True if the feedback list is currently being loaded, false otherwise. |
+| [myUserData](my-user-data.md) | [common]<br>val [myUserData](my-user-data.md): [UserData](../-user-data/index.md)<br>Data of the currently logged-in user. |
+| [readErrorMessage](read-error-message.md) | [common]<br>val [readErrorMessage](read-error-message.md): [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null<br>An error message related to reading a specific feedback item, if any. |
+| [readFeedback](read-feedback.md) | [common]<br>val [readFeedback](read-feedback.md): Feedback<br>The feedback item currently being viewed in detail. |
+| [readIsError](read-is-error.md) | [common]<br>val [readIsError](read-is-error.md): [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false<br>True if there was an error reading a specific feedback item, false otherwise. |
+| [readIsLoading](read-is-loading.md) | [common]<br>val [readIsLoading](read-is-loading.md): [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = true<br>True if a specific feedback item is currently being loaded, false otherwise. |
+| [sender](sender.md) | [common]<br>val [sender](sender.md): [UserSubmitOption](../-user-submit-option/index.md)<br>Specifies whether the feedback is submitted as &quot;My Profile&quot; or &quot;Anonymous&quot;. |
+| [sendErrorMessage](send-error-message.md) | [common]<br>val [sendErrorMessage](send-error-message.md): [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null<br>An error message related to sending feedback, if any. |
+| [sendFeedback](send-feedback.md) | [common]<br>val [sendFeedback](send-feedback.md): Feedback<br>The feedback item being prepared for submission. |
+| [sendIsError](send-is-error.md) | [common]<br>val [sendIsError](send-is-error.md): [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false<br>True if there was an error sending feedback, false otherwise. |
+| [sendIsLoading](send-is-loading.md) | [common]<br>val [sendIsLoading](send-is-loading.md): [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false<br>True if feedback is currently being sent, false otherwise. |
+| [showDetails](show-details.md) | [common]<br>val [showDetails](show-details.md): [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false<br>True to show the feedback details view, false otherwise. |
+| [showForm](show-form.md) | [common]<br>val [showForm](show-form.md): [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false<br>True to show the feedback submission form, false otherwise. |
+| [targetType](target-type.md) | [common]<br>val [targetType](target-type.md): [EventFeature](../-event-feature/index.md)<br>The type of event or feature the feedback is related to. |

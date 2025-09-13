@@ -1,0 +1,11 @@
+//[volyum-lib](../../index.md)/[ke.don.volyum.feedback.model.table](index.md)
+
+# Package-level declarations
+
+## Types
+
+| Name | Summary |
+|---|---|
+| [Feedback](-feedback/index.md) | [common]<br>@Serializable<br>data class [Feedback](-feedback/index.md)(val id: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, val userId: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, val targetId: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, val targetType: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, val createdAt: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html) = &quot;&quot;, val closingRemarks: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, val userMetadata: [UserMetadata](-user-metadata/index.md)? = UserMetadata(), val text: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = &quot;&quot;, val rating: [Int](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html)? = null, val status: [FeedbackStatus](-feedback-status/index.md) = FeedbackStatus.Pending)<br>Represents a feedback entry. |
+| [FeedbackStatus](-feedback-status/index.md) | [common]<br>@Serializable<br>enum [FeedbackStatus](-feedback-status/index.md) : [Enum](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html)&lt;[FeedbackStatus](-feedback-status/index.md)&gt; <br>Represents the status of a feedback item. |
+| [UserMetadata](-user-metadata/index.md) | [common]<br>@Serializable<br>data class [UserMetadata](-user-metadata/index.md)(val username: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, val profileUrl: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null)<br>Represents metadata associated with a user, such as their username and profile URL. This class is serializable, allowing it to be easily converted to and from formats like JSON. |
