@@ -93,12 +93,12 @@ internal suspend inline fun <reified T> klient(
  *         any predefined category.
  */
 private fun Int.toCategory(): NetworkErrorCategory = when (this) {
-    408 -> NetworkErrorCategory.REQUEST_TIMEOUT       // Request Timeout
-    401 -> NetworkErrorCategory.UNAUTHORIZED          // Unauthorized
-    409 -> NetworkErrorCategory.CONFLICT              // Conflict
-    429 -> NetworkErrorCategory.TOO_MANY_REQUESTS     // Rate limiting
-    413 -> NetworkErrorCategory.PAYLOAD_TOO_LARGE     // Payload Too Large
-    in 500..599 -> NetworkErrorCategory.SERVER_ERROR  // Server-side errors
+    408 -> NetworkErrorCategory.REQUEST_TIMEOUT // Request Timeout
+    401 -> NetworkErrorCategory.UNAUTHORIZED // Unauthorized
+    409 -> NetworkErrorCategory.CONFLICT // Conflict
+    429 -> NetworkErrorCategory.TOO_MANY_REQUESTS // Rate limiting
+    413 -> NetworkErrorCategory.PAYLOAD_TOO_LARGE // Payload Too Large
+    in 500..599 -> NetworkErrorCategory.SERVER_ERROR // Server-side errors
     else -> NetworkErrorCategory.UNKNOWN
 }
 

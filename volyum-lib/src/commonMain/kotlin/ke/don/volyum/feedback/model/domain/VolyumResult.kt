@@ -70,6 +70,7 @@ inline fun <T, E : VolyumError> VolyumResult<T, E>.onSuccess(action: (T) -> Unit
         }
     }
 }
+
 /**
  * Executes the given [action] if this [VolyumResult] is an [VolyumResult.Error].
  * The original [VolyumResult] is returned, regardless of whether it's an error or success.

@@ -36,11 +36,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import ke.don.volyum.demo.models.FeedbackState
 import ke.don.volyum.demo.components.EmptyScreenMessage
 import ke.don.volyum.demo.components.FeedbackItem
 import ke.don.volyum.demo.components.FeedbackItemShimmer
 import ke.don.volyum.demo.models.DemoIntentHandler
+import ke.don.volyum.demo.models.FeedbackState
 
 /**
  * Composable function that displays the details of a feedback item.

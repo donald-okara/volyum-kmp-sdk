@@ -25,6 +25,7 @@ sealed class DemoIntentHandler {
     data class GetFeedback(
         val filter: GetFeedbackFilter,
     ) : DemoIntentHandler()
+
     /**
      * Represents an intent to retrieve a specific feedback entry by its unique identifier.
      *
@@ -33,6 +34,7 @@ sealed class DemoIntentHandler {
     data class GetFeedbackById(
         val id: String,
     ) : DemoIntentHandler()
+
     /**
      * Represents an intent to update an existing feedback.
      *
@@ -41,6 +43,7 @@ sealed class DemoIntentHandler {
     data class UpdateFeedback(
         val feedback: Feedback,
     ) : DemoIntentHandler()
+
     /**
      * Represents an intent to update the target type for feedback.
      *
@@ -49,6 +52,7 @@ sealed class DemoIntentHandler {
     data class UpdateTargetType(
         val targetType: EventFeature,
     ) : DemoIntentHandler()
+
     /**
      * Represents an intent to update the sender of the feedback.
      *
@@ -57,6 +61,7 @@ sealed class DemoIntentHandler {
     data class UpdateSender(
         val sender: UserSubmitOption,
     ) : DemoIntentHandler()
+
     /**
      * Represents an intent to update the feedback filter.
      *
@@ -65,15 +70,18 @@ sealed class DemoIntentHandler {
     data class UpdateFilter(
         val filter: GetFeedbackFilter,
     ) : DemoIntentHandler()
+
     /**
      * Represents an intent to send feedback.
      * This intent handler is responsible for triggering the feedback sending process.
      */
     data object SendFeedback : DemoIntentHandler()
+
     /**
      * Intent to show the details screen.
      */
     data object ShowDetails : DemoIntentHandler()
+
     /**
      * An intent handler that signals the UI to show the feedback form.
      */

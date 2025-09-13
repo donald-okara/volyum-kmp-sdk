@@ -24,12 +24,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -101,7 +99,8 @@ fun App() {
  *
  * @param state The current state of the feedback screen.
  * @param handleIntent A function to handle user intents.
- */// --- Top-level screen switcher ---
+ */
+// --- Top-level screen switcher ---
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FeedbackScreenContent(

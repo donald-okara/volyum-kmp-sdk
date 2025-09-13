@@ -45,10 +45,12 @@ internal sealed class Endpoint(val route: String) {
          * Represents the endpoint for submitting feedback.
          */
         object AddFeedback : Functions(route = "submit_feedback")
+
         /**
          * Represents the endpoint for retrieving feedback.
          */
         object GetFeedback : Functions(route = "get_feedback")
+
         /**
          * Represents the endpoint for retrieving a specific feedback entry by its ID.
          * The complete URL for this endpoint will be constructed by combining the base functions URL

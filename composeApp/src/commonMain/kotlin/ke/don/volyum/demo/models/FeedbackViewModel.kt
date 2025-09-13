@@ -15,7 +15,6 @@ import ke.don.koffee.domain.Koffee
 import ke.don.koffee.model.ToastAction
 import ke.don.koffee.model.ToastDuration
 import ke.don.koffee.model.ToastType
-import ke.don.volyum.demo.models.FeedbackState
 import ke.don.volyum.feedback.config.VolyumSdk
 import ke.don.volyum.feedback.model.domain.NetworkError
 import ke.don.volyum.feedback.model.domain.data_transfer.GetFeedbackFilter
@@ -42,11 +41,13 @@ class FeedbackViewModel : ViewModel() {
      * Instance of the Volyum SDK.
      */
     val volyum = VolyumSdk.get()
+
     /**
      * The mutable state flow that holds the current state of the feedback UI.
      * This is private to ensure that the state is only modified through the [updateState] function.
      */
     private val _uiState = MutableStateFlow(FeedbackState())
+
     /**
      * The current state of the feedback UI.
      * This StateFlow emits updates to the UI whenever the feedback state changes.

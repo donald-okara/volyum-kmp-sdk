@@ -53,7 +53,8 @@ internal object KtorClientProvider {
      * - [HttpTimeout]: Sets timeouts for requests, connections, and sockets.
      * - [ContentNegotiation]: Configures JSON serialization/deserialization using Kotlinx Serialization.
      * - [Logging]: Enables logging of HTTP requests and responses.
-     */// This will store the session provider, which we'll set manually
+     */
+    // This will store the session provider, which we'll set manually
     val client = HttpClient(provideEngine()) {
         install(HttpTimeout) {
             requestTimeoutMillis = 30_000 // or higher

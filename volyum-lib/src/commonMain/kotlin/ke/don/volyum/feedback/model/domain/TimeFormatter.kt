@@ -40,7 +40,6 @@ object TimeFormatter {
      */
     val log = logger<TimeFormatter>()
 
-
     /**
      * Formats a timestamp string into a relative time string (e.g., "Just now", "5 minutes ago", "Yesterday").
      *
