@@ -14,9 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import org.jetbrains.compose.resources.Font
-import volyum.composeapp.generated.resources.Res
-import volyum.composeapp.generated.resources.roboto_mono_regular
-import volyum.composeapp.generated.resources.roboto_mono_semi_bold
+import volyum_sdk.composeapp.generated.resources.Res
+import volyum_sdk.composeapp.generated.resources.roboto_mono_regular
+import volyum_sdk.composeapp.generated.resources.roboto_mono_semi_bold
 
 val bodyFontFamily: FontFamily
     @Composable
