@@ -1,6 +1,6 @@
 <h1 align="center">📣 Volyum</h1>  
 
-![Maven Central](https://img.shields.io/maven-central/v/io.github.donald-okara/volyum?color=6A0DAD&label=volyum&labelColor=000000&logo=apachemaven&logoColor=FFD700)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.donald-okara/volyum.svg?logo=apachemaven&logoColor=FFD700&style=for-the-badge&colorA=000000&colorB=6A0DAD)](https://search.maven.org/artifact/io.github.donald-okara/volyum)
 
 Volyum is a friendly feedback platform designed with Kotlin Multiplatform in mind. It helps developers easily gather valuable feedback from their users right within their app, using the Volyum SDK.
 
