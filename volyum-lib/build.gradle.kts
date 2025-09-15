@@ -13,7 +13,6 @@ plugins {
 group = "io.github.donald-okara"
 version = project.findProperty("version") ?: throw GradleException("Version property is required. Pass it with -Pversion=<version>")
 
-
 // Configure Dokka GFM
 tasks.named<DokkaTask>("dokkaGfm").configure {
     moduleName.set("Volyum sdk")
@@ -145,4 +144,3 @@ mavenPublishing {
         }
     }
 }
-
