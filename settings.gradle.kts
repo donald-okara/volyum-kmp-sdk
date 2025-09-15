@@ -1,4 +1,4 @@
-rootProject.name = "volyum"
+rootProject.name = "volyum-sdk"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
