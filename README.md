@@ -4,7 +4,7 @@
 
 Volyum is a friendly feedback platform designed with Kotlin Multiplatform in mind. It helps developers easily gather valuable feedback from their users right within their app, using the Volyum SDK.
 
-> Note: The platform is still in development. Thank you for being among the first ones here, but the SDK is currently non-functional unless you have valid credentials (how did you get them? 😅)
+> ⚠️ Heads up: Volyum is still in active development. Thanks for checking it out early! Right now, the SDK requires private credentials, so it won’t work out of the box (unless you somehow already have them 👀).
 
 ---
 ## Step 1: Installation
