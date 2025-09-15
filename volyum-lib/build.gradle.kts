@@ -6,8 +6,13 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlin.serialization)
     id("org.jetbrains.dokka") version "2.0.0"
+    id("com.vanniktech.maven.publish") version "0.34.0"
     id("org.jetbrains.kotlinx.atomicfu") version "0.29.0"
 }
+
+group = "io.github.donald-okara"
+version = project.findProperty("version") ?: throw GradleException("Version property is required. Pass it with -Pversion=<version>")
+
 
 // Configure Dokka GFM
 tasks.named<DokkaTask>("dokkaGfm").configure {
@@ -107,3 +112,37 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 }
+
+mavenPublishing {
+    publishToMavenCentral() // or publishToMavenCentral(automaticRelease = true)
+    signAllPublications()
+
+    coordinates(group as String, "volyum", version as String)
+
+    pom {
+        name.set("Volyum SDK")
+        description.set("The SDK for the Volyum feedback platform.")
+        inceptionYear.set("2025")
+        url.set("https://github.com/donald-okara/volyum-kmp-sdk/")
+        licenses {
+            license {
+                name.set("The Apache License, Version 2.0")
+                url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                distribution.set("repo")
+            }
+        }
+        developers {
+            developer {
+                id.set("donald-okara")
+                name.set("Donald Okara")
+                url.set("https://github.com/donald-okara/")
+            }
+        }
+        scm {
+            url.set("https://github.com/donald-okara/volyum-kmp-sdk/")
+            connection.set("scm:git:git://github.com/donald-okara/volyum-kmp-sdk.git")
+            developerConnection.set("scm:git:ssh://git@github.com/donald-okara/volyum-kmp-sdk.git")
+        }
+    }
+}
+
