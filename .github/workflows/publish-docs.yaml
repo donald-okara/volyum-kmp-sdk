@@ -13,7 +13,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # full history for committing
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}   # checkout with token
 
       - name: Set up JDK
         uses: actions/setup-java@v4
@@ -33,4 +34,6 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add docs-md
           git commit -m "chore(docs): update markdown docs [skip ci]" || echo "No changes to commit"
-          git push origin master
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
