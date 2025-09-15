@@ -5,7 +5,7 @@
 Volyum is a friendly feedback platform designed with Kotlin Multiplatform in mind. It helps developers easily gather valuable feedback from their users right within their app, using the Volyum SDK.
 
 ---
-## Step 1: Intallation
+## Step 1: Installation
 The Volyum SDK is available on **Maven Central** (the default store for Kotlin libraries), so installation is straightforward.
 
 Add this dependency to your `commonMain` (for KMP) or your regular dependencies block:
@@ -47,7 +47,6 @@ class MyApp : Application() {
 #### iOS (Compose Multiplatform)
 
 ```kotlin
-@main
 fun MainViewController() = ComposeUIViewController {
     // remember ensures config is stable across recompositions
     val config = remember {
@@ -137,6 +136,10 @@ fun FeedbackScreen(viewModel: FeedbackViewModel = androidx.lifecycle.viewmodel.c
 - You want to **test** with different configurations easily.
 
 - Best for **large apps** or when feedback should behave differently per module.
+
+> Security note
+- Do not hardcode real API keys in source control or binaries.
+- Prefer injecting the key from secure config (BuildConfig on Android, plist/env on iOS, env vars/args on Desktop/CLI).
 
 ## Step 3: Usage
 The Volyum API has 3 main methods.
