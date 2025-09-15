@@ -26,7 +26,7 @@ Volyum supports **two integration styles**, depending on whether you want a **gl
 
 ---
 
-### 🔑 Global Setup (Singleton with `VolyumSdk`)
+### **Option 1**: 🔑 Global Setup (Singleton with `VolyumSdk`)
 
 If you want one **global Volyum instance** available throughout your app, initialize it once at startup.
 
@@ -83,7 +83,7 @@ val volyum = VolyumSdk.get()
 
 ---
 
-### 🏭 Scoped Setup (Lifecycle-aware with `VolyumFactory`)
+### **Option 2**: 🏭 Scoped Setup (Lifecycle-aware with `VolyumFactory`)
 
 If you want Volyum tied to a **screen, feature, or DI scope**, use `VolyumFactory`.  
 With **Compose Multiplatform**, you can rely on the multiplatform `ViewModel`.
