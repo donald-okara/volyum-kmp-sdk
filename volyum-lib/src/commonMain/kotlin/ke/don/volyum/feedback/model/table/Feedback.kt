@@ -13,6 +13,20 @@ import ke.don.volyum.feedback.model.domain.TimeFormatter
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Represents a feedback entry.
+ *
+ * @property id The unique identifier of the feedback.
+ * @property userId The ID of the user who submitted the feedback.
+ * @property targetId The ID of the target entity (e.g., product, service) the feedback is about.
+ * @property targetType The type of the target entity.
+ * @property createdAt The timestamp when the feedback was created.
+ * @property closingRemarks Any closing remarks associated with the feedback.
+ * @property userMetadata Additional metadata about the user.
+ * @property text The main content of the feedback.
+ * @property rating The rating given by the user, if applicable (must be between 1 and 5).
+ * @property status The current status of the feedback.
+ */
 @Serializable
 data class Feedback(
     val id: String? = null,
@@ -30,6 +44,14 @@ data class Feedback(
         require(rating == null || rating in 1..5) { "Rating must be between 1 and 5" }
     }
 
+    /**
+     * Formats the `createdAt` timestamp into a human-readable relative time string.
+     *
+     * For example, "2 minutes ago", "1 hour ago", "yesterday".
+     *
+     * @return A formatted string representing the relative time since the feedback was created,
+     * or an empty string if `createdAt` is empty.
+     */
     fun formatTimestamp(): String {
         if (createdAt.isEmpty()) {
             return ""

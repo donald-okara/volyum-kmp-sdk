@@ -19,9 +19,41 @@ import io.ktor.serialization.kotlinx.json.json
 import ke.don.volyum.feedback.helpers.compactKtorLogger
 import kotlinx.serialization.json.Json
 
-expect fun provideEngine(): HttpClientEngineFactory<*>
+/**
+ * Provides the platform-specific HTTP client engine.
+ *
+ * This function is an `expect` function, meaning its actual implementation
+ * will be provided by platform-specific `actual` declarations (e.g., for Android, iOS, JVM).
+ *
+ * @return An [HttpClientEngineFactory] suitable for the current platform.
+ */
+internal expect fun provideEngine(): HttpClientEngineFactory<*>
 
+/**
+ * Provides a configured Ktor HTTP client instance for making network requests.
+ *
+ * This object is responsible for setting up the Ktor client with necessary plugins:
+ * - **HttpTimeout**: Configures request, connection, and socket timeouts.
+ * - **ContentNegotiation**: Enables JSON serialization/deserialization using Kotlinx Serialization.
+ *   - `encodeDefaults = false`: Avoids sending default values in JSON payloads.
+ *   - `explicitNulls = false`: Skips explicit null values in JSON payloads.
+ *   - `ignoreUnknownKeys = true`: Allows parsing JSON with unknown keys without errors.
+ *   - `prettyPrint = true`: Formats JSON output for better readability (useful for debugging).
+ *   - `isLenient = true`: Allows for more lenient JSON parsing.
+ * - **Logging**: Enables logging of HTTP requests and responses.
+ *   - `level = LogLevel.BODY`: Logs the entire request and response body.
+ *   - `logger = compactKtorLogger()`: Uses a custom logger for compact output.
+ *
+ * The HTTP client engine is provided by the platform-specific `provideEngine()` function.
+ */
 internal object KtorClientProvider {
+    /**
+     * The [HttpClient] instance used for making network requests.
+     * It is configured with:
+     * - [HttpTimeout]: Sets timeouts for requests, connections, and sockets.
+     * - [ContentNegotiation]: Configures JSON serialization/deserialization using Kotlinx Serialization.
+     * - [Logging]: Enables logging of HTTP requests and responses.
+     */
     // This will store the session provider, which we'll set manually
     val client = HttpClient(provideEngine()) {
         install(HttpTimeout) {

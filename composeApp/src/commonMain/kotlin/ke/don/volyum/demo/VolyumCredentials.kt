@@ -11,6 +11,13 @@ package ke.don.volyum.demo
 
 import ke.don.volyum.feedback.config.VolyumConfig
 
+/**
+ * Object holding Volyum configuration credentials.
+ * This object is typically used to store and provide access to the project ID and API key
+ * required for interacting with the Volyum service.
+ *
+ * The credentials are usually sourced from build configuration, such as `BuildKonfig`.
+ */
 object VolyumCredentials {
     val CONFIG = VolyumConfig(
         projectId = BuildKonfig.VOLYUM_PROJECT_ID,

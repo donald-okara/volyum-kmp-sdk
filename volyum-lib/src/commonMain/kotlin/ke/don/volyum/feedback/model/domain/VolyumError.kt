@@ -9,4 +9,9 @@
  */
 package ke.don.volyum.feedback.model.domain
 
+/**
+ * Represents an error that can occur within the Volyum application.
+ * This interface serves as a marker for different types of errors,
+ * allowing for a unified way to handle and display error information.
+ */
 interface VolyumError

@@ -27,6 +27,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
+/**
+ * A composable function that displays a row of 5 stars for rating input.
+ *
+ * @param modifier The modifier to apply to this layout.
+ * @param rating The current rating value, an integer from 1 to 5.
+ * @param onRatingChange A callback function that is invoked when the rating changes.
+ *                       It receives the new rating value as an argument.
+ */
 @Composable
 fun RatingInput(
     modifier: Modifier = Modifier,
@@ -49,6 +57,17 @@ fun RatingInput(
     }
 }
 
+/**
+ * Composable function that displays a star icon, which can be either filled or outlined,
+ * typically used for rating systems.
+ *
+ * @param modifier The modifier to be applied to the component.
+ * @param size The size of the star icon. Defaults to 40.dp.
+ * @param index The index of the star, used for content description when part of a rating system.
+ *              If null, a generic "Star Icon" content description is used.
+ * @param onClick Lambda function to be invoked when the star is clicked.
+ * @param filled A boolean indicating whether the star should be filled (true) or outlined (false).
+ */
 @Composable
 fun StarSurface(
     modifier: Modifier = Modifier,

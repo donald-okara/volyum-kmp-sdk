@@ -9,6 +9,12 @@
  */
 package ke.don.volyum.feedback.model.domain
 
+/**
+ * Represents the identity of a project.
+ *
+ * @property id The unique identifier of the project.
+ * @property key The key associated with the project, often used for API authentication or identification.
+ */
 data class ProjectIdentity(
     val id: String,
     val key: String,

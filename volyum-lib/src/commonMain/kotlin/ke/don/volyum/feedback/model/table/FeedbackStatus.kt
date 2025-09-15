@@ -12,6 +12,17 @@ package ke.don.volyum.feedback.model.table
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Represents the status of a feedback item.
+ *
+ * This enum class is used to track the progress of a feedback item through its lifecycle.
+ * The possible statuses are:
+ *
+ * * **Pending**: The feedback item has been submitted but not yet reviewed.
+ * * **Reviewed**: The feedback item has been reviewed by an administrator.
+ * * **Resolved**: The feedback item has been addressed and the issue is considered resolved.
+ * * **Rejected**: The feedback item has been reviewed and rejected.
+ */
 @Serializable
 enum class FeedbackStatus {
     @SerialName("pending")

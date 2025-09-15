@@ -13,6 +13,13 @@ import ke.don.volyum.feedback.model.table.Feedback
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Data class representing the request to add feedback.
+ *
+ * @property projectId The unique identifier of the project to which the feedback belongs.
+ * @property key The API key for authorizing the request.
+ * @property feedback The feedback object containing the feedback details.
+ */
 @Serializable
 data class AddFeedbackRequest(
     @SerialName("project_id")val projectId: String,

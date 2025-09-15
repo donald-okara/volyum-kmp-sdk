@@ -1,0 +1,10 @@
+//[composeApp](../../../index.md)/[ke.don.volyum.demo.models](../index.md)/[FeedbackState](index.md)/[FeedbackState](-feedback-state.md)
+
+# FeedbackState
+
+[common]\
+constructor(filter: GetFeedbackFilter = GetFeedbackFilter(limit = 10), feedbackList: [List](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html)&lt;Feedback&gt; = emptyList(), listErrorMessage: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, listIsLoading: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = true, listIsError: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false, myUserData: [UserData](../-user-data/index.md) = UserData(
+        id = &quot;1&quot;,
+        name = &quot;Donald&quot;,
+        profileUrl = &quot;https://picsum.photos/200?seed=1&quot;,
+    ), targetType: [EventFeature](../-event-feature/index.md) = EventFeature.TICKETING, sender: [UserSubmitOption](../-user-submit-option/index.md) = UserSubmitOption.MyProfile, showDetails: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false, showForm: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false, readFeedback: Feedback = Feedback(), readErrorMessage: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, readIsLoading: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = true, readIsError: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false, sendFeedback: Feedback = Feedback(rating = 3), sendErrorMessage: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, sendIsLoading: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false, sendIsError: [Boolean](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html) = false)

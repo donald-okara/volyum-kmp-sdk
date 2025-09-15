@@ -9,6 +9,18 @@
  */
 package ke.don.volyum.feedback.model.domain
 
+/**
+ * Represents a network error that occurred during an operation.
+ *
+ * This class encapsulates details about a network error, providing information
+ * about its category, a descriptive message, and an optional error code.
+ * It inherits from [VolyumError], making it part of a common error handling framework.
+ *
+ * @property category The category of the network error, defaulting to [NetworkErrorCategory.UNKNOWN].
+ *                    This helps in classifying the type of network issue (e.g., connection timeout, server error).
+ * @property message A human-readable message describing the network error. This can be null if no specific message is available.
+ * @property code An optional integer code associated with the network error (e.g., HTTP status code). This can be null.
+ */
 data class NetworkError(
     val category: NetworkErrorCategory = NetworkErrorCategory.UNKNOWN,
     val message: String? = null,

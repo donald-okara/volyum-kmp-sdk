@@ -1,0 +1,6 @@
+//[Volyum](../../../index.md)/[ke.don.volyum.feedback.model.table](../index.md)/[Feedback](index.md)/[Feedback](-feedback.md)
+
+# Feedback
+
+[common]\
+constructor(id: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, userId: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, targetId: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, targetType: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, createdAt: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html) = &quot;&quot;, closingRemarks: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = null, userMetadata: [UserMetadata](../-user-metadata/index.md)? = UserMetadata(), text: [String](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html)? = &quot;&quot;, rating: [Int](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html)? = null, status: [FeedbackStatus](../-feedback-status/index.md) = FeedbackStatus.Pending)

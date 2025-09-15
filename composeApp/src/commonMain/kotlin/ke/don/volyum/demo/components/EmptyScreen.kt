@@ -28,6 +28,19 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
+/**
+ * A composable function that displays a message for an empty screen.
+ *
+ * This function is typically used when a screen has no content to display,
+ * such as when a list is empty or when there is an error fetching data.
+ *
+ * @param modifier The modifier to be applied to the layout.
+ * @param icon The icon to be displayed. Defaults to [Icons.Default.Info].
+ * @param title The title of the message.
+ * @param message An optional message to provide more details.
+ * @param actionLabel An optional label for an action button.
+ * @param onActionClick An optional lambda to be executed when the action button is clicked.
+ */
 @Composable
 fun EmptyScreenMessage(
     modifier: Modifier = Modifier,

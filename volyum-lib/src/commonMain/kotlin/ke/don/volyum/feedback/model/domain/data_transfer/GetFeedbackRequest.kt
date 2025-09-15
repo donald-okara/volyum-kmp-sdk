@@ -13,6 +13,18 @@ import ke.don.volyum.feedback.model.table.FeedbackStatus
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Represents a request to retrieve feedback.
+ *
+ * @property projectId The ID of the project.
+ * @property apiKey The API key for authentication.
+ * @property userId The ID of the user (optional).
+ * @property targetId The ID of the target (optional).
+ * @property targetType The type of the target (optional).
+ * @property status The status of the feedback (optional).
+ * @property limit The maximum number of feedback items to retrieve (optional).
+ * @property offset The offset for pagination (optional).
+ */
 @Serializable
 data class GetFeedbackRequest(
     @SerialName("project_id")val projectId: String,

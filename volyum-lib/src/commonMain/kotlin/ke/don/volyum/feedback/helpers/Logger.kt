@@ -11,6 +11,19 @@ package ke.don.volyum.feedback.helpers
 
 import co.touchlab.kermit.Logger
 
+/**
+ * Creates a [Logger] instance with a tag derived from the reified type `T`.
+ *
+ * If the simple name of the class `T` is available, it's used as the tag.
+ * Otherwise, the default tag "Volyum" is used.
+ *
+ * This is an inline function, which means the bytecode of this function will be
+ * copied into the call site, potentially improving performance by avoiding
+ * function call overhead. The `reified` keyword allows accessing the type `T`
+ * at runtime.
+ *
+ * @return A [Logger] instance configured with an appropriate tag.
+ */
 internal inline fun <reified T> logger(): Logger {
     return Logger.withTag(T::class.simpleName ?: "Volyum")
 }

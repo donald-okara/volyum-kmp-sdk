@@ -9,6 +9,16 @@
  */
 package ke.don.volyum.demo.models
 
+/**
+ * Represents the options available to a user when submitting feedback.
+ *
+ * Each option has a human-readable [description].
+ *
+ * - [MyProfile]: Allows the user to submit feedback associated with their own profile.
+ * - [Anonymous]: Allows the user to submit feedback without revealing their identity.
+ * - [RandomUser]: Allows submitting feedback as a randomly generated user. **This option
+ *   should only be used for testing or development purposes and never in a production environment.**
+ */
 enum class UserSubmitOption(val description: String) {
     MyProfile(
         "Submit feedback with my profile",

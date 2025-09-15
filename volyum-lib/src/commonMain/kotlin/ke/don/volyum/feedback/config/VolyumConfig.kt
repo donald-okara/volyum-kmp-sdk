@@ -11,6 +11,14 @@ package ke.don.volyum.feedback.config
 
 import ke.don.volyum.feedback.model.domain.ProjectIdentity
 
+/**
+ * Configuration class for Volyum.
+ *
+ * This data class holds the necessary credentials to interact with the Volyum API.
+ *
+ * @property projectId The unique identifier for your Volyum project.
+ * @property apiKey The API key associated with your Volyum project for authentication.
+ */
 data class VolyumConfig(
     val projectId: String,
     val apiKey: String,

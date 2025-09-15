@@ -12,6 +12,13 @@ package ke.don.volyum.feedback.model.domain.data_transfer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Represents the request to get feedback by its ID.
+ *
+ * @property projectId The ID of the project.
+ * @property apiKey The API key for authentication.
+ * @property feedbackId The ID of the feedback to retrieve.
+ */
 @Serializable
 data class GetFeedbackByIdRequest(
     @SerialName("project_id")val projectId: String,

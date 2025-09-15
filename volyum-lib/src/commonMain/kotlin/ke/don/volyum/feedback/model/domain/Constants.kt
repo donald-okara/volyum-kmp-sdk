@@ -9,6 +9,9 @@
  */
 package ke.don.volyum.feedback.model.domain
 
+/**
+ * Contains constant values used throughout the feedback module.
+ */
 internal object Constants {
     const val URL = "https://zdhujadtssptbcbvspvy.supabase.co"
 }

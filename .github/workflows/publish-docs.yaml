@@ -1,0 +1,36 @@
+name: Publish Markdown Docs
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history for committing
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Cache Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Run publishMarkdownDocsAll
+        run: ./gradlew publishMarkdownDocsAll --no-daemon
+
+      - name: Commit and push docs-md
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs-md
+          git commit -m "chore(docs): update markdown docs [skip ci]" || echo "No changes to commit"
+          git push origin master
