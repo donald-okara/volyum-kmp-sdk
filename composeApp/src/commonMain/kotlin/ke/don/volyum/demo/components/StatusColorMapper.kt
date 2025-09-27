@@ -25,6 +25,9 @@ import ke.don.volyum.feedback.model.table.FeedbackStatus
  *  - [FeedbackStatus.Reviewed] -> `MaterialTheme.colorScheme.tertiary`
  *  - [FeedbackStatus.Resolved] -> `MaterialTheme.colorScheme.secondary`
  *  - [FeedbackStatus.Rejected] -> `MaterialTheme.colorScheme.error`
+ *  - [FeedbackStatus.Unknown] -> `MaterialTheme.colorScheme.error`
+ *  - [FeedbackStatus.WIP] -> `MaterialTheme.colorScheme.secondary`
+ *  - [FeedbackStatus.Planned] -> `MaterialTheme.colorScheme.secondary`
  */
 @Composable
 fun FeedbackStatus.color(): Color {
