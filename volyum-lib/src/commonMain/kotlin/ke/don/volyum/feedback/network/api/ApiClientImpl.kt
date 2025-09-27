@@ -21,6 +21,7 @@ import ke.don.volyum.feedback.model.domain.data_transfer.GetFeedbackByIdRequest
 import ke.don.volyum.feedback.model.domain.data_transfer.GetFeedbackFilter
 import ke.don.volyum.feedback.model.domain.data_transfer.GetFeedbackRequest
 import ke.don.volyum.feedback.model.table.Feedback
+import ke.don.volyum.feedback.model.table.FeedbackStatus
 import ke.don.volyum.feedback.network.KtorClientProvider.client
 import ke.don.volyum.feedback.network.klient
 
@@ -68,6 +69,8 @@ internal class ApiClientImpl(
     override suspend fun getFeedback(
         filter: GetFeedbackFilter,
     ): VolyumResult<List<Feedback>, NetworkError> = klient {
+        val statusToSend = if (filter.status == FeedbackStatus.Unknown) null else filter.status
+
         client.post(Endpoint.Functions.GetFeedback.url) {
             contentType(ContentType.Application.Json)
             setBody(
@@ -77,7 +80,7 @@ internal class ApiClientImpl(
                     userId = filter.userId,
                     targetId = filter.targetId,
                     targetType = filter.targetType,
-                    status = filter.status,
+                    status = statusToSend,
                     limit = filter.limit,
                     offset = filter.offset,
                 ),
