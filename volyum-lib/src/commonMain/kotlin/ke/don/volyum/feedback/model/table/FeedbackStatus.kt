@@ -22,9 +22,12 @@ import kotlinx.serialization.Serializable
  * * **Reviewed**: The feedback item has been reviewed by an administrator.
  * * **Resolved**: The feedback item has been addressed and the issue is considered resolved.
  * * **Rejected**: The feedback item has been reviewed and rejected.
+ * * **Unknown**: The fallback status for unknown or invalid values.
  */
 @Serializable
 enum class FeedbackStatus {
+    Unknown,
+
     @SerialName("pending")
     Pending,
 

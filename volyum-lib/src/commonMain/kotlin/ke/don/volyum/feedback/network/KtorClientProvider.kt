@@ -70,6 +70,7 @@ internal object KtorClientProvider {
                     ignoreUnknownKeys = true
                     prettyPrint = true
                     isLenient = true
+                    coerceInputValues = true
                 },
             )
         }
