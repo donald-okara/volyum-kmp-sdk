@@ -32,7 +32,10 @@ fun FeedbackStatus.color(): Color {
         FeedbackStatus.Pending -> MaterialTheme.colorScheme.primary
         FeedbackStatus.Reviewed -> MaterialTheme.colorScheme.tertiary
         FeedbackStatus.Resolved -> MaterialTheme.colorScheme.secondary
+        FeedbackStatus.WIP -> MaterialTheme.colorScheme.secondary
+        FeedbackStatus.Planned -> MaterialTheme.colorScheme.secondary
         FeedbackStatus.Rejected -> MaterialTheme.colorScheme.error
         FeedbackStatus.Unknown -> MaterialTheme.colorScheme.error
+
     }
 }

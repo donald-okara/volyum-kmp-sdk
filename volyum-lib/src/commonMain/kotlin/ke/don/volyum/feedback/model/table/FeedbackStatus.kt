@@ -22,6 +22,8 @@ import kotlinx.serialization.Serializable
  * * **Reviewed**: The feedback item has been reviewed by an administrator.
  * * **Resolved**: The feedback item has been addressed and the issue is considered resolved.
  * * **Rejected**: The feedback item has been reviewed and rejected.
+ * * **Work In Progress (WIP)**: The feedback item is being worked on.
+ * * **Planned**: The feedback item is planned for future work.
  * * **Unknown**: The fallback status for unknown or invalid values.
  */
 @Serializable
@@ -39,4 +41,10 @@ enum class FeedbackStatus {
 
     @SerialName("rejected")
     Rejected,
+
+    @SerialName("work_in_progress")
+    WIP,
+
+    @SerialName("planned")
+    Planned,
 }
