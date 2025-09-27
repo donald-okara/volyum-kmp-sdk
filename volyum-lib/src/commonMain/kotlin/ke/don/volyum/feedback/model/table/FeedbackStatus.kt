@@ -27,6 +27,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 enum class FeedbackStatus {
     Unknown,
+
     @SerialName("pending")
     Pending,
 
@@ -37,5 +38,5 @@ enum class FeedbackStatus {
     Resolved,
 
     @SerialName("rejected")
-    Rejected
+    Rejected,
 }
