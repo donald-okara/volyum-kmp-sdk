@@ -36,6 +36,5 @@ fun FeedbackStatus.color(): Color {
         FeedbackStatus.Planned -> MaterialTheme.colorScheme.secondary
         FeedbackStatus.Rejected -> MaterialTheme.colorScheme.error
         FeedbackStatus.Unknown -> MaterialTheme.colorScheme.error
-
     }
 }
