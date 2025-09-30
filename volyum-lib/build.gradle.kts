@@ -99,7 +99,7 @@ kotlin {
 }
 
 android {
-    namespace = "ke.don.volyum.feedback"
+    namespace = "io.github.donald_okara.volyum"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {

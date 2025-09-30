@@ -9,7 +9,7 @@
  */
 package ke.don.volyum.demo.models
 
-import ke.don.volyum.feedback.model.table.UserMetadata
+import io.github.donald_okara.volyum.model.table.UserMetadata
 
 /**
  * Represents user data.

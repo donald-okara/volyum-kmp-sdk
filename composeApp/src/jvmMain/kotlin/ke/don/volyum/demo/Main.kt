@@ -12,7 +12,7 @@ package ke.don.volyum.demo
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import ke.don.volyum.feedback.config.VolyumSdk
+import io.github.donald_okara.volyum.config.VolyumSdk
 
 fun main() = application {
     VolyumSdk.init(VolyumCredentials.CONFIG)

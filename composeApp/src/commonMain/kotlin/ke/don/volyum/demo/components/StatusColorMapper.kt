@@ -12,7 +12,7 @@ package ke.don.volyum.demo.components
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import ke.don.volyum.feedback.model.table.FeedbackStatus
+import io.github.donald_okara.volyum.model.table.FeedbackStatus
 
 /**
  * Returns the color associated with the [FeedbackStatus].

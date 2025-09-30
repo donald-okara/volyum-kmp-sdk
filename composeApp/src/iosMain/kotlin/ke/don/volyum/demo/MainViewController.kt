@@ -10,7 +10,7 @@
 package ke.don.volyum.demo
 
 import androidx.compose.ui.window.ComposeUIViewController
-import ke.don.volyum.feedback.config.VolyumSdk
+import io.github.donald_okara.volyum.config.VolyumSdk
 
 fun MainViewController() = ComposeUIViewController {
     VolyumSdk.init(VolyumCredentials.CONFIG)

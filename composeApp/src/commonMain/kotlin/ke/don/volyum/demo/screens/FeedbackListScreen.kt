@@ -42,6 +42,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import io.github.donald_okara.volyum.model.domain.data_transfer.GetFeedbackFilter
+import io.github.donald_okara.volyum.model.table.FeedbackStatus
 import ke.don.volyum.demo.components.EmptyScreenMessage
 import ke.don.volyum.demo.components.FeedbackItem
 import ke.don.volyum.demo.components.FeedbackItemShimmer
@@ -49,8 +51,6 @@ import ke.don.volyum.demo.models.DemoIntentHandler
 import ke.don.volyum.demo.models.EventFeature
 import ke.don.volyum.demo.models.FeedbackState
 import ke.don.volyum.demo.models.UserData
-import ke.don.volyum.feedback.model.domain.data_transfer.GetFeedbackFilter
-import ke.don.volyum.feedback.model.table.FeedbackStatus
 
 /**
  * Displays a list of feedback items with filtering and loading states.

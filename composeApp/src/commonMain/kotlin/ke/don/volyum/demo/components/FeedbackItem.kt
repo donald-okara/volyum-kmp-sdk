@@ -39,9 +39,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import io.github.donald_okara.volyum.model.table.Feedback
+import io.github.donald_okara.volyum.model.table.FeedbackStatus
 import ke.don.volyum.demo.models.UserData
-import ke.don.volyum.feedback.model.table.Feedback
-import ke.don.volyum.feedback.model.table.FeedbackStatus
 
 /**
  * Displays a single feedback item in a card format.

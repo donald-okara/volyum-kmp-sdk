@@ -9,7 +9,7 @@
  */
 package ke.don.volyum.demo
 
-import ke.don.volyum.feedback.config.VolyumConfig
+import io.github.donald_okara.volyum.config.VolyumConfig
 
 /**
  * Object holding Volyum configuration credentials.

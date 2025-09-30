@@ -7,15 +7,9 @@
  *
  *       http://www.apache.org/licenses/LICENSE-2.0
  */
-package ke.don.volyum.demo
+package io.github.donald_okara.volyum.network
 
-import android.app.Application
-import io.github.donald_okara.volyum.config.VolyumSdk
+import io.ktor.client.engine.HttpClientEngineFactory
+import io.ktor.client.engine.darwin.Darwin
 
-class VolyumDemoApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-
-        VolyumSdk.init(VolyumCredentials.CONFIG)
-    }
-}
+internal actual fun provideEngine(): HttpClientEngineFactory<*> = Darwin

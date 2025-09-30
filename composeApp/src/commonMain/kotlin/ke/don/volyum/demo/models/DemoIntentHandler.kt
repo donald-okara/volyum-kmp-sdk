@@ -9,8 +9,8 @@
  */
 package ke.don.volyum.demo.models
 
-import ke.don.volyum.feedback.model.domain.data_transfer.GetFeedbackFilter
-import ke.don.volyum.feedback.model.table.Feedback
+import io.github.donald_okara.volyum.model.domain.data_transfer.GetFeedbackFilter
+import io.github.donald_okara.volyum.model.table.Feedback
 
 /**
  * Represents the different intents or actions that can be performed in the demo application.

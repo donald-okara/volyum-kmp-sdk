@@ -9,11 +9,11 @@
  */
 import FakeFeedbackData.fakeFeedbackItem
 import FakeFeedbackData.fakeFeedbackList
-import ke.don.volyum.feedback.model.domain.NetworkError
-import ke.don.volyum.feedback.model.domain.VolyumResult
-import ke.don.volyum.feedback.model.domain.data_transfer.GetFeedbackFilter
-import ke.don.volyum.feedback.model.table.Feedback
-import ke.don.volyum.feedback.network.api.ApiClient
+import io.github.donald_okara.volyum.model.domain.NetworkError
+import io.github.donald_okara.volyum.model.domain.VolyumResult
+import io.github.donald_okara.volyum.model.domain.data_transfer.GetFeedbackFilter
+import io.github.donald_okara.volyum.model.table.Feedback
+import io.github.donald_okara.volyum.network.api.ApiClient
 
 class FakeApiClient : ApiClient {
     override suspend fun addFeedback(feedback: Feedback): VolyumResult<Feedback, NetworkError> {
