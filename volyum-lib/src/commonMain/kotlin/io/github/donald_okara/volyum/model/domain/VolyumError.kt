@@ -7,15 +7,11 @@
  *
  *       http://www.apache.org/licenses/LICENSE-2.0
  */
-package ke.don.volyum.demo
+package io.github.donald_okara.volyum.model.domain
 
-import android.app.Application
-import io.github.donald_okara.volyum.config.VolyumSdk
-
-class VolyumDemoApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-
-        VolyumSdk.init(VolyumCredentials.CONFIG)
-    }
-}
+/**
+ * Represents an error that can occur within the Volyum application.
+ * This interface serves as a marker for different types of errors,
+ * allowing for a unified way to handle and display error information.
+ */
+interface VolyumError

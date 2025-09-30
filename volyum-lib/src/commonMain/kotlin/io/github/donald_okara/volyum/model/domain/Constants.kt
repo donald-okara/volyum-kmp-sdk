@@ -7,15 +7,11 @@
  *
  *       http://www.apache.org/licenses/LICENSE-2.0
  */
-package ke.don.volyum.demo
+package io.github.donald_okara.volyum.model.domain
 
-import android.app.Application
-import io.github.donald_okara.volyum.config.VolyumSdk
-
-class VolyumDemoApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-
-        VolyumSdk.init(VolyumCredentials.CONFIG)
-    }
+/**
+ * Contains constant values used throughout the feedback module.
+ */
+internal object Constants {
+    const val URL = "https://zdhujadtssptbcbvspvy.supabase.co"
 }

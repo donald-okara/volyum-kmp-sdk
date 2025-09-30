@@ -9,12 +9,12 @@
  */
 import FakeFeedbackData.fakeFeedbackItem
 import FakeFeedbackData.fakeFeedbackList
-import ke.don.volyum.feedback.config.Volyum
-import ke.don.volyum.feedback.config.VolyumConfig
-import ke.don.volyum.feedback.config.VolyumFactory
-import ke.don.volyum.feedback.model.domain.VolyumResult
-import ke.don.volyum.feedback.model.domain.data_transfer.GetFeedbackFilter
-import ke.don.volyum.feedback.model.domain.isSuccess
+import io.github.donald_okara.volyum.config.Volyum
+import io.github.donald_okara.volyum.config.VolyumConfig
+import io.github.donald_okara.volyum.config.VolyumFactory
+import io.github.donald_okara.volyum.model.domain.VolyumResult
+import io.github.donald_okara.volyum.model.domain.data_transfer.GetFeedbackFilter
+import io.github.donald_okara.volyum.model.domain.isSuccess
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals

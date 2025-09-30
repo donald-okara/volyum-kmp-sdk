@@ -7,7 +7,7 @@
  *
  *       http://www.apache.org/licenses/LICENSE-2.0
  */
-import ke.don.volyum.feedback.model.table.Feedback
+import io.github.donald_okara.volyum.model.table.Feedback
 
 internal object FakeFeedbackData {
     val fakeFeedbackList = listOf(

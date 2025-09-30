@@ -49,8 +49,8 @@ import ke.don.volyum.demo.models.DemoIntentHandler
 import ke.don.volyum.demo.models.EventFeature
 import ke.don.volyum.demo.models.FeedbackState
 import ke.don.volyum.demo.models.UserData
-import ke.don.volyum.feedback.model.domain.data_transfer.GetFeedbackFilter
-import ke.don.volyum.feedback.model.table.FeedbackStatus
+import io.github.donald_okara.volyum.model.domain.data_transfer.GetFeedbackFilter
+import io.github.donald_okara.volyum.model.table.FeedbackStatus
 
 /**
  * Displays a list of feedback items with filtering and loading states.

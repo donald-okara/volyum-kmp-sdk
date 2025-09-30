@@ -53,7 +53,7 @@ import ke.don.volyum.demo.screens.FeedbackDetailsScreen
 import ke.don.volyum.demo.screens.FeedbackForm
 import ke.don.volyum.demo.screens.FeedbackList
 import ke.don.volyum.demo.theme.VolyumTheme
-import ke.don.volyum.feedback.model.domain.data_transfer.GetFeedbackFilter
+import io.github.donald_okara.volyum.model.domain.data_transfer.GetFeedbackFilter
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 /**
