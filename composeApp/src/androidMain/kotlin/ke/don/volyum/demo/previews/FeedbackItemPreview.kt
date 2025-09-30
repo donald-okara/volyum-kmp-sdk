@@ -12,13 +12,13 @@ package ke.don.volyum.demo.previews
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import io.github.donald_okara.volyum.model.table.Feedback
+import io.github.donald_okara.volyum.model.table.FeedbackStatus
 import ke.don.volyum.demo.components.FeedbackItem
 import ke.don.volyum.demo.components.ProfileHeader
 import ke.don.volyum.demo.components.RatingRow
 import ke.don.volyum.demo.models.UserData
 import ke.don.volyum.demo.theme.VolyumTheme
-import io.github.donald_okara.volyum.model.table.Feedback
-import io.github.donald_okara.volyum.model.table.FeedbackStatus
 
 @DevicePreviews
 @Composable

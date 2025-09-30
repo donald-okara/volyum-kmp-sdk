@@ -10,10 +10,10 @@
 package ke.don.volyum.demo.previews
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import ke.don.volyum.demo.models.FeedbackState
-import ke.don.volyum.demo.models.UserData
 import io.github.donald_okara.volyum.model.table.Feedback
 import io.github.donald_okara.volyum.model.table.FeedbackStatus
+import ke.don.volyum.demo.models.FeedbackState
+import ke.don.volyum.demo.models.UserData
 
 class BooleanPreviewParameterProvider : PreviewParameterProvider<Boolean> {
     override val values = sequenceOf(true, false)
