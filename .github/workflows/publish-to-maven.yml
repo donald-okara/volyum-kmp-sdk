@@ -12,7 +12,8 @@ on:
 jobs:
   publish:
     name: Release build and publish
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
+
 
     steps:
       - name: Check out code
