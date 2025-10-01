@@ -31,6 +31,7 @@ import kotlinx.serialization.Serializable
 data class Feedback(
     val id: String? = null,
     @SerialName("user_id")val userId: String? = null,
+    @SerialName("project_id")val projectId: String? = null,
     @SerialName("target_id")val targetId: String? = null,
     @SerialName("target_type")val targetType: String? = null,
     @SerialName("created_at")val createdAt: String = "",
