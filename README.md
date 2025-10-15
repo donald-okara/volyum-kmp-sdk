@@ -104,7 +104,7 @@ class FeedbackViewModel : ViewModel() {
 
 ```kotlin
 @Composable
-fun FeedbackScreen(viewModel: FeedbackViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
+fun FeedbackScreen(viewModel: FeedbackViewModel = viewModel()) {
     val volyum = viewModel.volyum
     // Use volyum safely here
 }
