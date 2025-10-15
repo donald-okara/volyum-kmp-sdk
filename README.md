@@ -38,7 +38,7 @@ class MyApp : Application() {
         super.onCreate()
 
         val config = VolyumConfig(
-            baseUrl = "https://your.supabase.co",
+            projectId = "your_project_id",
             apiKey = "your_api_key"
         )
         VolyumSdk.init(config)
@@ -52,7 +52,7 @@ class MyApp : Application() {
 fun MainViewController() = ComposeUIViewController {
     // remember ensures config is stable across recompositions
     val config = remember {
-        VolyumConfig("https://your.supabase.co", "your_api_key")
+        VolyumConfig("your_project_id", "your_api_key")
     }
 
     // Initialize SDK once
@@ -68,7 +68,7 @@ fun MainViewController() = ComposeUIViewController {
 
 ```kotlin
 fun main() {
-    val config = VolyumConfig("https://your.supabase.co", "your_api_key")
+    val config = VolyumConfig("your_project_id", "your_api_key")
     VolyumSdk.init(config)
 
     App() // launch Compose for Desktop
@@ -95,7 +95,7 @@ import androidx.lifecycle.ViewModel
 import ke.don.volyum.feedback.config.*
 
 class FeedbackViewModel : ViewModel() {
-    private val config = VolyumConfig("https://your.supabase.co", "your_api_key")
+    private val config = VolyumConfig("your_project_id", "your_api_key")
     val volyum: Volyum = VolyumFactory.create(config)
 }
 ```
